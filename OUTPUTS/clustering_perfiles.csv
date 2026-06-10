@@ -1,0 +1,31 @@
+﻿region,cultivo,piso_ecologico,distrito,cluster_kmeans,cluster_jerarquico,cluster_dbscan,produccion_total
+Junin,alfalfa,sierra,El Tambo,0,3,-1,818659.21
+Junin,avena_forrajera,sierra,El Tambo,0,3,-1,613391.6
+Junin,maiz_choclo,sierra,El Tambo,0,3,-1,538397.189
+Junin,papa,sierra,El Tambo,0,3,-1,2417968.459
+La Libertad,papa,sierra,Huamachuco,0,3,-1,3088294.98
+Piura,arroz_cascara,valle_chira,Sullana,1,5,-1,2821553.0
+Piura,cana_para_azucar,valle_chira,Sullana,1,5,-1,3542055.1560000004
+Piura,limon_sutil,bosque_seco,Tambogrande,1,5,-1,1084301.5
+Piura,mango,bosque_seco,Tambogrande,1,5,-1,1725374.0
+Ica,alfalfa,costa,Chincha Alta,2,0,0,745084.395
+Ica,esparrago,costa,Chincha Alta,2,0,0,944185.7390000001
+Ica,maiz_amarillo_duro,costa,Chincha Alta,2,0,0,917318.206
+Ica,mandarina,costa,Chincha Alta,2,0,0,1106303.9980000001
+Ica,palta,costa,Chincha Alta,2,0,0,645631.289
+Ica,tomate,costa,Chincha Alta,2,0,0,687503.844
+Ica,uva,costa,Chincha Alta,2,0,0,2534248.421
+La Libertad,arroz_cascara,costa,Viru,2,0,-1,1613590.2
+La Libertad,palta,costa,Viru,2,0,-1,1366744.9939999997
+San Martin,arroz_cascara,selva_alto_mayo,Moyobamba,3,2,-1,4843545.875999999
+San Martin,maiz_amarillo_duro,selva_alto_mayo,Moyobamba,3,2,-1,1115746.849
+San Martin,palma_aceitera,selva_huallaga,Tocache,3,2,-1,2964758.39
+San Martin,platano,selva_huallaga,Tocache,3,2,-1,2468659.9
+Puno,alfalfa,altiplano_lacustre,Ilave,4,1,-1,10029663.895
+Puno,avena_forrajera,puna_alta,Ayaviri,4,1,-1,13294902.332999999
+Puno,papa,puna_alta,Ayaviri,4,1,-1,4790038.927
+Junin,naranja,selva_alta,Perene,5,6,1,1713291.179
+Junin,pina,selva_alta,Perene,5,6,1,2477936.74
+Junin,platano,selva_alta,Perene,5,6,1,1222260.2659999998
+Junin,yuca,selva_alta,Perene,5,6,1,670256.7299999999
+La Libertad,cana_para_azucar,costa,Viru,6,4,-1,28122930.502000004

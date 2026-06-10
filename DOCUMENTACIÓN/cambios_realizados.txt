@@ -1,0 +1,476 @@
+% =============================================================================
+% REGISTRO DE CAMBIOS — Proyecto DM_TF
+% Relación clima–producción agrícola en el Perú (2020–2025)
+% Universidad del Pacífico — Data Mining 2026-I
+% Fecha de documentación: 9 de junio de 2026
+% =============================================================================
+% Compilar con: pdflatex cambios_realizados.txt
+% (renombrar a .tex si el compilador lo exige)
+% =============================================================================
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{xcolor}
+
+\geometry{margin=2.5cm}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+\title{Registro de cambios realizados en el proyecto DM\_TF}
+\author{Asistente Cursor / sesiones de desarrollo 2026}
+\date{9 de junio de 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Este documento resume \textbf{todos los cambios} introducidos en el repositorio
+\texttt{DM\_TF} desde el inicio del trabajo asistido: creación del pipeline de
+integración corregido, documentación técnica, corrección de rutas en notebooks,
+reconstrucción del análisis de clustering y adición de comentarios explicativos
+paso a paso. El notebook \texttt{03\_merge\_y\_filtrado.ipynb} se conserva como
+referencia \textit{legacy}; la generación de datos debe hacerse con
+\texttt{build\_dataset\_integrado.ipynb} o \texttt{SCRIPTS/pipeline\_integrado.py}.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% -----------------------------------------------------------------------------
+\section{Contexto del proyecto}
+% -----------------------------------------------------------------------------
+
+El proyecto analiza la relación entre variables climáticas (NASA POWER) y
+producción agrícola (MIDAGRI) para seis regiones del Perú entre 2020 y 2025.
+El pipeline modular original constaba de cinco notebooks en \texttt{SCRIPTS/}
+(01--05) más un notebook de clustering.
+
+\textbf{Problemas detectados en el estado inicial:}
+\begin{itemize}[noitemsep]
+  \item Rutas absolutas hardcodeadas (\texttt{C:/Users/Joyssie/...}) incompatibles con otras máquinas.
+  \item Filtrado Pareto-80 que cortaba \textbf{antes} de alcanzar el 80\% de producción regional (24 combinaciones en lugar de 30).
+  \item Agregado regional con \texttt{groupby().sum()} que convertía meses 100\% NaN en \texttt{0.0}.
+  \item Notebook de clustering con \texttt{fillna(0)} en producción, bucles rotos y rutas incorrectas.
+  \item Ausencia de un dataset maestro único y documentado para ML/clustering.
+  \item Nombres de columnas climáticas en códigos NASA sin renombrar a español en exportación.
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+\section{Fase 1 — Pipeline de integración (\texttt{pipeline\_integrado.py})}
+% -----------------------------------------------------------------------------
+
+\subsection{Archivo creado}
+\texttt{SCRIPTS/pipeline\_integrado.py}
+
+\subsection{Funcionalidad}
+Script Python reproducible que:
+\begin{enumerate}[noitemsep]
+  \item Carga \texttt{OUTPUTS/midagri\_largo.csv}, \texttt{OUTPUTS/nasa\_2020\_2025.csv} y \texttt{BDS/mapping\_cultivo\_distrito.csv}.
+  \item Realiza el merge agroclimático (Análisis B): asigna distrito/piso por \texttt{(región, cultivo)} y une con clima NASA.
+  \item Construye el Análisis A regional por piso ecológico.
+  \item Aplica filtrado Pareto-80 \textbf{corregido}.
+  \item Renombra columnas a español (\texttt{snake\_case}).
+  \item Exporta cuatro CSV en \texttt{OUTPUTS/}.
+\end{enumerate}
+
+\subsection{Funciones principales añadidas}
+\begin{itemize}[noitemsep]
+  \item \texttt{renombrar\_columnas()} — aplica diccionario \texttt{RENAME\_COLUMNAS}.
+  \item \texttt{filtrar\_pareto()} — Pareto-80 con umbral $\geq 80\%$.
+  \item \texttt{construir\_datasets()} — merge MIDAGRI + mapping + NASA.
+  \item \texttt{validar\_datasets()} — coherencia A$\leftrightarrow$B, NaN en clima.
+  \item \texttt{exportar()} — escritura de CSV finales.
+\end{itemize}
+
+\subsection{Archivos de salida generados}
+\begin{center}
+\begin{tabular}{@{}llr@{}}
+\toprule
+\textbf{Archivo} & \textbf{Descripción} & \textbf{Filas} \\
+\midrule
+\texttt{dataset\_integrado.csv} & Maestro Pareto-80 (ML/clustering) & 2\,160 \\
+\texttt{dataset\_por\_cultivo.csv} & Análisis B completo & 14\,400 \\
+\texttt{dataset\_regional.csv} & Análisis A por piso & 1\,008 \\
+\texttt{dataset\_por\_cultivo\_filtrado.csv} & Copia legacy del integrado & 2\,160 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% -----------------------------------------------------------------------------
+\section{Fase 2 — Correcciones metodológicas críticas}
+% -----------------------------------------------------------------------------
+
+\subsection{Corrección Pareto-80}
+
+\textbf{Problema (NB03 original):}
+\begin{verbatim}
+acum[acum <= 0.80]   # cortaba antes de llegar al 80%
+\end{verbatim}
+Ejemplo: Ica quedaba en 74,4\% con 6 cultivos.
+
+\textbf{Solución implementada:}
+\begin{verbatim}
+if (acum >= umbral).any():
+    idx = (acum >= umbral).idxmax()
+else:
+    idx = acum.index[-1]
+cultivos_top = acum.loc[:idx].index.tolist()
+\end{verbatim}
+
+\textbf{Resultado:} 30 combinaciones \texttt{(región, cultivo)} en lugar de 24;
+2\,160 filas mensuales ($30 \times 72$ meses).
+
+\begin{center}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+\textbf{Región} & \textbf{Cultivos} & \textbf{\% acumulado} \\
+\midrule
+Ica & 7 & 81,3\% \\
+Junín & 8 & 81,7\% \\
+La Libertad & 4 & 82,1\% \\
+Piura & 4 & 90,6\% \\
+Puno & 3 & 92,0\% \\
+San Martín & 4 & 84,4\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Corrección agregado regional (Análisis A)}
+
+\textbf{Problema:} \texttt{groupby().sum()} convertía meses sin ningún dato MIDAGRI
+(mayo-2021, marzo-2022) en producción \texttt{0.0}.
+
+\textbf{Solución:} \texttt{sum(min\_count=1)} — si todos los valores del grupo son NaN, el resultado permanece NaN.
+
+\subsection{Política sobre NaN de producción}
+
+\begin{itemize}[noitemsep]
+  \item Los 170 NaN en \texttt{produccion\_ton} del integrado son \textbf{esperados} (meses faltantes MIDAGRI o revisiones negativas).
+  \item \textbf{No se imputan} con cero en ningún notebook nuevo ni en el pipeline integrado.
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+\section{Fase 3 — Renombrado de columnas a español}
+% -----------------------------------------------------------------------------
+
+En \texttt{pipeline\_integrado.py} se definió el diccionario \texttt{RENAME\_CLIMA}:
+
+\begin{center}
+\begin{longtable}{@{}ll@{}}
+\toprule
+\textbf{Código NASA} & \textbf{Columna exportada} \\
+\midrule
+\endhead
+\texttt{t2m} & \texttt{temp\_promedio} \\
+\texttt{t2m\_max} & \texttt{temp\_maxima} \\
+\texttt{t2m\_min} & \texttt{temp\_minima} \\
+\texttt{prectotcorr} & \texttt{precipitacion} \\
+\texttt{rh2m} & \texttt{humedad\_relativa} \\
+\texttt{allsky\_sfc\_sw\_dwn} & \texttt{radiacion\_solar} \\
+\texttt{ws2m} & \texttt{velocidad\_viento} \\
+\texttt{ps} & \texttt{presion\_atmosferica} \\
+\texttt{gwetroot} & \texttt{humedad\_suelo} \\
+\texttt{ts} & \texttt{temp\_superficie} \\
+\texttt{t2mdew} & \texttt{punto\_rocio} \\
+\texttt{qv2m} & \texttt{humedad\_especifica} \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+Metadatos renombrados: \texttt{piso\_asignado} $\to$ \texttt{piso\_ecologico},
+\texttt{mes\_num} $\to$ \texttt{numero\_mes}, \texttt{produccion\_mensual} $\to$ \texttt{produccion\_ton}, etc.
+
+El CSV intermedio \texttt{nasa\_2020\_2025.csv} conserva códigos NASA; el renombrado ocurre al exportar datasets finales.
+
+% -----------------------------------------------------------------------------
+\section{Fase 4 — Notebook de integración (\texttt{build\_dataset\_integrado.ipynb})}
+% -----------------------------------------------------------------------------
+
+\subsection{Archivo creado}
+\texttt{build\_dataset\_integrado.ipynb} (raíz del proyecto)
+
+\subsection{Propósito}
+Notebook unificado que invoca la misma lógica de \texttt{pipeline\_integrado.py}
+sin duplicar el EDA de los notebooks 04--05. Sustituye a NB03 para \textbf{generación de datos}.
+
+\subsection{Uso recomendado}
+\begin{enumerate}[noitemsep]
+  \item Ejecutar \texttt{SCRIPTS/01\_midagri\_pipeline.ipynb} $\to$ \texttt{midagri\_largo.csv}
+  \item Ejecutar \texttt{SCRIPTS/02\_nasa\_pipeline.ipynb} $\to$ \texttt{nasa\_2020\_2025.csv}
+  \item Ejecutar \texttt{build\_dataset\_integrado.ipynb}
+\end{enumerate}
+
+Equivalente por línea de comandos:
+\begin{verbatim}
+python SCRIPTS/pipeline_integrado.py
+\end{verbatim}
+
+% -----------------------------------------------------------------------------
+\section{Fase 5 — Documentación técnica}
+% -----------------------------------------------------------------------------
+
+\subsection{Archivos creados/actualizados}
+
+\begin{itemize}
+  \item \texttt{DOCUMENTACIÓN/dataset\_integrado.md} — esquema de columnas, Pareto corregido, validación, uso en clustering.
+  \item \texttt{DOCUMENTACIÓN/documentacion\_notebooks.md} — visión general del pipeline, descripción de notebooks 01--05, integración y clustering.
+\end{itemize}
+
+\subsection{Contenido documentado}
+\begin{itemize}[noitemsep]
+  \item Flujo completo del pipeline con diagrama ASCII.
+  \item Dimensiones y esquema del maestro (20 columnas).
+  \item Métricas de validación post-ejecución (\texttt{max\_diff\_a\_b} $\approx 2{,}3 \times 10^{-10}$).
+  \item Sección de clustering y archivos exportados.
+  \item Nota de que NB03 queda \textit{legacy}.
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+\section{Fase 6 — Corrección de rutas en notebooks 01--05}
+% -----------------------------------------------------------------------------
+
+\subsection{Cambio aplicado}
+Sustitución de rutas absolutas (\texttt{C:/Users/Joyssie/...}) por rutas relativas portables:
+
+\begin{verbatim}
+ROOT = Path.cwd()
+if ROOT.name == "SCRIPTS":
+    ROOT = ROOT.parent
+
+RUTA_OUTPUT = ROOT / "OUTPUTS"
+RUTA_BASE = ROOT / "Datasets Originales"
+\end{verbatim}
+
+\subsection{Notebooks modificados}
+\begin{itemize}[noitemsep]
+  \item \texttt{SCRIPTS/01\_midagri\_pipeline.ipynb}
+  \item \texttt{SCRIPTS/02\_nasa\_pipeline.ipynb}
+  \item \texttt{SCRIPTS/03\_merge\_y\_filtrado.ipynb} (conservado, no recomendado para regenerar datos)
+  \item \texttt{SCRIPTS/04\_eda\_regional.ipynb}
+  \item \texttt{SCRIPTS/05\_eda\_por\_cultivo.ipynb}
+\end{itemize}
+
+Los outputs de ejecución antiguos en celdas de NB03 pueden seguir mostrando rutas Joyssie en texto impreso; el \textbf{código fuente} ya usa \texttt{ROOT / "OUTPUTS"}.
+
+% -----------------------------------------------------------------------------
+\section{Fase 7 — Capa de compatibilidad en EDA (notebooks 04 y 05)}
+% -----------------------------------------------------------------------------
+
+Los notebooks 04 y 05 fueron escritos con nombres de columna antiguos
+(\texttt{piso}, \texttt{produccion\_mensual}, etc.). Se añadió una capa de
+compatibilidad que renombra columnas del integrado al leer:
+
+\begin{verbatim}
+_RENAME = {"piso_ecologico": "piso", ...}
+# Si el CSV tiene nombres nuevos, se revierten temporalmente
+# para que el resto del notebook funcione sin reescribir todo el EDA
+\end{verbatim}
+
+\subsection{Fix adicional en NB04}
+Corrección de variable \texttt{df\_b} no definida en una celda del EDA regional.
+
+% -----------------------------------------------------------------------------
+\section{Fase 8 — Script de verificación (\texttt{run\_all\_notebooks.py})}
+% -----------------------------------------------------------------------------
+
+\subsection{Archivo creado}
+\texttt{SCRIPTS/run\_all\_notebooks.py}
+
+\subsection{Funcionalidad}
+Ejecuta secuencialmente todos los notebooks con \texttt{jupyter nbconvert --execute}
+y reporta OK/FAIL con tiempos. Timeouts configurados por notebook (clustering: 1200\,s).
+
+\subsection{Resultado de verificación (2026-06-09)}
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Notebook} & \textbf{Estado} \\
+\midrule
+\texttt{build\_dataset\_integrado.ipynb} & OK \\
+\texttt{02\_nasa\_pipeline.ipynb} & OK \\
+\texttt{03\_merge\_y\_filtrado.ipynb} & OK \\
+\texttt{04\_eda\_regional.ipynb} & OK \\
+\texttt{05\_eda\_por\_cultivo.ipynb} & OK \\
+\texttt{Clustering/Clustering\_Cultivos.ipynb} & OK \\
+\texttt{01\_midagri\_pipeline.ipynb} & \textbf{FAIL} — requiere Excel MIDAGRI en \texttt{Datasets Originales/} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Si existen los CSV intermedios en \texttt{OUTPUTS/}, el pipeline puede ejecutarse sin NB01.
+
+% -----------------------------------------------------------------------------
+\section{Fase 9 — Reconstrucción completa de \texttt{Clustering\_Cultivos.ipynb}}
+% -----------------------------------------------------------------------------
+
+El notebook original tenía problemas graves (rutas, \texttt{fillna(0)}, bucle \texttt{for} roto, métricas DBSCAN incorrectas). Se reconstruyó con 29 celdas organizadas en secciones.
+
+\subsection{Estructura del notebook nuevo}
+
+\begin{center}
+\begin{longtable}{@{}clp{8cm}@{}}
+\toprule
+\textbf{§} & \textbf{Sección} & \textbf{Contenido} \\
+\midrule
+\endhead
+0 & Objetivo & Decisiones metodológicas documentadas en markdown \\
+1 & Setup & Importaciones, \texttt{ROOT}, rutas \texttt{OUTPUTS/} \\
+2 & Carga & Lee \texttt{dataset\_integrado.csv} (2\,160 filas, 30 combinaciones) \\
+3 & Funciones & \texttt{eval\_kmeans\_range}, \texttt{grid\_dbscan}, \texttt{silhouette\_no\_noise}, \texttt{elegir\_k} \\
+4 & \textbf{Principal} & 30 perfiles \texttt{(región, cultivo)}: KMeans, jerárquico + dendrograma, DBSCAN \\
+5 & Complementario & 2\,160 filas mensuales, solo clima, sin \texttt{fillna(0)} \\
+6 & Comparativa & Tabla de métricas (Silhouette, Davies-Bouldin, \% ruido) \\
+7 & Exportación & CSV y figuras PNG \\
+8 & Conclusiones & Interpretación agronómica \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\subsection{Cambios metodológicos respecto al notebook antiguo}
+
+\begin{itemize}
+  \item \textbf{Eliminado} \texttt{X\_raw['produccion\_ton'].fillna(0)} — no imputar ausencia de dato como cero producción.
+  \item \textbf{Unidad principal:} agregación a 30 perfiles con medias/std de clima y métricas de producción (\texttt{produccion\_total}, \texttt{n\_meses\_cosecha}, etc.).
+  \item \textbf{DBSCAN:} Silhouette calculada con \texttt{silhouette\_no\_noise()} excluyendo etiqueta \texttt{-1}.
+  \item \textbf{Sin remoción de outliers} (IQR/Z-score), según restricción del proyecto.
+  \item \textbf{Rutas:} \texttt{ROOT} detecta si se ejecuta desde carpeta \texttt{Clustering/}.
+  \item \textbf{Variables climáticas:} lista \texttt{CLIMA\_VARS} con nombres en español del integrado.
+\end{itemize}
+
+\subsection{Archivos exportados por el clustering}
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Archivo} & \textbf{Contenido} \\
+\midrule
+\texttt{OUTPUTS/clustering\_perfiles.csv} & 30 filas, clusters por \texttt{(región, cultivo)} \\
+\texttt{OUTPUTS/clustering\_metricas.csv} & 9 configuraciones comparadas \\
+\texttt{OUTPUTS/figures/dendrograma\_perfiles.png} & Dendrograma jerárquico \\
+\texttt{OUTPUTS/figures/heatmap\_perfiles\_kmeans.png} & Heatmap de centroides KMeans \\
+\texttt{OUTPUTS/figures/comparativa\_clustering.png} & Gráfico comparativo de métodos \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Resultado automático de KMeans}
+El método recomendado por métricas fue \textbf{Perfil KMeans K=7}; conviene revisar interpretabilidad agronómica (dendrograma disponible en figuras).
+
+% -----------------------------------------------------------------------------
+\section{Fase 10 — Comentarios paso a paso en el notebook de clustering}
+% -----------------------------------------------------------------------------
+
+A petición del usuario, se añadieron comentarios extensos en \textbf{español} en 17 celdas de código del notebook \texttt{Clustering/Clustering\_Cultivos.ipynb}.
+
+\subsection{Esquema de comentarios (PASO 1--7)}
+
+\begin{enumerate}
+  \item \textbf{PASO 1} — Importaciones: qué hace cada librería (matplotlib, scipy, sklearn).
+  \item \textbf{PASO 2} — Rutas portables y carga de \texttt{dataset\_integrado.csv}.
+  \item \textbf{PASO 2b} — Definición de \texttt{CLIMA\_VARS} / \texttt{CLIMA\_CORE} y revisión de cobertura.
+  \item \textbf{PASO 3} — Funciones auxiliares reutilizables con docstrings inline.
+  \item \textbf{PASO 4} — Construcción de \texttt{df\_perfil} (agregación por región$\times$cultivo).
+  \item \textbf{PASO 4a--4d} — KMeans, jerárquico, DBSCAN e interpretación de clusters.
+  \item \textbf{PASO 5} — Análisis mensual complementario (solo clima).
+  \item \textbf{PASO 5a--5c} — KMeans/DBSCAN mensual, PCA+NMF.
+  \item \textbf{PASO 6--6b} — Comparativa final y exportación a \texttt{OUTPUTS/}.
+  \item \textbf{PASO 7} — Conclusiones agronómicas (no solo métricas).
+\end{enumerate}
+
+Los comentarios explican el \textbf{porqué} de cada decisión (escalado, elección de $K$, exclusión de ruido en Silhouette, etc.).
+
+\subsection{Verificación post-comentarios}
+El notebook fue re-ejecutado con \texttt{jupyter nbconvert --execute} sin errores tras añadir los comentarios.
+
+% -----------------------------------------------------------------------------
+\section{Resumen de archivos creados}
+% -----------------------------------------------------------------------------
+
+\begin{center}
+\begin{longtable}{@{}lp{9cm}@{}}
+\toprule
+\textbf{Archivo} & \textbf{Rol} \\
+\midrule
+\endhead
+\texttt{SCRIPTS/pipeline\_integrado.py} & Lógica de merge + Pareto + exportación \\
+\texttt{build\_dataset\_integrado.ipynb} & Notebook de integración en raíz \\
+\texttt{SCRIPTS/run\_all\_notebooks.py} & Verificación batch de notebooks \\
+\texttt{DOCUMENTACIÓN/dataset\_integrado.md} & Documentación técnica del maestro \\
+\texttt{DOCUMENTACIÓN/documentacion\_notebooks.md} & Documentación del pipeline completo \\
+\texttt{DOCUMENTACIÓN/cambios\_realizados.txt} & Este documento (registro LaTeX) \\
+\texttt{OUTPUTS/dataset\_integrado.csv} & Dataset maestro generado \\
+\texttt{OUTPUTS/clustering\_perfiles.csv} & Salida clustering \\
+\texttt{OUTPUTS/clustering\_metricas.csv} & Métricas clustering \\
+\texttt{OUTPUTS/figures/*.png} & Figuras clustering y EDA \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+% -----------------------------------------------------------------------------
+\section{Resumen de archivos modificados}
+% -----------------------------------------------------------------------------
+
+\begin{itemize}
+  \item \texttt{SCRIPTS/01\_midagri\_pipeline.ipynb} — rutas \texttt{ROOT/OUTPUTS}.
+  \item \texttt{SCRIPTS/02\_nasa\_pipeline.ipynb} — rutas \texttt{ROOT/OUTPUTS}.
+  \item \texttt{SCRIPTS/03\_merge\_y\_filtrado.ipynb} — rutas (legacy, sin corregir Pareto en código).
+  \item \texttt{SCRIPTS/04\_eda\_regional.ipynb} — rutas + capa compatibilidad columnas + fix \texttt{df\_b}.
+  \item \texttt{SCRIPTS/05\_eda\_por\_cultivo.ipynb} — rutas + capa compatibilidad columnas.
+  \item \texttt{Clustering/Clustering\_Cultivos.ipynb} — reconstrucción completa + comentarios PASO 1--7.
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+\section{Restricciones respetadas durante el trabajo}
+% -----------------------------------------------------------------------------
+
+\begin{itemize}[noitemsep]
+  \item No imputar NaN de producción con cero.
+  \item Sin remoción de outliers (IQR/Z-score).
+  \item Notebooks 01--05 conservados; NB03 marcado como legacy.
+  \item No se editó el archivo de plan en \texttt{.cursor/plans/}.
+  \item No se crearon commits git (repositorio sin historial de commits al momento de documentar).
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+\section{Limitaciones conocidas y trabajo pendiente opcional}
+% -----------------------------------------------------------------------------
+
+\begin{enumerate}
+  \item \textbf{NB01} falla si no existe la carpeta \texttt{Datasets Originales/} con los Excel MIDAGRI. Solución: usar CSV ya generados en \texttt{OUTPUTS/} o añadir modo \textit{skip} si existe \texttt{midagri\_largo.csv}.
+  \item \textbf{K=7} en clustering de perfiles puede ser alto para interpretación; revisar dendrograma y considerar $K$ menor si el paper lo requiere.
+  \item \textbf{NB03} aún contiene la lógica Pareto antigua en su código fuente; no usarlo para regenerar el integrado.
+  \item Algunas celdas de NB03 conservan \textit{outputs} con rutas Joyssie en texto impreso (solo cosmético).
+\end{enumerate}
+
+% -----------------------------------------------------------------------------
+\section{Diagrama del pipeline actualizado}
+% -----------------------------------------------------------------------------
+
+\begin{verbatim}
+01_midagri_pipeline.ipynb  -->  midagri_largo.csv
+02_nasa_pipeline.ipynb     -->  nasa_2020_2025.csv
+        |
+        v
+build_dataset_integrado.ipynb  /  pipeline_integrado.py
+        |
+        +--> dataset_integrado.csv      (maestro, 2.160 filas)
+        +--> dataset_regional.csv
+        +--> dataset_por_cultivo.csv
+        +--> dataset_por_cultivo_filtrado.csv
+        |
+        +--> 04_eda_regional.ipynb     (visualizaciones A)
+        +--> 05_eda_por_cultivo.ipynb  (visualizaciones B)
+        +--> Clustering_Cultivos.ipynb --> clustering_*.csv + figures/
+\end{verbatim}
+
+\vspace{1em}
+\noindent
+\textbf{Fin del registro de cambios.}
+
+\end{document}
