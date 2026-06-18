@@ -1,0 +1,361 @@
+================================================================================
+DM_TF — EXPLICACIÓN COMPLETA DEL PROYECTO
+================================================================================
+Relación entre variables climáticas y producción agrícola en el Perú (2020–2025)
+Universidad del Pacífico — Data Mining 2026-I
+Generado: junio 2026
+================================================================================
+
+
+1. QUÉ ES ESTE PROYECTO
+--------------------------------------------------------------------------------
+
+Proyecto académico de Data Mining que estudia la relación entre clima y
+producción agrícola en el Perú entre 2020 y 2025, en 6 regiones:
+
+  Piura, La Libertad, Ica, San Martín, Junín y Puno.
+
+Pregunta central:
+  ¿Cómo se agrupan los cultivos según su perfil climático y productivo, y qué
+  patrones aparecen entre variables como temperatura, precipitación o humedad
+  del suelo y la producción mensual?
+
+Metodología: CRISP-DM
+Integrantes: Johao Mendoza, Joyssie Rivas, Thiago Ormeño
+Docente: Soledad Espezua Llerena
+
+
+2. EL PROBLEMA QUE RESUELVE
+--------------------------------------------------------------------------------
+
+MIDAGRI publica producción ACUMULADA por región, no mensual directa ni por
+piso ecológico. Además, una región como Junín o La Libertad mezcla costa,
+sierra y selva: un solo punto climático por región oculta esa heterogeneidad.
+
+El proyecto hace tres cosas para unir clima y producción de forma coherente:
+
+  (i)   Recuperar producción mensual desde los acumulados MIDAGRI (diff).
+  (ii)  Tomar clima de 14 distritos (NASA POWER), cada uno representando un
+        piso ecológico.
+  (iii) Asignar cada cultivo al distrito/piso correcto mediante una tabla de
+        mapping documentada.
+
+
+3. FUENTES DE DATOS
+--------------------------------------------------------------------------------
+
+  MIDAGRI (producción)
+    Entrada:  BDS/YYYY/MES.xlsx (Excel mensuales formato c-18)
+    Proceso:  SCRIPTS/01_midagri_pipeline.ipynb
+    Salida:   OUTPUTS/midagri_largo.csv (~23.328 filas)
+
+  NASA POWER (clima)
+    Entrada:  API NASA POWER
+    Proceso:  SCRIPTS/02_nasa_pipeline.ipynb
+    Salida:   OUTPUTS/nasa_2020_2025.csv (1.008 filas = 14 distritos × 72 meses)
+
+  Mapping cultivo–distrito
+    Archivo:  BDS/mapping/mapping_cultivo_distrito.csv (v1 activo)
+    Función:  Conecta (región, cultivo) → piso ecológico + distrito NASA
+
+Flujo general:
+
+  Excel MIDAGRI  --[NB01]-->  midagri_largo.csv
+  API NASA       --[NB02]-->  nasa_2020_2025.csv
+  Mapping        --[merge]--> dataset_integrado.csv
+                                      |
+                                      v
+                            Clustering + EDA
+
+
+4. PIPELINE PASO A PASO
+--------------------------------------------------------------------------------
+
+4.1 MIDAGRI → producción mensual (01_midagri_pipeline.ipynb)
+--------------------------------------------------------------
+
+Lee los Excel mensuales en BDS/YYYY/MES.xlsx y:
+
+  - Normaliza nombres de cultivos (54 cultivos canónicos).
+  - Construye un grid completo región × año × mes (con NaN donde falta dato).
+  - Convierte acumulados en producción mensual real con diff() (enero conserva
+    el valor original).
+  - Trata revisiones negativas de MIDAGRI como NaN.
+  - Recupera diciembre 2020 desde el archivo de diciembre 2021.
+
+Salida: midagri_largo.csv en formato largo (región, cultivo, año, mes, toneladas).
+
+
+4.2 NASA POWER → clima (02_nasa_pipeline.ipynb)
+------------------------------------------------
+
+Descarga datos mensuales 2020–2025 para 14 distritos representativos:
+
+  Chincha Alta (Ica costa), Virú (La Libertad costa), Sullana (Piura),
+  Moyobamba/Tocache (San Martín), El Tambo/Perene/Río Tambo (Junín),
+  Ayaviri/Ilave (Puno), Huamachuco/Cascas (La Libertad sierra), etc.
+
+Variables climáticas (12):
+
+  | Código NASA          | Columna exportada      |
+  |----------------------|------------------------|
+  | t2m                  | temp_promedio          |
+  | t2m_max              | temp_maxima            |
+  | t2m_min              | temp_minima            |
+  | prectotcorr          | precipitacion          |
+  | rh2m                 | humedad_relativa       |
+  | allsky_sfc_sw_dwn    | radiacion_solar        |
+  | ws2m                 | velocidad_viento       |
+  | ps                   | presion_atmosferica    |
+  | gwetroot             | humedad_suelo          |
+  | ts                   | temp_superficie        |
+  | t2mdew               | punto_rocio            |
+  | qv2m                 | humedad_especifica     |
+
+
+4.3 Merge integrado (pipeline_integrado.py)
+--------------------------------------------
+
+Une las tres fuentes:
+
+  1. Análisis B — cada fila es (región, cultivo, mes) con producción + clima
+     del distrito asignado por el mapping.
+
+  2. Análisis A — agrega por (región, piso ecológico, mes) sumando cultivos
+     del mismo piso.
+
+  3. Filtro Pareto-80 — por región, conserva solo los cultivos que acumulan
+     >= 80% de la producción regional (los más relevantes).
+
+También disponible como notebook: SCRIPTS/04_build_dataset_integrado.ipynb
+
+Salidas:
+
+  | Archivo                  | Contenido                                    |
+  |--------------------------|----------------------------------------------|
+  | dataset_integrado.csv    | MAESTRO — cultivos Pareto × 72 meses         |
+  | dataset_por_cultivo.csv  | Todos los cultivos con mapping (~14.400 filas)|
+  | dataset_regional.csv     | Agregado por piso ecológico (1.008 filas)    |
+
+Cada fila del maestro tiene: región, piso, distrito, cultivo, año, mes,
+produccion_ton y las 12 variables climáticas (20 columnas en total).
+
+Reglas importantes:
+  - NO se imputa producción faltante con cero.
+  - NO se eliminan outliers (restricción del proyecto).
+  - El Pareto corregido incluye cultivos hasta alcanzar el 80%, no antes.
+
+Pareto-80 por región (mapping v1, corregido):
+
+  | Región       | Cultivos | % acumulado |
+  |--------------|----------|-------------|
+  | Ica          | 7        | ~81%        |
+  | Junín        | 8        | ~82%        |
+  | La Libertad  | 4        | ~82%        |
+  | Piura        | 3        | ~80%        |
+  | Puno         | 3        | ~92%        |
+  | San Martín   | 4        | ~84%        |
+
+
+4.4 EDA exploratorio (04_eda_regional.ipynb, 05_eda_por_cultivo.ipynb)
+-----------------------------------------------------------------------
+
+Análisis descriptivo antes del modelado:
+
+  NB04 (regional / Análisis A):
+    - Series temporales por piso ecológico.
+    - Heatmaps de estacionalidad (mes × año).
+    - Perfil climático por piso (boxplots, promedios).
+    - Correlaciones Pearson clima–producción por unidad.
+    - Caso El Niño 2023–2024 en regiones costeras.
+    - Validación sequía Puno (producción vs humedad_suelo).
+
+  NB05 (por cultivo / Análisis B):
+    - Top cultivos por región.
+    - Curvas de concentración (Pareto por región).
+    - Calendarios agrícolas (heatmap mes × cultivo).
+    - Correlaciones por par región–cultivo.
+    - Caso sequía altoandina 2022 (Puno).
+    - Validación cruzada Puno vs La Libertad sierra.
+
+
+4.5 Clustering agroclimático (Clustering/Clustering_Cultivos.ipynb)
+---------------------------------------------------------------------
+
+Tarea principal de Data Mining. Agrupa perfiles (región, cultivo) — unos 30
+cultivos Pareto — según:
+
+  - Producción total y variabilidad (coeficiente de variación).
+  - Promedios y desviaciones de variables climáticas core:
+    temperatura, precipitación, humedad relativa, radiación solar,
+    humedad de suelo.
+
+Métodos:
+  - KMeans (K seleccionado por Silhouette y Davies-Bouldin, típicamente K≈7).
+  - Clustering jerárquico (dendrograma, método Ward).
+  - DBSCAN como contraste (con detección de ruido).
+
+Salidas:
+  - OUTPUTS/clustering_perfiles.csv
+  - OUTPUTS/clustering_metricas.csv
+  - OUTPUTS/figures/ (heatmap, dendrograma, comparativa)
+
+Interpretación: cultivos que comparten clima y comportamiento productivo
+similar quedan en el mismo cluster (ej. cultivos de costa árida en Ica,
+cultivos de selva en San Martín).
+
+
+5. EL MAPPING: PIEZA CLAVE
+--------------------------------------------------------------------------------
+
+MIDAGRI reporta por REGIÓN, NASA por DISTRITO. El mapping conecta ambos:
+
+  (región, cultivo) → piso ecológico + distrito NASA
+
+Ejemplos:
+  - Ica / uva        → Chincha Alta (costa)
+  - Puno / papa      → Ayaviri (puna alta)
+  - Junín / café     → Perene (selva alta) [en mapping v2]
+  - La Libertad / uva → Cascas (yunga) [corregido en v2]
+
+Sin esto no se puede hacer merge clima–producción de forma agronómicamente
+coherente.
+
+Archivos de mapping en BDS/mapping/:
+  - mapping_cultivo_distrito.csv          → v1 activo (pipeline principal)
+  - mapping_cultivo_distrito_v1_legacy.csv → respaldo manual original
+  - mapping_cultivo_distrito_v2.csv       → v2 completo (con confianza, justificación)
+  - mapping_cultivo_distrito_v2_pipeline.csv → v2 reducido para merge
+
+Generador v2: SCRIPTS/notebooks/00_build_mapping_cultivo_distrito.ipynb
+Reporte comparativo: DOCUMENTACIÓN/reporte_mapping_v1_vs_v2.md
+
+
+6. EXPERIMENTO MAPPING V2 (EXPERIMENTOS/MAPPING_V2/)
+--------------------------------------------------------------------------------
+
+Versión mejorada del mapping con:
+  - Taxonomía agronómica (pisos compatibles por cultivo).
+  - Overrides regionales documentados.
+  - Nivel de confianza y justificación por fila.
+  - Exclusiones explícitas cuando no hay piso compatible.
+
+Corre en carpeta AISLADA — no modifica OUTPUTS/ del pipeline v1.
+
+Ejecutar:
+  python EXPERIMENTOS/MAPPING_V2/run_pipeline_completo.py
+  jupyter notebook EXPERIMENTOS/MAPPING_V2/Clustering_Cultivos.ipynb
+
+Resultados v2 vs v1:
+  - Más combos Pareto (~33 vs ~30).
+  - ~99.9% de producción cubierta.
+  - Nuevos en Pareto: Ica/papa, Junín/café, Piura/plátano, Piura/uva.
+  - Clustering similar (K=6, Silhouette ~0.53).
+
+Reporte: EXPERIMENTOS/MAPPING_V2/REPORTE_resultados_vs_v1.md
+
+
+7. METODOLOGÍA CRISP-DM
+--------------------------------------------------------------------------------
+
+  | Fase                      | Qué hace el repo                              |
+  |---------------------------|-----------------------------------------------|
+  | Comprensión del negocio   | Agricultura peruana, sequías, El Niño,        |
+  |                           | heterogeneidad ecológica                      |
+  | Comprensión de datos      | EDA en NB04/NB05, validación NaN y coherencia |
+  | Preparación               | NB01, NB02, merge, Pareto-80                  |
+  | Modelado                  | Clustering KMeans + jerárquico + DBSCAN       |
+  | Evaluación                | Silhouette, Davies-Bouldin, casos Puno 2022   |
+  |                           | y costa 2023–24                               |
+  | Despliegue                | Informe, presentación, datasets reproducibles   |
+
+
+8. CASOS DE VALIDACIÓN NARRATIVOS
+--------------------------------------------------------------------------------
+
+El informe usa dos eventos climáticos conocidos:
+
+  1. Sequía altoandina 2022 (Puno)
+     Caída de producción en papa, avena, alfalfa; baja humedad de suelo.
+
+  2. Fenómeno del Niño 2023–2024 (costa)
+     Impacto en cultivos de Ica, La Libertad, Piura.
+
+Sirven para comprobar que el dataset captura patrones reales.
+
+
+9. ESTRUCTURA DEL REPOSITORIO
+--------------------------------------------------------------------------------
+
+DM_TF/
+├── README.md
+├── BDS/
+│   ├── mapping/                    ← tablas región×cultivo → distrito/piso
+│   └── YYYY/MES.xlsx               ← Excel MIDAGRI
+├── SCRIPTS/
+│   ├── 01_midagri_pipeline.ipynb
+│   ├── 02_nasa_pipeline.ipynb
+│   ├── 04_build_dataset_integrado.ipynb
+│   ├── 04_eda_regional.ipynb
+│   ├── 05_eda_por_cultivo.ipynb
+│   ├── pipeline_integrado.py       ← merge canónico
+│   ├── paths.py                    ← rutas centralizadas
+│   ├── run_all_notebooks.py
+│   └── build_mapping_cultivo_distrito.py
+├── Clustering/
+│   └── Clustering_Cultivos.ipynb   ← clustering principal
+├── OUTPUTS/                        ← CSV y figuras (pipeline v1)
+├── EXPERIMENTOS/
+│   └── MAPPING_V2/                 ← pipeline con mapping v2
+├── DOCUMENTACIÓN/
+├── ENTREGAS/
+└── REQUISITOS PARA EL PROYECTO/
+
+
+10. CÓMO EJECUTARLO
+--------------------------------------------------------------------------------
+
+Si ya existen midagri_largo.csv y nasa_2020_2025.csv en OUTPUTS/:
+
+  # 1. Dataset integrado
+  python SCRIPTS/pipeline_integrado.py
+
+  # 2. Clustering
+  jupyter notebook Clustering/Clustering_Cultivos.ipynb
+
+  # Pipeline completo automatizado
+  python SCRIPTS/run_all_notebooks.py
+
+  # Experimento mapping v2
+  python EXPERIMENTOS/MAPPING_V2/run_pipeline_completo.py
+
+
+11. CORRECCIONES METODOLÓGICAS IMPORTANTES
+--------------------------------------------------------------------------------
+
+11.1 Pareto-80
+  Problema (merge legacy): acum[acum <= 0.80] cortaba antes del 80%.
+  Solución: incluir cultivos hasta el primero con acumulado >= 80%.
+
+11.2 Agregado regional (Análisis A)
+  Problema: groupby().sum() convertía meses 100% NaN en 0.0.
+  Solución: sum(min_count=1).
+
+11.3 Política de NaN
+  - NO imputar producción faltante con cero.
+  - NO remover outliers (IQR/Z-score).
+  - Meses faltantes MIDAGRI permanecen como NaN explícitos.
+
+
+12. RESUMEN EN UNA FRASE
+--------------------------------------------------------------------------------
+
+El proyecto construye un dataset mensual que cruza producción agrícola peruana
+con clima local por cultivo, filtra los cultivos más importantes (Pareto-80),
+explora patrones con EDA y agrupa cultivos en perfiles agroclimáticos mediante
+clustering — todo documentado y reproducible para la entrega académica.
+
+
+================================================================================
+FIN DEL DOCUMENTO
+================================================================================

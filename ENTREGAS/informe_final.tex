@@ -1,0 +1,90 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\title{Tipología agroclimática de perfiles productivos agrícolas en el Perú (2020--2025)}
+\author{\IEEEauthorblockN{Equipo DM\_TF}
+\IEEEauthorblockA{Universidad del Pacífico --- Data Mining 2026-I\\
+Repositorio: \url{https://github.com/JohaoM-ML/DM_TF}}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Este trabajo presenta un pipeline reproducible de Data Mining que integra producción agrícola mensual de MIDAGRI (cuadro C-18, 2020--2025) con doce variables climáticas de NASA POWER en catorce distritos de seis regiones peruanas. Tras recuperar la producción mensual mediante diferenciación de acumulados, aplicar un filtro Pareto-80 por región (33 combinaciones región$\times$cultivo, 2.376 observaciones mensuales) y vincular cada cultivo a un distrito mediante mapping v2 documentado, se comparan cuatro tareas de minería de datos: clustering no supervisado de perfiles, reducción dimensional PCA, minería de correlaciones exploratorias y análisis de robustez (ARI, sensibilidad Pareto, Hopkins). El clustering principal (KMeans, $K{=}6$) alcanza Silhouette$=0{,}514$ sobre 33 perfiles. Los resultados son \textbf{descriptivos y tipológicos}; no establecen causalidad clima$\rightarrow$producción ni habilitan predicción operativa.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Data Mining, agricultura, clustering, MIDAGRI, NASA POWER, Perú
+\end{IEEEkeywords}
+
+\section{Introducción}
+La producción agrícola peruana presenta alta heterogeneidad regional. Este proyecto integra series de producción MIDAGRI con variables agroclimáticas de NASA POWER para caracterizar \textbf{perfiles productivos} región$\times$cultivo mediante técnicas de Data Mining.
+
+A diferencia de agregados regionales convencionales, asignamos clima a nivel distrito/piso ecológico (14 puntos NASA POWER) y recuperamos estacionalidad productiva mediante diferenciación de acumulados MIDAGRI. La pregunta de investigación se formula en términos de \textbf{tipología}: ¿qué perfiles emergen al combinar clima agregado 2020--2025 con volumen y variabilidad de cosecha? No se pretende identificar elasticidades climáticas ni pronosticar shocks.
+
+\section{Trabajo relacionado}
+Chapman et al.\ \cite{chapman2021} documentan NASA POWER como fuente de reanálisis gridded, sin integración con MIDAGRI peruano. Lawrence y Lin \cite{lawrence2019} revisan clustering en agricultura; Villanueva-López et al.\ \cite{villanueva2020} abordan relaciones clima--rendimiento con enfoque causal/temporal. La brecha que cubre DM\_TF es un pipeline end-to-end con acumulados MIDAGRI, mapping multi-distrito y comparación de \textbf{tareas} DM con trazabilidad reproducible.
+
+\section{Datos y metodología}
+\subsection{Fuentes}
+\textbf{MIDAGRI C-18:} producción acumulada mensual; producción mensual $=$ diff(acumulado); negativos $\rightarrow$ NaN. \textbf{NASA POWER:} 12 variables, 14 distritos, 2020--2025. \textbf{Mapping v2:} 210 asignaciones cultivo$\rightarrow$piso$\rightarrow$distrito con metadatos de confianza.
+
+\subsection{Preprocesamiento}
+Filtro Pareto-80 \textbf{por región} (incluir cultivos hasta $\geq 80\%$ acumulado). Agregado regional con sum(min\_count$=1$) para no convertir meses 100\% NaN en cero. Dataset maestro: 2.376 filas $\times$ 20 columnas; 166 NaN intencionales en producción.
+
+\subsection{Unidad de análisis}
+Perfil $=$ agregado región$\times$cultivo ($n{=}33$). Features: 5 variables climáticas core $\times$ (media, desv.\ est.) + producción total, media de cosecha y coeficiente de variación; estandarización StandardScaler.
+
+\section{Comparación de tareas de Data Mining}
+Tabla~\ref{tab:tareas} resume cuatro tareas distintas (no solo algoritmos del mismo tipo).
+
+\begin{table}[t]
+\centering
+\caption{Comparación de tareas de Data Mining}
+\label{tab:tareas}
+\small
+\begin{tabular}{@{}p{0.18\linewidth}p{0.22\linewidth}p{0.18\linewidth}p{0.28\linewidth}@{}}
+\toprule
+\textbf{Tarea} & \textbf{Método} & \textbf{Métrica} & \textbf{Resultado} \\
+\midrule
+Clustering & KMeans $K{=}6$ & Silhouette & 0,514 \\
+Clustering alt. & Jerárquico Ward & Silhouette & 0,514 \\
+Detección densidad & DBSCAN & \% ruido & 63,6\% \\
+Reducción dim. & PCA (clima) & Var.\ expl. & Exploratorio \\
+Asociación & Pearson & $r$, $p$ & Sin BH \\
+Validación & Hopkins & $H$ & 0,544 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Clustering:} sweep $K{=}2$--7; selección dual Silhouette + Davies--Bouldin. \textbf{DBSCAN} descartado como método principal por alto ruido. \textbf{Correlaciones:} exploratorias; no implican causalidad.
+
+\section{Resultados}
+$K{=}6$ agrupa perfiles coherentes con costa irrigada (Ica), selva (Junín/San Martín), altiplano (Puno) y un outlier volumétrico (caña La Libertad, cluster singleton). Hopkins $\approx 0{,}54$ indica estructura moderada. ARI entre mappings v1 y v2 $= 0{,}865$ en 29 perfiles comunes ($K$ cambió de 7 a 6).
+
+\section{Discusión}
+Limitación estructural: cultivos del mismo piso comparten clima idéntico; el clustering separa entornos agroclimáticos y escala productiva, no sensibilidad climática intra-piso. Sin rendimiento (t/ha) no se aísla efecto de extensión vs.\ productividad.
+
+\section{Implicancias éticas}
+Datos públicos agregados sin información personal. El filtro Pareto-80 concentra cultivos comerciales y marginaliza biodiversidad andina. El mapping manual puede atribuir clima incorrecto. Evitar presentar correlaciones como política agrícola sin evidencia causal.
+
+\section{Trabajos futuros}
+Integrar área sembrada para t/ha; calcular VPD y SPI; covariables ENSO; reglas de asociación, detección de anomalías y pronóstico con validación temporal; validación con agrónomos regionales.
+
+\section{Conclusión}
+DM\_TF entrega un pipeline reproducible y una tipología exploratoria de 33 perfiles agroclimáticos. La contribución reside en ingeniería de datos, transparencia metodológica y honestidad ante limitaciones, no en demostrar impacto causal del clima.
+
+\begin{thebibliography}{00}
+\bibitem{chapman2021} Chapman, W., et al. (2021). The NASA POWER project. \textit{Bulletin of the American Meteorological Society}.
+\bibitem{lawrence2019} Lawrence, I., \& Lin, K. (2019). Clustering techniques in agriculture: A review. \textit{Computers and Electronics in Agriculture}.
+\bibitem{villanueva2020} Villanueva-López, G., et al. (2020). Climate and crop yield relationships: A review. \textit{Agricultural Systems}.
+\bibitem{midagri2024} MIDAGRI. (2024). Anuario Estadístico Agropecuario. Lima: Ministerio de Desarrollo Agrario y Riego.
+\bibitem{crispdm2000} Chapman, P., et al. (2000). CRISP-DM 1.0: Step-by-step data mining guide. SPSS Inc.
+\end{thebibliography}
+
+\end{document}

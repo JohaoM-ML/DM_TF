@@ -1,0 +1,211 @@
+﻿region,cultivo,piso_asignado,distrito
+Ica,aceituna,costa,Chincha Alta
+Ica,aji,costa,Chincha Alta
+Ica,ajo,costa,Chincha Alta
+Ica,alcachofa,costa,Chincha Alta
+Ica,alfalfa,costa,Chincha Alta
+Ica,algodon_rama,costa,Chincha Alta
+Ica,arandano,costa,Chincha Alta
+Ica,arveja_grano_seco,costa,Chincha Alta
+Ica,arveja_verde,costa,Chincha Alta
+Ica,camote,costa,Chincha Alta
+Ica,cebolla,costa,Chincha Alta
+Ica,esparrago,costa,Chincha Alta
+Ica,frijol_grano_seco,costa,Chincha Alta
+Ica,haba_grano_seco,costa,Chincha Alta
+Ica,limon_sutil,costa,Chincha Alta
+Ica,maiz_amarillo_duro,costa,Chincha Alta
+Ica,maiz_chala,costa,Chincha Alta
+Ica,maiz_choclo,costa,Chincha Alta
+Ica,mandarina,costa,Chincha Alta
+Ica,mango,costa,Chincha Alta
+Ica,naranja,costa,Chincha Alta
+Ica,pallar_grano_seco,costa,Chincha Alta
+Ica,palta,costa,Chincha Alta
+Ica,papa,costa,Chincha Alta
+Ica,papaya,costa,Chincha Alta
+Ica,paprika,costa,Chincha Alta
+Ica,pimiento,costa,Chincha Alta
+Ica,tangelo,costa,Chincha Alta
+Ica,tomate,costa,Chincha Alta
+Ica,tuna,costa,Chincha Alta
+Ica,uva,costa,Chincha Alta
+Ica,yuca,costa,Chincha Alta
+Ica,zanahoria,costa,Chincha Alta
+Ica,zapallo,costa,Chincha Alta
+Junin,aji,selva_alta,Perene
+Junin,ajo,sierra,El Tambo
+Junin,alcachofa,sierra,El Tambo
+Junin,alfalfa,sierra,El Tambo
+Junin,arroz_cascara,selva_alta,Perene
+Junin,arveja_grano_seco,sierra,El Tambo
+Junin,arveja_verde,sierra,El Tambo
+Junin,avena_forrajera,sierra,El Tambo
+Junin,cacao,selva_baja,Rio Tambo
+Junin,cafe_pergamino,selva_alta,Perene
+Junin,cebada_forrajera,sierra,El Tambo
+Junin,cebada_grano,sierra,El Tambo
+Junin,cebolla,sierra,El Tambo
+Junin,frijol_grano_seco,sierra,El Tambo
+Junin,granadilla,selva_alta,Perene
+Junin,haba_grano_seco,sierra,El Tambo
+Junin,limon_sutil,selva_alta,Perene
+Junin,maiz_amarillo_duro,selva_alta,Perene
+Junin,maiz_amilaceo,sierra,El Tambo
+Junin,maiz_choclo,sierra,El Tambo
+Junin,mandarina,selva_alta,Perene
+Junin,mango,selva_alta,Perene
+Junin,manzana,sierra,El Tambo
+Junin,melocoton,sierra,El Tambo
+Junin,naranja,selva_alta,Perene
+Junin,oca,sierra,El Tambo
+Junin,olluco,sierra,El Tambo
+Junin,oregano,sierra,El Tambo
+Junin,palta,selva_alta,Perene
+Junin,papa,sierra,El Tambo
+Junin,papaya,selva_alta,Perene
+Junin,pina,selva_alta,Perene
+Junin,platano,selva_alta,Perene
+Junin,quinua,sierra,El Tambo
+Junin,tangelo,selva_alta,Perene
+Junin,tomate,sierra,El Tambo
+Junin,trigo,sierra,El Tambo
+Junin,tuna,sierra,El Tambo
+Junin,yuca,selva_baja,Rio Tambo
+Junin,zanahoria,sierra,El Tambo
+Junin,zapallo,sierra,El Tambo
+La Libertad,aceituna,costa,Viru
+La Libertad,aji,costa,Viru
+La Libertad,ajo,costa,Viru
+La Libertad,alcachofa,costa,Viru
+La Libertad,alfalfa,costa,Viru
+La Libertad,arandano,costa,Viru
+La Libertad,arroz_cascara,costa,Viru
+La Libertad,arveja_grano_seco,sierra,Huamachuco
+La Libertad,arveja_verde,sierra,Huamachuco
+La Libertad,avena_forrajera,sierra,Huamachuco
+La Libertad,cafe_pergamino,sierra,Huamachuco
+La Libertad,camote,costa,Viru
+La Libertad,cana_para_azucar,costa,Viru
+La Libertad,cebada_forrajera,sierra,Huamachuco
+La Libertad,cebada_grano,sierra,Huamachuco
+La Libertad,cebolla,costa,Viru
+La Libertad,esparrago,costa,Viru
+La Libertad,frijol_grano_seco,yunga,Cascas
+La Libertad,granadilla,yunga,Cascas
+La Libertad,haba_grano_seco,sierra,Huamachuco
+La Libertad,limon_sutil,costa,Viru
+La Libertad,maiz_amarillo_duro,costa,Viru
+La Libertad,maiz_amilaceo,sierra,Huamachuco
+La Libertad,maiz_chala,costa,Viru
+La Libertad,maiz_choclo,costa,Viru
+La Libertad,mandarina,costa,Viru
+La Libertad,mango,costa,Viru
+La Libertad,manzana,yunga,Cascas
+La Libertad,melocoton,yunga,Cascas
+La Libertad,naranja,costa,Viru
+La Libertad,oca,sierra,Huamachuco
+La Libertad,olluco,sierra,Huamachuco
+La Libertad,oregano,sierra,Huamachuco
+La Libertad,pallar_grano_seco,costa,Viru
+La Libertad,palta,costa,Viru
+La Libertad,papa,sierra,Huamachuco
+La Libertad,papaya,costa,Viru
+La Libertad,paprika,costa,Viru
+La Libertad,pimiento,costa,Viru
+La Libertad,pina,yunga,Cascas
+La Libertad,piquillo,costa,Viru
+La Libertad,platano,yunga,Cascas
+La Libertad,quinua,sierra,Huamachuco
+La Libertad,tomate,costa,Viru
+La Libertad,trigo,sierra,Huamachuco
+La Libertad,tuna,costa,Viru
+La Libertad,uva,yunga,Cascas
+La Libertad,yuca,costa,Viru
+La Libertad,zanahoria,costa,Viru
+La Libertad,zapallo,costa,Viru
+Piura,ajo,sierra,Canchaque
+Piura,alfalfa,sierra,Canchaque
+Piura,algodon_rama,valle_chira,Sullana
+Piura,arandano,sierra,Canchaque
+Piura,arroz_cascara,valle_chira,Sullana
+Piura,arveja_grano_seco,sierra,Canchaque
+Piura,arveja_verde,sierra,Canchaque
+Piura,cafe_pergamino,sierra,Canchaque
+Piura,camote,sierra,Canchaque
+Piura,cana_para_azucar,valle_chira,Sullana
+Piura,cebada_grano,sierra,Canchaque
+Piura,cebolla,sierra,Canchaque
+Piura,frijol_grano_seco,sierra,Canchaque
+Piura,haba_grano_seco,sierra,Canchaque
+Piura,limon_sutil,bosque_seco,Tambogrande
+Piura,maiz_amarillo_duro,valle_chira,Sullana
+Piura,maiz_amilaceo,sierra,Canchaque
+Piura,maiz_choclo,sierra,Canchaque
+Piura,mango,bosque_seco,Tambogrande
+Piura,naranja,bosque_seco,Tambogrande
+Piura,oca,sierra,Canchaque
+Piura,olluco,sierra,Canchaque
+Piura,palta,valle_chira,Sullana
+Piura,papa,sierra,Canchaque
+Piura,papaya,bosque_seco,Tambogrande
+Piura,paprika,valle_chira,Sullana
+Piura,pimiento,valle_chira,Sullana
+Piura,piquillo,valle_chira,Sullana
+Piura,platano,valle_chira,Sullana
+Piura,tomate,sierra,Canchaque
+Piura,trigo,sierra,Canchaque
+Piura,tuna,sierra,Canchaque
+Piura,uva,valle_chira,Sullana
+Piura,yuca,valle_chira,Sullana
+Piura,zanahoria,sierra,Canchaque
+Piura,zapallo,sierra,Canchaque
+Puno,ajo,altiplano_lacustre,Ilave
+Puno,alfalfa,altiplano_lacustre,Ilave
+Puno,arroz_cascara,altiplano_lacustre,Ilave
+Puno,arveja_grano_seco,altiplano_lacustre,Ilave
+Puno,avena_forrajera,puna_alta,Ayaviri
+Puno,cafe_pergamino,altiplano_lacustre,Ilave
+Puno,camote,altiplano_lacustre,Ilave
+Puno,cebada_forrajera,puna_alta,Ayaviri
+Puno,cebada_grano,puna_alta,Ayaviri
+Puno,cebolla,altiplano_lacustre,Ilave
+Puno,frijol_grano_seco,altiplano_lacustre,Ilave
+Puno,granadilla,altiplano_lacustre,Ilave
+Puno,haba_grano_seco,altiplano_lacustre,Ilave
+Puno,maiz_amarillo_duro,altiplano_lacustre,Ilave
+Puno,maiz_amilaceo,altiplano_lacustre,Ilave
+Puno,maiz_choclo,altiplano_lacustre,Ilave
+Puno,mandarina,altiplano_lacustre,Ilave
+Puno,naranja,altiplano_lacustre,Ilave
+Puno,oca,puna_alta,Ayaviri
+Puno,olluco,puna_alta,Ayaviri
+Puno,oregano,altiplano_lacustre,Ilave
+Puno,papa,puna_alta,Ayaviri
+Puno,papaya,altiplano_lacustre,Ilave
+Puno,pina,altiplano_lacustre,Ilave
+Puno,platano,altiplano_lacustre,Ilave
+Puno,quinua,puna_alta,Ayaviri
+Puno,trigo,puna_alta,Ayaviri
+Puno,yuca,altiplano_lacustre,Ilave
+Puno,zanahoria,altiplano_lacustre,Ilave
+Puno,zapallo,altiplano_lacustre,Ilave
+San Martin,aji,selva_alto_mayo,Moyobamba
+San Martin,algodon_rama,selva_alto_mayo,Moyobamba
+San Martin,arroz_cascara,selva_alto_mayo,Moyobamba
+San Martin,cacao,selva_huallaga,Tocache
+San Martin,cafe_pergamino,selva_alto_mayo,Moyobamba
+San Martin,frijol_grano_seco,selva_alto_mayo,Moyobamba
+San Martin,limon_sutil,selva_alto_mayo,Moyobamba
+San Martin,maiz_amarillo_duro,selva_alto_mayo,Moyobamba
+San Martin,mandarina,selva_alto_mayo,Moyobamba
+San Martin,mango,selva_alto_mayo,Moyobamba
+San Martin,naranja,selva_alto_mayo,Moyobamba
+San Martin,palma_aceitera,selva_huallaga,Tocache
+San Martin,palta,selva_alto_mayo,Moyobamba
+San Martin,papaya,selva_alto_mayo,Moyobamba
+San Martin,pina,selva_alto_mayo,Moyobamba
+San Martin,platano,selva_huallaga,Tocache
+San Martin,tomate,selva_alto_mayo,Moyobamba
+San Martin,yuca,selva_huallaga,Tocache
+San Martin,zapallo,selva_alto_mayo,Moyobamba

@@ -28,3 +28,15 @@ desktop.ini
 .env
 *.pem
 credentials.json
+
+# Artefactos generados por notebooks (no commitear)
+OUTPUTS/**/*.csv
+OUTPUTS/**/*.png
+OUTPUTS/robustez/
+
+# Datos MIDAGRI en bruto (obtener de MIDAGRI Agro en Cifras)
+BDS/**/*.xlsx
+
+# Carpetas obsoletas (eliminar si aún existen localmente)
+MAPPING_V2/
+Clustering/
