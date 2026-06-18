@@ -15,9 +15,8 @@
 ## Cómo generarlo
 
 ```bash
-python SCRIPTS/pipeline_integrado.py
-# o
 jupyter execute SCRIPTS/notebooks/03_build_dataset_integrado.ipynb
+# o ejecutar el notebook 03 en Jupyter tras 01, 00 y 02
 ```
 
 Opciones CLI: `--mapping`, `--output-dir`, `--pareto-threshold`.

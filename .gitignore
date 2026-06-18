@@ -17,6 +17,9 @@ env/
 # Notebooks de verificación (copias con outputs embebidos, muy pesadas)
 OUTPUTS/_executed/
 
+# LaTeX build logs
+ENTREGAS/*.log
+
 # IDE / OS
 .cursor/
 .vscode/

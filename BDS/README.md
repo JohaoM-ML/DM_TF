@@ -1,20 +1,11 @@
-# BDS — Datos de entrada
+# BDS — Base de datos e insumos
 
-## `mapping/`
+| Carpeta / archivo | Descripción |
+|-------------------|-------------|
+| `mapping/mapping_cultivo_distrito_v2_pipeline.csv` | **Mapping canónico** — distrito proxy por `(región, cultivo)` |
+| `mapping/mapping_cultivo_distrito_v2.csv` | Mapping con metadatos de confianza |
+| `mapping/mapping_cultivo_distrito_v1_legacy.csv` | Versión legacy (ablación) |
+| `mapping/mapping_cultivo_distrito.csv` | Referencia v1 |
+| `YYYY/*.xlsx` | Excel MIDAGRI C-18 (local; gitignored) |
 
-Tablas de asignación región×cultivo → distrito/piso:
-
-| Archivo | Uso |
-|---------|-----|
-| `mapping_cultivo_distrito_v2_pipeline.csv` | **Canónico** — insumo del notebook 03 |
-| `mapping_cultivo_distrito_v2.csv` | Metadatos (confianza, justificación) |
-| `mapping_cultivo_distrito_v1_legacy.csv` | Respaldo v1 |
-| `mapping_cultivo_distrito.csv` | v1 histórico (referencia para comparación en notebook 00) |
-
-**Generador:** `SCRIPTS/notebooks/00_build_mapping_cultivo_distrito.ipynb` (requiere `OUTPUTS/midagri_largo.csv`).
-
-## Excel MIDAGRI (opcional)
-
-Colocar archivos `BDS/YYYY/MES.xlsx` (cuadro C-18) y ejecutar notebook 01.
-
-Si no hay Excel, usar `OUTPUTS/midagri_largo.csv` ya generado.
+Generación del mapping v2: notebook `SCRIPTS/notebooks/00_build_mapping_cultivo_distrito.ipynb`.

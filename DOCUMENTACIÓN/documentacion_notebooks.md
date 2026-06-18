@@ -1,27 +1,33 @@
 # Documentación de notebooks
 
-## Flujo canónico (mapping v2)
+Pipeline **notebook-only** en `SCRIPTS/notebooks/`. No existen módulos Python (`pipeline_integrado.py`, `clustering.py`) en el repositorio.
 
-```
-SCRIPTS/notebooks/01_midagri_pipeline.ipynb   → OUTPUTS/midagri_largo.csv
-SCRIPTS/notebooks/02_nasa_pipeline.ipynb      → OUTPUTS/nasa_2020_2025.csv
-        ↓
-SCRIPTS/pipeline_integrado.py                 → dataset_integrado.csv
-        ↓
-SCRIPTS/notebooks/03_build_dataset_integrado.ipynb
-SCRIPTS/notebooks/04_eda_regional.ipynb
-SCRIPTS/notebooks/05_eda_por_cultivo.ipynb
-SCRIPTS/notebooks/06_clustering_cultivos.ipynb
-```
+## Orden de ejecución
 
-**Orquestación:** `python SCRIPTS/run_all_notebooks.py`
+Ver [`SCRIPTS/notebooks/README.md`](../SCRIPTS/notebooks/README.md).
 
-## Módulos Python (preferir sobre lógica en notebooks)
+## Entregables por notebook
 
-- `pipeline_integrado.py`, `clustering.py`, `robustez.py`, `paths.py`
+| Notebook | Salidas principales |
+|----------|---------------------|
+| 00 | `BDS/mapping/mapping_cultivo_distrito_v2_pipeline.csv` |
+| 01 | `OUTPUTS/midagri_largo.csv` |
+| 02 | `OUTPUTS/nasa_2020_2025.csv` |
+| 03 | `OUTPUTS/dataset_integrado.csv` (2.376 filas × 20 cols) |
+| 04 | `OUTPUTS/figures/eda_regional_*.png` |
+| 05 | Correlaciones por cultivo |
+| 06 | `clustering_perfiles.csv`, `mapa_clusters_folium.html` |
+| 06a | Tipologías por zona climática, `06a_mapa_zonas.html` |
+| 06b | Tipologías por estacionalidad productiva |
 
-## Legacy
+## Esquema del dataset integrado
 
-`SCRIPTS/legacy/03_merge_y_filtrado.ipynb` — obsoleto.
+Ver [`dataset_integrado.md`](dataset_integrado.md).
 
-Ver `DOCUMENTACIÓN/dataset_integrado.md` para esquema de columnas.
+## Comparativa de enfoques de clustering
+
+Ver [`comparacion_clustering.md`](comparacion_clustering.md).
+
+## Mantenimiento
+
+Scripts en `tools/` y `SCRIPTS/annotate_notebooks.py` — solo para inyectar comentarios en celdas, no para ejecutar el pipeline.

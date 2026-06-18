@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_770fa51e9f546ab52348689da9001344 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>
+    
+    
+<div style="position: fixed; bottom: 24px; left: 24px; z-index: 9999;
+            background: white; padding: 10px 12px; border: 1px solid #ccc;
+            border-radius: 4px; font-size: 12px; line-height: 1.5;">
+  <b>Clusters KMeans</b><br><div><span style="background:#1f77b4;opacity:0.85;display:inline-block;width:14px;height:14px;margin-right:6px;border:1px solid #333;"></span>Cluster 0</div><div><span style="background:#ff7f0e;opacity:0.85;display:inline-block;width:14px;height:14px;margin-right:6px;border:1px solid #333;"></span>Cluster 1</div><div><span style="background:#2ca02c;opacity:0.85;display:inline-block;width:14px;height:14px;margin-right:6px;border:1px solid #333;"></span>Cluster 2</div><div><span style="background:#d62728;opacity:0.85;display:inline-block;width:14px;height:14px;margin-right:6px;border:1px solid #333;"></span>Cluster 3</div><div><span style="background:#9467bd;opacity:0.85;display:inline-block;width:14px;height:14px;margin-right:6px;border:1px solid #333;"></span>Cluster 4</div><div><span style="background:#8c564b;opacity:0.85;display:inline-block;width:14px;height:14px;margin-right:6px;border:1px solid #333;"></span>Cluster 5</div>
+  <hr style="margin:6px 0;">
+  <span style="color:#666;">Círculos grises = 14 distritos proxy NASA</span>
+</div>
+    
+            <div class="folium-map" id="map_770fa51e9f546ab52348689da9001344" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_770fa51e9f546ab52348689da9001344 = L.map(
+                "map_770fa51e9f546ab52348689da9001344",
+                {
+                    center: [-9.5, -75.5],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_d2e1cb02f169caaed640d85cab4a23d2 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_d2e1cb02f169caaed640d85cab4a23d2.addTo(map_770fa51e9f546ab52348689da9001344);
+        
+    
+            var feature_group_9212638496f017fe3ae6d5442bcf324a = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_bf920d3d714e85dba92d520ab774ed51 = L.circleMarker(
+                [-13.4099, -76.1324],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#bbbbbb", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9212638496f017fe3ae6d5442bcf324a);
+        
+    
+        var popup_265f6babf382853f4f9bd7ec13149949 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b0e2bc40e2f83fd325ec15c3a44167a1 = $(`<div id="html_b0e2bc40e2f83fd325ec15c3a44167a1" style="width: 100.0%; height: 100.0%;"><b>Chincha Alta</b><br>Proxy climático NASA POWER</div>`)[0];
+                popup_265f6babf382853f4f9bd7ec13149949.setContent(html_b0e2bc40e2f83fd325ec15c3a44167a1);
+            
+        
+
+        circle_marker_bf920d3d714e85dba92d520ab774ed51.bindPopup(popup_265f6babf382853f4f9bd7ec13149949)
+        ;
+
+        
+    
+    
+            var circle_marker_4e5873a3b2633b07b4f50b58b141a0a3 = L.circleMarker(
+                [-8.4143, -78.7524],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#bbbbbb", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9212638496f017fe3ae6d5442bcf324a);
+        
+    
+        var popup_b44b4675e65fcdab5dc223b196c906e6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ae709a1e0cd5262f1e985dc700b9f152 = $(`<div id="html_ae709a1e0cd5262f1e985dc700b9f152" style="width: 100.0%; height: 100.0%;"><b>Viru</b><br>Proxy climático NASA POWER</div>`)[0];
+                popup_b44b4675e65fcdab5dc223b196c906e6.setContent(html_ae709a1e0cd5262f1e985dc700b9f152);
+            
+        
+
+        circle_marker_4e5873a3b2633b07b4f50b58b141a0a3.bindPopup(popup_b44b4675e65fcdab5dc223b196c906e6)
+        ;
+
+        
+    
+    
+            var circle_marker_17198ba5413bf2624029a5aa2b539831 = L.circleMarker(
+                [-7.8121, -78.0487],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#bbbbbb", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9212638496f017fe3ae6d5442bcf324a);
+        
+    
+        var popup_cbf661e251d5d98279a4923cf7990fbf = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_37e4330e2abd9d98d14ed1c838514d6c = $(`<div id="html_37e4330e2abd9d98d14ed1c838514d6c" style="width: 100.0%; height: 100.0%;"><b>Huamachuco</b><br>Proxy climático NASA POWER</div>`)[0];
+                popup_cbf661e251d5d98279a4923cf7990fbf.setContent(html_37e4330e2abd9d98d14ed1c838514d6c);
+            
+        
+
+        circle_marker_17198ba5413bf2624029a5aa2b539831.bindPopup(popup_cbf661e251d5d98279a4923cf7990fbf)
+        ;
+
+        
+    
+    
+            var circle_marker_3cc82af5550cbc7a5c8ca38d4e5fe8d9 = L.circleMarker(
+                [-7.4797, -78.8178],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#bbbbbb", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9212638496f017fe3ae6d5442bcf324a);
+        
+    
+        var popup_bcadb11357898d937a90f09a4e87a9bb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d35bc7a0b7bd462ff61f4085a5c8c610 = $(`<div id="html_d35bc7a0b7bd462ff61f4085a5c8c610" style="width: 100.0%; height: 100.0%;"><b>Cascas</b><br>Proxy climático NASA POWER</div>`)[0];
+                popup_bcadb11357898d937a90f09a4e87a9bb.setContent(html_d35bc7a0b7bd462ff61f4085a5c8c610);
+            
+        
+
+        circle_marker_3cc82af5550cbc7a5c8ca38d4e5fe8d9.bindPopup(popup_bcadb11357898d937a90f09a4e87a9bb)
+        ;
+
+        
+    
+    
+            var circle_marker_b83e6f11be2545f5dbb5947cdc9f8220 = L.circleMarker(
+                [-4.9269, -80.3447],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#bbbbbb", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9212638496f017fe3ae6d5442bcf324a);
+        
+    
+        var popup_8d747864d7bc19ab3fa8df009a96c17e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_961888b452c8af3b0610dcff16e4bb2f = $(`<div id="html_961888b452c8af3b0610dcff16e4bb2f" style="width: 100.0%; height: 100.0%;"><b>Tambogrande</b><br>Proxy climático NASA POWER</div>`)[0];
+                popup_8d747864d7bc19ab3fa8df009a96c17e.setContent(html_961888b452c8af3b0610dcff16e4bb2f);
+            
+        
+
+        circle_marker_b83e6f11be2545f5dbb5947cdc9f8220.bindPopup(popup_8d747864d7bc19ab3fa8df009a96c17e)
+        ;
+
+        
+    
+    
+            var circle_marker_1d9a432a07dd771bfca09485a9548f7a = L.circleMarker(
+                [-4.9039, -80.6853],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#bbbbbb", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9212638496f017fe3ae6d5442bcf324a);
+        
+    
+        var popup_0002ea19be9135f0d465a9524d7d10be = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_232d0ee7affd81d2d4a6524a4fe67e82 = $(`<div id="html_232d0ee7affd81d2d4a6524a4fe67e82" style="width: 100.0%; height: 100.0%;"><b>Sullana</b><br>Proxy climático NASA POWER</div>`)[0];
+                popup_0002ea19be9135f0d465a9524d7d10be.setContent(html_232d0ee7affd81d2d4a6524a4fe67e82);
+            
+        
+
+        circle_marker_1d9a432a07dd771bfca09485a9548f7a.bindPopup(popup_0002ea19be9135f0d465a9524d7d10be)
+        ;
+
+        
+    
+    
+            var circle_marker_33f346fb33fa62be37480d0b3ba5b47f = L.circleMarker(
+                [-5.376, -79.6098],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#bbbbbb", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9212638496f017fe3ae6d5442bcf324a);
+        
+    
+        var popup_f739cc1806ee19824e5cf9bece427d9f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2e3fdb5b2bc683adc3985442c14c141e = $(`<div id="html_2e3fdb5b2bc683adc3985442c14c141e" style="width: 100.0%; height: 100.0%;"><b>Canchaque</b><br>Proxy climático NASA POWER</div>`)[0];
+                popup_f739cc1806ee19824e5cf9bece427d9f.setContent(html_2e3fdb5b2bc683adc3985442c14c141e);
+            
+        
+
+        circle_marker_33f346fb33fa62be37480d0b3ba5b47f.bindPopup(popup_f739cc1806ee19824e5cf9bece427d9f)
+        ;
+
+        
+    
+    
+            var circle_marker_450ba19ee460f624bf462e5c63615881 = L.circleMarker(
+                [-6.0344, -76.9742],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#bbbbbb", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9212638496f017fe3ae6d5442bcf324a);
+        
+    
+        var popup_1af2cc9007113419f79e69af1bb31d5a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_24c7d576bd651e7be5f2f703f011bcca = $(`<div id="html_24c7d576bd651e7be5f2f703f011bcca" style="width: 100.0%; height: 100.0%;"><b>Moyobamba</b><br>Proxy climático NASA POWER</div>`)[0];
+                popup_1af2cc9007113419f79e69af1bb31d5a.setContent(html_24c7d576bd651e7be5f2f703f011bcca);
+            
+        
+
+        circle_marker_450ba19ee460f624bf462e5c63615881.bindPopup(popup_1af2cc9007113419f79e69af1bb31d5a)
+        ;
+
+        
+    
+    
+            var circle_marker_65de8a6fbb7f4379b808b3ae61102829 = L.circleMarker(
+                [-8.1877, -76.5205],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#bbbbbb", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9212638496f017fe3ae6d5442bcf324a);
+        
+    
+        var popup_f09d540e84cc3341adbeb95fb9062170 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_09e6aaee05c78003c986a24707f9f5d8 = $(`<div id="html_09e6aaee05c78003c986a24707f9f5d8" style="width: 100.0%; height: 100.0%;"><b>Tocache</b><br>Proxy climático NASA POWER</div>`)[0];
+                popup_f09d540e84cc3341adbeb95fb9062170.setContent(html_09e6aaee05c78003c986a24707f9f5d8);
+            
+        
+
+        circle_marker_65de8a6fbb7f4379b808b3ae61102829.bindPopup(popup_f09d540e84cc3341adbeb95fb9062170)
+        ;
+
+        
+    
+    
+            var circle_marker_8b3d1ab49c2ba4da166304ec1ab107e8 = L.circleMarker(
+                [-10.9489, -75.2264],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#bbbbbb", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9212638496f017fe3ae6d5442bcf324a);
+        
+    
+        var popup_102440fea5ff3d31c83929dfb4a55a64 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c6e391cb64e0593389b1902196d92916 = $(`<div id="html_c6e391cb64e0593389b1902196d92916" style="width: 100.0%; height: 100.0%;"><b>Perene</b><br>Proxy climático NASA POWER</div>`)[0];
+                popup_102440fea5ff3d31c83929dfb4a55a64.setContent(html_c6e391cb64e0593389b1902196d92916);
+            
+        
+
+        circle_marker_8b3d1ab49c2ba4da166304ec1ab107e8.bindPopup(popup_102440fea5ff3d31c83929dfb4a55a64)
+        ;
+
+        
+    
+    
+            var circle_marker_6fd9b4f1879c816ae26dce7cd852b358 = L.circleMarker(
+                [-11.1656, -74.2353],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#bbbbbb", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9212638496f017fe3ae6d5442bcf324a);
+        
+    
+        var popup_bcd18db5966714913323f87aed312da3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1ed0c046936e804983072d8085cd4a21 = $(`<div id="html_1ed0c046936e804983072d8085cd4a21" style="width: 100.0%; height: 100.0%;"><b>Rio Tambo</b><br>Proxy climático NASA POWER</div>`)[0];
+                popup_bcd18db5966714913323f87aed312da3.setContent(html_1ed0c046936e804983072d8085cd4a21);
+            
+        
+
+        circle_marker_6fd9b4f1879c816ae26dce7cd852b358.bindPopup(popup_bcd18db5966714913323f87aed312da3)
+        ;
+
+        
+    
+    
+            var circle_marker_82e70bfdf48ef8f8427720e7ae7a828a = L.circleMarker(
+                [-12.0313, -75.2222],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#bbbbbb", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9212638496f017fe3ae6d5442bcf324a);
+        
+    
+        var popup_019f03197267cca17c1e644d8b3f4ec5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_591728bf275e55eccf97252ff24f87fc = $(`<div id="html_591728bf275e55eccf97252ff24f87fc" style="width: 100.0%; height: 100.0%;"><b>El Tambo</b><br>Proxy climático NASA POWER</div>`)[0];
+                popup_019f03197267cca17c1e644d8b3f4ec5.setContent(html_591728bf275e55eccf97252ff24f87fc);
+            
+        
+
+        circle_marker_82e70bfdf48ef8f8427720e7ae7a828a.bindPopup(popup_019f03197267cca17c1e644d8b3f4ec5)
+        ;
+
+        
+    
+    
+            var circle_marker_c2be279af1929f5cf1f6a9ab725756ad = L.circleMarker(
+                [-16.0866, -69.6354],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#bbbbbb", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9212638496f017fe3ae6d5442bcf324a);
+        
+    
+        var popup_df4117f4acf68df473b74df0076b5d30 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fad981a5ce7742bde348d8198d6982c9 = $(`<div id="html_fad981a5ce7742bde348d8198d6982c9" style="width: 100.0%; height: 100.0%;"><b>Ilave</b><br>Proxy climático NASA POWER</div>`)[0];
+                popup_df4117f4acf68df473b74df0076b5d30.setContent(html_fad981a5ce7742bde348d8198d6982c9);
+            
+        
+
+        circle_marker_c2be279af1929f5cf1f6a9ab725756ad.bindPopup(popup_df4117f4acf68df473b74df0076b5d30)
+        ;
+
+        
+    
+    
+            var circle_marker_4bc43606c936d3ff79d4a4676c3302df = L.circleMarker(
+                [-14.8864, -70.5889],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#bbbbbb", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9212638496f017fe3ae6d5442bcf324a);
+        
+    
+        var popup_62827cad2bbaec54f6849980b50a46b3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_913962e86e70df2cf0be26c8fd07800a = $(`<div id="html_913962e86e70df2cf0be26c8fd07800a" style="width: 100.0%; height: 100.0%;"><b>Ayaviri</b><br>Proxy climático NASA POWER</div>`)[0];
+                popup_62827cad2bbaec54f6849980b50a46b3.setContent(html_913962e86e70df2cf0be26c8fd07800a);
+            
+        
+
+        circle_marker_4bc43606c936d3ff79d4a4676c3302df.bindPopup(popup_62827cad2bbaec54f6849980b50a46b3)
+        ;
+
+        
+    
+    
+            feature_group_9212638496f017fe3ae6d5442bcf324a.addTo(map_770fa51e9f546ab52348689da9001344);
+        
+    
+            var marker_cluster_f1dcc31651cdf034cd918c11724e477b = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_dde65af841e891f7479281f643629b8e = L.circleMarker(
+                [-13.4099, -76.1324],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_e45f4a53b2ac3cab53f3b81f1891de6f = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_49e5728677d848a5b4495a7d59a08d20 = $(`<div id="html_49e5728677d848a5b4495a7d59a08d20" style="width: 100.0%; height: 100.0%;"><b>Ica | alfalfa</b><br>Cluster KMeans: 1<br>Distrito proxy: Chincha Alta<br>Piso: costa<br>Producción total: 757,682 t</div>`)[0];
+                popup_e45f4a53b2ac3cab53f3b81f1891de6f.setContent(html_49e5728677d848a5b4495a7d59a08d20);
+            
+        
+
+        circle_marker_dde65af841e891f7479281f643629b8e.bindPopup(popup_e45f4a53b2ac3cab53f3b81f1891de6f)
+        ;
+
+        
+    
+    
+            circle_marker_dde65af841e891f7479281f643629b8e.bindTooltip(
+                `<div>
+                     C1: Ica | alfalfa
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6b80fed98b3f7b5157ff4f5562a57a24 = L.circleMarker(
+                [-13.4099, -76.1324],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_f82ca16e88f2055ee5bca201d6d235a8 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_7ee1fd918ccf9dca8eca3ca467bf667e = $(`<div id="html_7ee1fd918ccf9dca8eca3ca467bf667e" style="width: 100.0%; height: 100.0%;"><b>Ica | esparrago</b><br>Cluster KMeans: 1<br>Distrito proxy: Chincha Alta<br>Piso: costa<br>Producción total: 959,796 t</div>`)[0];
+                popup_f82ca16e88f2055ee5bca201d6d235a8.setContent(html_7ee1fd918ccf9dca8eca3ca467bf667e);
+            
+        
+
+        circle_marker_6b80fed98b3f7b5157ff4f5562a57a24.bindPopup(popup_f82ca16e88f2055ee5bca201d6d235a8)
+        ;
+
+        
+    
+    
+            circle_marker_6b80fed98b3f7b5157ff4f5562a57a24.bindTooltip(
+                `<div>
+                     C1: Ica | esparrago
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1bd43f7d027a5d300a0751eadd482aea = L.circleMarker(
+                [-13.4099, -76.1324],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_110ee7a4d15bcb45dbfc19daeb77c9df = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_486e99f1525cd47168a1308bfd3871d3 = $(`<div id="html_486e99f1525cd47168a1308bfd3871d3" style="width: 100.0%; height: 100.0%;"><b>Ica | maiz_amarillo_duro</b><br>Cluster KMeans: 1<br>Distrito proxy: Chincha Alta<br>Piso: costa<br>Producción total: 924,061 t</div>`)[0];
+                popup_110ee7a4d15bcb45dbfc19daeb77c9df.setContent(html_486e99f1525cd47168a1308bfd3871d3);
+            
+        
+
+        circle_marker_1bd43f7d027a5d300a0751eadd482aea.bindPopup(popup_110ee7a4d15bcb45dbfc19daeb77c9df)
+        ;
+
+        
+    
+    
+            circle_marker_1bd43f7d027a5d300a0751eadd482aea.bindTooltip(
+                `<div>
+                     C1: Ica | maiz_amarillo_duro
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ec5fd35896dbd4edbc5ac1ab208b8fbb = L.circleMarker(
+                [-13.4099, -76.1324],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_f887371be8451ccdc12549a3be6e0ba3 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_d070e272c95d6ffdfdc6f5b3ccbc6748 = $(`<div id="html_d070e272c95d6ffdfdc6f5b3ccbc6748" style="width: 100.0%; height: 100.0%;"><b>Ica | mandarina</b><br>Cluster KMeans: 1<br>Distrito proxy: Chincha Alta<br>Piso: costa<br>Producción total: 1,106,304 t</div>`)[0];
+                popup_f887371be8451ccdc12549a3be6e0ba3.setContent(html_d070e272c95d6ffdfdc6f5b3ccbc6748);
+            
+        
+
+        circle_marker_ec5fd35896dbd4edbc5ac1ab208b8fbb.bindPopup(popup_f887371be8451ccdc12549a3be6e0ba3)
+        ;
+
+        
+    
+    
+            circle_marker_ec5fd35896dbd4edbc5ac1ab208b8fbb.bindTooltip(
+                `<div>
+                     C1: Ica | mandarina
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e07c624571db65cbe5e0dbde513885bc = L.circleMarker(
+                [-13.4099, -76.1324],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_245f88172aec292786a8847262579180 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_ee27b31277e983c50d8d66d687b07d71 = $(`<div id="html_ee27b31277e983c50d8d66d687b07d71" style="width: 100.0%; height: 100.0%;"><b>Ica | palta</b><br>Cluster KMeans: 1<br>Distrito proxy: Chincha Alta<br>Piso: costa<br>Producción total: 645,631 t</div>`)[0];
+                popup_245f88172aec292786a8847262579180.setContent(html_ee27b31277e983c50d8d66d687b07d71);
+            
+        
+
+        circle_marker_e07c624571db65cbe5e0dbde513885bc.bindPopup(popup_245f88172aec292786a8847262579180)
+        ;
+
+        
+    
+    
+            circle_marker_e07c624571db65cbe5e0dbde513885bc.bindTooltip(
+                `<div>
+                     C1: Ica | palta
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ae46565fdfd2f8946bf34ccffed12117 = L.circleMarker(
+                [-13.4099, -76.1324],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_0b4980af93975c383666b5df9d447bff = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_6d51f72c50f0d3675f5691dd2602b84a = $(`<div id="html_6d51f72c50f0d3675f5691dd2602b84a" style="width: 100.0%; height: 100.0%;"><b>Ica | papa</b><br>Cluster KMeans: 1<br>Distrito proxy: Chincha Alta<br>Piso: costa<br>Producción total: 791,327 t</div>`)[0];
+                popup_0b4980af93975c383666b5df9d447bff.setContent(html_6d51f72c50f0d3675f5691dd2602b84a);
+            
+        
+
+        circle_marker_ae46565fdfd2f8946bf34ccffed12117.bindPopup(popup_0b4980af93975c383666b5df9d447bff)
+        ;
+
+        
+    
+    
+            circle_marker_ae46565fdfd2f8946bf34ccffed12117.bindTooltip(
+                `<div>
+                     C1: Ica | papa
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8077ffc187f755f0f6f481e3474418e4 = L.circleMarker(
+                [-13.4099, -76.1324],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_42642ed93e8a23e7dc0b81e311f4b121 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_93a9db173f0b3b8e3c3059b03a757535 = $(`<div id="html_93a9db173f0b3b8e3c3059b03a757535" style="width: 100.0%; height: 100.0%;"><b>Ica | tomate</b><br>Cluster KMeans: 1<br>Distrito proxy: Chincha Alta<br>Piso: costa<br>Producción total: 702,007 t</div>`)[0];
+                popup_42642ed93e8a23e7dc0b81e311f4b121.setContent(html_93a9db173f0b3b8e3c3059b03a757535);
+            
+        
+
+        circle_marker_8077ffc187f755f0f6f481e3474418e4.bindPopup(popup_42642ed93e8a23e7dc0b81e311f4b121)
+        ;
+
+        
+    
+    
+            circle_marker_8077ffc187f755f0f6f481e3474418e4.bindTooltip(
+                `<div>
+                     C1: Ica | tomate
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c19987dae1dcf2ab2ca8c597f793524e = L.circleMarker(
+                [-13.4099, -76.1324],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_7e6e79167c5bc0fc541ff24e6af8b7e1 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_a3c4fb9ac9a887f1afeeb0d457052232 = $(`<div id="html_a3c4fb9ac9a887f1afeeb0d457052232" style="width: 100.0%; height: 100.0%;"><b>Ica | uva</b><br>Cluster KMeans: 1<br>Distrito proxy: Chincha Alta<br>Piso: costa<br>Producción total: 2,632,080 t</div>`)[0];
+                popup_7e6e79167c5bc0fc541ff24e6af8b7e1.setContent(html_a3c4fb9ac9a887f1afeeb0d457052232);
+            
+        
+
+        circle_marker_c19987dae1dcf2ab2ca8c597f793524e.bindPopup(popup_7e6e79167c5bc0fc541ff24e6af8b7e1)
+        ;
+
+        
+    
+    
+            circle_marker_c19987dae1dcf2ab2ca8c597f793524e.bindTooltip(
+                `<div>
+                     C1: Ica | uva
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_acb79acc9f53e9b6c2550fea4659a414 = L.circleMarker(
+                [-12.0313, -75.2222],
+                {"bubblingMouseEvents": true, "color": "#8c564b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c564b", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_8f1374df9781a56201a8c1e382bf30da = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_e3c047a7df89cf44afa3fa5f6ac8424f = $(`<div id="html_e3c047a7df89cf44afa3fa5f6ac8424f" style="width: 100.0%; height: 100.0%;"><b>Junin | alfalfa</b><br>Cluster KMeans: 5<br>Distrito proxy: El Tambo<br>Piso: sierra<br>Producción total: 829,310 t</div>`)[0];
+                popup_8f1374df9781a56201a8c1e382bf30da.setContent(html_e3c047a7df89cf44afa3fa5f6ac8424f);
+            
+        
+
+        circle_marker_acb79acc9f53e9b6c2550fea4659a414.bindPopup(popup_8f1374df9781a56201a8c1e382bf30da)
+        ;
+
+        
+    
+    
+            circle_marker_acb79acc9f53e9b6c2550fea4659a414.bindTooltip(
+                `<div>
+                     C5: Junin | alfalfa
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_854e453d2d94c5ff3230494b4a90f8c2 = L.circleMarker(
+                [-12.0313, -75.2222],
+                {"bubblingMouseEvents": true, "color": "#8c564b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c564b", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_17fa3ac022f8ea425704b13080638d4a = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_61942cb16147365a2c57ea18addaa57d = $(`<div id="html_61942cb16147365a2c57ea18addaa57d" style="width: 100.0%; height: 100.0%;"><b>Junin | avena_forrajera</b><br>Cluster KMeans: 5<br>Distrito proxy: El Tambo<br>Piso: sierra<br>Producción total: 614,215 t</div>`)[0];
+                popup_17fa3ac022f8ea425704b13080638d4a.setContent(html_61942cb16147365a2c57ea18addaa57d);
+            
+        
+
+        circle_marker_854e453d2d94c5ff3230494b4a90f8c2.bindPopup(popup_17fa3ac022f8ea425704b13080638d4a)
+        ;
+
+        
+    
+    
+            circle_marker_854e453d2d94c5ff3230494b4a90f8c2.bindTooltip(
+                `<div>
+                     C5: Junin | avena_forrajera
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_859f9b89dfbf8621eca11df025d86591 = L.circleMarker(
+                [-10.9489, -75.2264],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_1812df95f7b1e2f8b59825f1afe1d467 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_2e17fc8e3eb6d75e3c166c2ae440d9f2 = $(`<div id="html_2e17fc8e3eb6d75e3c166c2ae440d9f2" style="width: 100.0%; height: 100.0%;"><b>Junin | cafe_pergamino</b><br>Cluster KMeans: 0<br>Distrito proxy: Perene<br>Piso: selva_alta<br>Producción total: 370,046 t</div>`)[0];
+                popup_1812df95f7b1e2f8b59825f1afe1d467.setContent(html_2e17fc8e3eb6d75e3c166c2ae440d9f2);
+            
+        
+
+        circle_marker_859f9b89dfbf8621eca11df025d86591.bindPopup(popup_1812df95f7b1e2f8b59825f1afe1d467)
+        ;
+
+        
+    
+    
+            circle_marker_859f9b89dfbf8621eca11df025d86591.bindTooltip(
+                `<div>
+                     C0: Junin | cafe_pergamino
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6a5e4758297d5920e7b13ed91eded3c0 = L.circleMarker(
+                [-12.0313, -75.2222],
+                {"bubblingMouseEvents": true, "color": "#8c564b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c564b", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_90e23f7c313309b62d461738d58e43e3 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_ca69e8d2cf22347b12bb9c1e917ab92e = $(`<div id="html_ca69e8d2cf22347b12bb9c1e917ab92e" style="width: 100.0%; height: 100.0%;"><b>Junin | maiz_choclo</b><br>Cluster KMeans: 5<br>Distrito proxy: El Tambo<br>Piso: sierra<br>Producción total: 540,869 t</div>`)[0];
+                popup_90e23f7c313309b62d461738d58e43e3.setContent(html_ca69e8d2cf22347b12bb9c1e917ab92e);
+            
+        
+
+        circle_marker_6a5e4758297d5920e7b13ed91eded3c0.bindPopup(popup_90e23f7c313309b62d461738d58e43e3)
+        ;
+
+        
+    
+    
+            circle_marker_6a5e4758297d5920e7b13ed91eded3c0.bindTooltip(
+                `<div>
+                     C5: Junin | maiz_choclo
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3e370166e3ae3adf5a51e38c1338470a = L.circleMarker(
+                [-10.9489, -75.2264],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_08c5aae7b31d3182b1f05a386495eb02 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_37d841a18dd3311a484560e9e18105bd = $(`<div id="html_37d841a18dd3311a484560e9e18105bd" style="width: 100.0%; height: 100.0%;"><b>Junin | naranja</b><br>Cluster KMeans: 0<br>Distrito proxy: Perene<br>Piso: selva_alta<br>Producción total: 1,734,258 t</div>`)[0];
+                popup_08c5aae7b31d3182b1f05a386495eb02.setContent(html_37d841a18dd3311a484560e9e18105bd);
+            
+        
+
+        circle_marker_3e370166e3ae3adf5a51e38c1338470a.bindPopup(popup_08c5aae7b31d3182b1f05a386495eb02)
+        ;
+
+        
+    
+    
+            circle_marker_3e370166e3ae3adf5a51e38c1338470a.bindTooltip(
+                `<div>
+                     C0: Junin | naranja
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_088715fbfcfd6c5e12718e0f501fc504 = L.circleMarker(
+                [-12.0313, -75.2222],
+                {"bubblingMouseEvents": true, "color": "#8c564b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c564b", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_bf098608d01d1b17841f54a7c721b2a9 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_dcbd0ac47a311977661da736ba8068b3 = $(`<div id="html_dcbd0ac47a311977661da736ba8068b3" style="width: 100.0%; height: 100.0%;"><b>Junin | papa</b><br>Cluster KMeans: 5<br>Distrito proxy: El Tambo<br>Piso: sierra<br>Producción total: 2,440,844 t</div>`)[0];
+                popup_bf098608d01d1b17841f54a7c721b2a9.setContent(html_dcbd0ac47a311977661da736ba8068b3);
+            
+        
+
+        circle_marker_088715fbfcfd6c5e12718e0f501fc504.bindPopup(popup_bf098608d01d1b17841f54a7c721b2a9)
+        ;
+
+        
+    
+    
+            circle_marker_088715fbfcfd6c5e12718e0f501fc504.bindTooltip(
+                `<div>
+                     C5: Junin | papa
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1ffa1467754e6355cd61de48a3be9e72 = L.circleMarker(
+                [-10.9489, -75.2264],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_c8c2645270362dcd56f71b61dde89ddb = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_0ca65f8129f71d9a4be612c10dcb4515 = $(`<div id="html_0ca65f8129f71d9a4be612c10dcb4515" style="width: 100.0%; height: 100.0%;"><b>Junin | pina</b><br>Cluster KMeans: 0<br>Distrito proxy: Perene<br>Piso: selva_alta<br>Producción total: 2,527,248 t</div>`)[0];
+                popup_c8c2645270362dcd56f71b61dde89ddb.setContent(html_0ca65f8129f71d9a4be612c10dcb4515);
+            
+        
+
+        circle_marker_1ffa1467754e6355cd61de48a3be9e72.bindPopup(popup_c8c2645270362dcd56f71b61dde89ddb)
+        ;
+
+        
+    
+    
+            circle_marker_1ffa1467754e6355cd61de48a3be9e72.bindTooltip(
+                `<div>
+                     C0: Junin | pina
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_867a9e97522b5178ecb08cf9113e3e29 = L.circleMarker(
+                [-10.9489, -75.2264],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_7eedf39ca282f90d6f59738d720061cf = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_a99a043578256fb1f01ca06f25064c98 = $(`<div id="html_a99a043578256fb1f01ca06f25064c98" style="width: 100.0%; height: 100.0%;"><b>Junin | platano</b><br>Cluster KMeans: 0<br>Distrito proxy: Perene<br>Piso: selva_alta<br>Producción total: 1,244,001 t</div>`)[0];
+                popup_7eedf39ca282f90d6f59738d720061cf.setContent(html_a99a043578256fb1f01ca06f25064c98);
+            
+        
+
+        circle_marker_867a9e97522b5178ecb08cf9113e3e29.bindPopup(popup_7eedf39ca282f90d6f59738d720061cf)
+        ;
+
+        
+    
+    
+            circle_marker_867a9e97522b5178ecb08cf9113e3e29.bindTooltip(
+                `<div>
+                     C0: Junin | platano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5d9f64ab5092bdf876f692c1ef7f6753 = L.circleMarker(
+                [-11.1656, -74.2353],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_287caa723d7439e7a7f837b70e5edc3e = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_1293cc1a895695165b83663239d20e48 = $(`<div id="html_1293cc1a895695165b83663239d20e48" style="width: 100.0%; height: 100.0%;"><b>Junin | yuca</b><br>Cluster KMeans: 0<br>Distrito proxy: Rio Tambo<br>Piso: selva_baja<br>Producción total: 696,952 t</div>`)[0];
+                popup_287caa723d7439e7a7f837b70e5edc3e.setContent(html_1293cc1a895695165b83663239d20e48);
+            
+        
+
+        circle_marker_5d9f64ab5092bdf876f692c1ef7f6753.bindPopup(popup_287caa723d7439e7a7f837b70e5edc3e)
+        ;
+
+        
+    
+    
+            circle_marker_5d9f64ab5092bdf876f692c1ef7f6753.bindTooltip(
+                `<div>
+                     C0: Junin | yuca
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_89110a8b7f55eac449bcd9b4630584f4 = L.circleMarker(
+                [-8.4143, -78.7524],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_5c29abfd684aafb3117936bf9b1b22a2 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_6404d49c867ba8c5df5029206e02e4f0 = $(`<div id="html_6404d49c867ba8c5df5029206e02e4f0" style="width: 100.0%; height: 100.0%;"><b>La Libertad | arroz_cascara</b><br>Cluster KMeans: 1<br>Distrito proxy: Viru<br>Piso: costa<br>Producción total: 1,613,590 t</div>`)[0];
+                popup_5c29abfd684aafb3117936bf9b1b22a2.setContent(html_6404d49c867ba8c5df5029206e02e4f0);
+            
+        
+
+        circle_marker_89110a8b7f55eac449bcd9b4630584f4.bindPopup(popup_5c29abfd684aafb3117936bf9b1b22a2)
+        ;
+
+        
+    
+    
+            circle_marker_89110a8b7f55eac449bcd9b4630584f4.bindTooltip(
+                `<div>
+                     C1: La Libertad | arroz_cascara
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f9795e2d771469b38dea0acd92901426 = L.circleMarker(
+                [-8.4143, -78.7524],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_74f150ee9d57d14089fed43114455ffe = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_b7eafa94ded941b30e040348fbafe786 = $(`<div id="html_b7eafa94ded941b30e040348fbafe786" style="width: 100.0%; height: 100.0%;"><b>La Libertad | cana_para_azucar</b><br>Cluster KMeans: 3<br>Distrito proxy: Viru<br>Piso: costa<br>Producción total: 28,614,989 t</div>`)[0];
+                popup_74f150ee9d57d14089fed43114455ffe.setContent(html_b7eafa94ded941b30e040348fbafe786);
+            
+        
+
+        circle_marker_f9795e2d771469b38dea0acd92901426.bindPopup(popup_74f150ee9d57d14089fed43114455ffe)
+        ;
+
+        
+    
+    
+            circle_marker_f9795e2d771469b38dea0acd92901426.bindTooltip(
+                `<div>
+                     C3: La Libertad | cana_para_azucar
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fc181e4b1c26fdad57bb820ac7e90a06 = L.circleMarker(
+                [-8.4143, -78.7524],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_730e442d685b2065b9370b4601c6958a = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_059e788c66e88159a6bb68ff24f0044f = $(`<div id="html_059e788c66e88159a6bb68ff24f0044f" style="width: 100.0%; height: 100.0%;"><b>La Libertad | palta</b><br>Cluster KMeans: 1<br>Distrito proxy: Viru<br>Piso: costa<br>Producción total: 1,366,745 t</div>`)[0];
+                popup_730e442d685b2065b9370b4601c6958a.setContent(html_059e788c66e88159a6bb68ff24f0044f);
+            
+        
+
+        circle_marker_fc181e4b1c26fdad57bb820ac7e90a06.bindPopup(popup_730e442d685b2065b9370b4601c6958a)
+        ;
+
+        
+    
+    
+            circle_marker_fc181e4b1c26fdad57bb820ac7e90a06.bindTooltip(
+                `<div>
+                     C1: La Libertad | palta
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cee705c8a832b5279f3bcff6bf28ce93 = L.circleMarker(
+                [-7.8121, -78.0487],
+                {"bubblingMouseEvents": true, "color": "#8c564b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c564b", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_0dbb569f785d4d8699d6ea48005642fa = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_4543d4181434458f84df80f3024e8af6 = $(`<div id="html_4543d4181434458f84df80f3024e8af6" style="width: 100.0%; height: 100.0%;"><b>La Libertad | papa</b><br>Cluster KMeans: 5<br>Distrito proxy: Huamachuco<br>Piso: sierra<br>Producción total: 3,127,629 t</div>`)[0];
+                popup_0dbb569f785d4d8699d6ea48005642fa.setContent(html_4543d4181434458f84df80f3024e8af6);
+            
+        
+
+        circle_marker_cee705c8a832b5279f3bcff6bf28ce93.bindPopup(popup_0dbb569f785d4d8699d6ea48005642fa)
+        ;
+
+        
+    
+    
+            circle_marker_cee705c8a832b5279f3bcff6bf28ce93.bindTooltip(
+                `<div>
+                     C5: La Libertad | papa
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_59b0d8df908ed1428974e2a32cdfd0ff = L.circleMarker(
+                [-4.9039, -80.6853],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9467bd", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_168af2388926d134967adac8da9fbeda = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_2b92ecda803ce2e2d42e0e51810396c0 = $(`<div id="html_2b92ecda803ce2e2d42e0e51810396c0" style="width: 100.0%; height: 100.0%;"><b>Piura | arroz_cascara</b><br>Cluster KMeans: 4<br>Distrito proxy: Sullana<br>Piso: valle_chira<br>Producción total: 2,860,924 t</div>`)[0];
+                popup_168af2388926d134967adac8da9fbeda.setContent(html_2b92ecda803ce2e2d42e0e51810396c0);
+            
+        
+
+        circle_marker_59b0d8df908ed1428974e2a32cdfd0ff.bindPopup(popup_168af2388926d134967adac8da9fbeda)
+        ;
+
+        
+    
+    
+            circle_marker_59b0d8df908ed1428974e2a32cdfd0ff.bindTooltip(
+                `<div>
+                     C4: Piura | arroz_cascara
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f74777dbcef6d1e947725a10853c0dae = L.circleMarker(
+                [-4.9039, -80.6853],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9467bd", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_3b9c98fc517490cc048bd457ac13fcc1 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_6447f72a387236d957f0d5f252cce67c = $(`<div id="html_6447f72a387236d957f0d5f252cce67c" style="width: 100.0%; height: 100.0%;"><b>Piura | cana_para_azucar</b><br>Cluster KMeans: 4<br>Distrito proxy: Sullana<br>Piso: valle_chira<br>Producción total: 3,614,281 t</div>`)[0];
+                popup_3b9c98fc517490cc048bd457ac13fcc1.setContent(html_6447f72a387236d957f0d5f252cce67c);
+            
+        
+
+        circle_marker_f74777dbcef6d1e947725a10853c0dae.bindPopup(popup_3b9c98fc517490cc048bd457ac13fcc1)
+        ;
+
+        
+    
+    
+            circle_marker_f74777dbcef6d1e947725a10853c0dae.bindTooltip(
+                `<div>
+                     C4: Piura | cana_para_azucar
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8b7263ef98e941a2cd20660aa6018ec9 = L.circleMarker(
+                [-4.9269, -80.3447],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9467bd", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_4697fbab70b2d69cfb8c6bbf7595f3c8 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f0b9d18fc7a5711064a4718d4a769610 = $(`<div id="html_f0b9d18fc7a5711064a4718d4a769610" style="width: 100.0%; height: 100.0%;"><b>Piura | mango</b><br>Cluster KMeans: 4<br>Distrito proxy: Tambogrande<br>Piso: bosque_seco<br>Producción total: 1,882,343 t</div>`)[0];
+                popup_4697fbab70b2d69cfb8c6bbf7595f3c8.setContent(html_f0b9d18fc7a5711064a4718d4a769610);
+            
+        
+
+        circle_marker_8b7263ef98e941a2cd20660aa6018ec9.bindPopup(popup_4697fbab70b2d69cfb8c6bbf7595f3c8)
+        ;
+
+        
+    
+    
+            circle_marker_8b7263ef98e941a2cd20660aa6018ec9.bindTooltip(
+                `<div>
+                     C4: Piura | mango
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f1bf1770126b05ba6dc1412e091684dd = L.circleMarker(
+                [-4.9039, -80.6853],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9467bd", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_7695d5a7f6caf671148206dea87f6cd7 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_02f1899345a5c8254359e739eb54f9fd = $(`<div id="html_02f1899345a5c8254359e739eb54f9fd" style="width: 100.0%; height: 100.0%;"><b>Piura | platano</b><br>Cluster KMeans: 4<br>Distrito proxy: Sullana<br>Piso: valle_chira<br>Producción total: 2,091,358 t</div>`)[0];
+                popup_7695d5a7f6caf671148206dea87f6cd7.setContent(html_02f1899345a5c8254359e739eb54f9fd);
+            
+        
+
+        circle_marker_f1bf1770126b05ba6dc1412e091684dd.bindPopup(popup_7695d5a7f6caf671148206dea87f6cd7)
+        ;
+
+        
+    
+    
+            circle_marker_f1bf1770126b05ba6dc1412e091684dd.bindTooltip(
+                `<div>
+                     C4: Piura | platano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_35379b10383dcf1a457f5eb0fca06991 = L.circleMarker(
+                [-4.9039, -80.6853],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9467bd", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_41c39aefbd1d604cb93a9c0fcb8304f8 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f5b37ac3109a2e584a1c1421078f5951 = $(`<div id="html_f5b37ac3109a2e584a1c1421078f5951" style="width: 100.0%; height: 100.0%;"><b>Piura | uva</b><br>Cluster KMeans: 4<br>Distrito proxy: Sullana<br>Piso: valle_chira<br>Producción total: 1,465,184 t</div>`)[0];
+                popup_41c39aefbd1d604cb93a9c0fcb8304f8.setContent(html_f5b37ac3109a2e584a1c1421078f5951);
+            
+        
+
+        circle_marker_35379b10383dcf1a457f5eb0fca06991.bindPopup(popup_41c39aefbd1d604cb93a9c0fcb8304f8)
+        ;
+
+        
+    
+    
+            circle_marker_35379b10383dcf1a457f5eb0fca06991.bindTooltip(
+                `<div>
+                     C4: Piura | uva
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f3233ac2721de8b22e78281a8ac6e85e = L.circleMarker(
+                [-16.0866, -69.6354],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_509fa6d01fb73bd26b22073a1c0f29e0 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_adbb352d7402cb998b7641160878f9e9 = $(`<div id="html_adbb352d7402cb998b7641160878f9e9" style="width: 100.0%; height: 100.0%;"><b>Puno | alfalfa</b><br>Cluster KMeans: 2<br>Distrito proxy: Ilave<br>Piso: altiplano_lacustre<br>Producción total: 10,029,664 t</div>`)[0];
+                popup_509fa6d01fb73bd26b22073a1c0f29e0.setContent(html_adbb352d7402cb998b7641160878f9e9);
+            
+        
+
+        circle_marker_f3233ac2721de8b22e78281a8ac6e85e.bindPopup(popup_509fa6d01fb73bd26b22073a1c0f29e0)
+        ;
+
+        
+    
+    
+            circle_marker_f3233ac2721de8b22e78281a8ac6e85e.bindTooltip(
+                `<div>
+                     C2: Puno | alfalfa
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_64da45ecf45a975c93bdb52715c338db = L.circleMarker(
+                [-14.8864, -70.5889],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_500f757b56af040e90f106b8c86a7da3 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_0fac046b0482a1807dcf91ab287e0301 = $(`<div id="html_0fac046b0482a1807dcf91ab287e0301" style="width: 100.0%; height: 100.0%;"><b>Puno | avena_forrajera</b><br>Cluster KMeans: 2<br>Distrito proxy: Ayaviri<br>Piso: puna_alta<br>Producción total: 13,294,902 t</div>`)[0];
+                popup_500f757b56af040e90f106b8c86a7da3.setContent(html_0fac046b0482a1807dcf91ab287e0301);
+            
+        
+
+        circle_marker_64da45ecf45a975c93bdb52715c338db.bindPopup(popup_500f757b56af040e90f106b8c86a7da3)
+        ;
+
+        
+    
+    
+            circle_marker_64da45ecf45a975c93bdb52715c338db.bindTooltip(
+                `<div>
+                     C2: Puno | avena_forrajera
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f6019cdc7857b54027cfa034ae94269e = L.circleMarker(
+                [-14.8864, -70.5889],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_1c858a5a8923fe7bc90766fb181f207c = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_3f5a96ab8ed17d2c810d4ead20b91b3e = $(`<div id="html_3f5a96ab8ed17d2c810d4ead20b91b3e" style="width: 100.0%; height: 100.0%;"><b>Puno | papa</b><br>Cluster KMeans: 2<br>Distrito proxy: Ayaviri<br>Piso: puna_alta<br>Producción total: 4,821,686 t</div>`)[0];
+                popup_1c858a5a8923fe7bc90766fb181f207c.setContent(html_3f5a96ab8ed17d2c810d4ead20b91b3e);
+            
+        
+
+        circle_marker_f6019cdc7857b54027cfa034ae94269e.bindPopup(popup_1c858a5a8923fe7bc90766fb181f207c)
+        ;
+
+        
+    
+    
+            circle_marker_f6019cdc7857b54027cfa034ae94269e.bindTooltip(
+                `<div>
+                     C2: Puno | papa
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8272ce822b1f4850adad564d6425c0aa = L.circleMarker(
+                [-6.0344, -76.9742],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_9fbb1b32ac1e5bb1f7e3cc162f9df34e = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_5c1b372e811f9735c65ee61127228aad = $(`<div id="html_5c1b372e811f9735c65ee61127228aad" style="width: 100.0%; height: 100.0%;"><b>San Martin | arroz_cascara</b><br>Cluster KMeans: 0<br>Distrito proxy: Moyobamba<br>Piso: selva_alto_mayo<br>Producción total: 4,913,001 t</div>`)[0];
+                popup_9fbb1b32ac1e5bb1f7e3cc162f9df34e.setContent(html_5c1b372e811f9735c65ee61127228aad);
+            
+        
+
+        circle_marker_8272ce822b1f4850adad564d6425c0aa.bindPopup(popup_9fbb1b32ac1e5bb1f7e3cc162f9df34e)
+        ;
+
+        
+    
+    
+            circle_marker_8272ce822b1f4850adad564d6425c0aa.bindTooltip(
+                `<div>
+                     C0: San Martin | arroz_cascara
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_99ccac09e031adb3bedea96e93076a67 = L.circleMarker(
+                [-6.0344, -76.9742],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_9299f8106534a56083f8371dc9022814 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_06debd64e0dfccee8c63e6d98cc670f4 = $(`<div id="html_06debd64e0dfccee8c63e6d98cc670f4" style="width: 100.0%; height: 100.0%;"><b>San Martin | maiz_amarillo_duro</b><br>Cluster KMeans: 0<br>Distrito proxy: Moyobamba<br>Piso: selva_alto_mayo<br>Producción total: 1,118,595 t</div>`)[0];
+                popup_9299f8106534a56083f8371dc9022814.setContent(html_06debd64e0dfccee8c63e6d98cc670f4);
+            
+        
+
+        circle_marker_99ccac09e031adb3bedea96e93076a67.bindPopup(popup_9299f8106534a56083f8371dc9022814)
+        ;
+
+        
+    
+    
+            circle_marker_99ccac09e031adb3bedea96e93076a67.bindTooltip(
+                `<div>
+                     C0: San Martin | maiz_amarillo_duro
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5203672c8177ebb75d53d6d6dcd56c9d = L.circleMarker(
+                [-8.1877, -76.5205],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_c9418ae6bf12e23405842c4af4dddfc6 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_2bad7c46a677196c71293e36ed5ed9e0 = $(`<div id="html_2bad7c46a677196c71293e36ed5ed9e0" style="width: 100.0%; height: 100.0%;"><b>San Martin | palma_aceitera</b><br>Cluster KMeans: 0<br>Distrito proxy: Tocache<br>Piso: selva_huallaga<br>Producción total: 3,021,208 t</div>`)[0];
+                popup_c9418ae6bf12e23405842c4af4dddfc6.setContent(html_2bad7c46a677196c71293e36ed5ed9e0);
+            
+        
+
+        circle_marker_5203672c8177ebb75d53d6d6dcd56c9d.bindPopup(popup_c9418ae6bf12e23405842c4af4dddfc6)
+        ;
+
+        
+    
+    
+            circle_marker_5203672c8177ebb75d53d6d6dcd56c9d.bindTooltip(
+                `<div>
+                     C0: San Martin | palma_aceitera
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6aba1ef86d75cc2190df6a46e4e9472f = L.circleMarker(
+                [-8.1877, -76.5205],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_f1dcc31651cdf034cd918c11724e477b);
+        
+    
+        var popup_5347c57b6f158e21ac6748afb27dc361 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_8f7ae92bb95f529baec48aad42b9973c = $(`<div id="html_8f7ae92bb95f529baec48aad42b9973c" style="width: 100.0%; height: 100.0%;"><b>San Martin | platano</b><br>Cluster KMeans: 0<br>Distrito proxy: Tocache<br>Piso: selva_huallaga<br>Producción total: 2,547,538 t</div>`)[0];
+                popup_5347c57b6f158e21ac6748afb27dc361.setContent(html_8f7ae92bb95f529baec48aad42b9973c);
+            
+        
+
+        circle_marker_6aba1ef86d75cc2190df6a46e4e9472f.bindPopup(popup_5347c57b6f158e21ac6748afb27dc361)
+        ;
+
+        
+    
+    
+            circle_marker_6aba1ef86d75cc2190df6a46e4e9472f.bindTooltip(
+                `<div>
+                     C0: San Martin | platano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            marker_cluster_f1dcc31651cdf034cd918c11724e477b.addTo(map_770fa51e9f546ab52348689da9001344);
+        
+    
+            var layer_control_39aa2be71a6514c4f696144e52312488_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_d2e1cb02f169caaed640d85cab4a23d2,
+                },
+                overlays :  {
+                    "Distritos proxy (NASA)" : feature_group_9212638496f017fe3ae6d5442bcf324a,
+                    "Perfiles Pareto-80 (KMeans)" : marker_cluster_f1dcc31651cdf034cd918c11724e477b,
+                },
+            };
+            let layer_control_39aa2be71a6514c4f696144e52312488 = L.control.layers(
+                layer_control_39aa2be71a6514c4f696144e52312488_layers.base_layers,
+                layer_control_39aa2be71a6514c4f696144e52312488_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_770fa51e9f546ab52348689da9001344);
+
+        
+</script>
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_a86f0eabbf08b1608c3e458e7533ad33 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    <div style="position:fixed;bottom:24px;left:24px;z-index:9999;background:white;padding:10px;border:1px solid #ccc;border-radius:4px;font-size:12px;"><b>Zonas agroclimaticas</b><br><div><span style="background:#1f77b4;width:14px;height:14px;display:inline-block;margin-right:6px;border:1px solid #333;"></span>Cluster 0</div><div><span style="background:#ff7f0e;width:14px;height:14px;display:inline-block;margin-right:6px;border:1px solid #333;"></span>Cluster 1</div><div><span style="background:#2ca02c;width:14px;height:14px;display:inline-block;margin-right:6px;border:1px solid #333;"></span>Cluster 2</div><div><span style="background:#d62728;width:14px;height:14px;display:inline-block;margin-right:6px;border:1px solid #333;"></span>Cluster 3</div><div><span style="background:#9467bd;width:14px;height:14px;display:inline-block;margin-right:6px;border:1px solid #333;"></span>Cluster 4</div></div>
+    
+            <div class="folium-map" id="map_a86f0eabbf08b1608c3e458e7533ad33" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_a86f0eabbf08b1608c3e458e7533ad33 = L.map(
+                "map_a86f0eabbf08b1608c3e458e7533ad33",
+                {
+                    center: [-9.5, -75.5],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b1e0633eca36dc6bb26f04bc36a8d66f = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_b1e0633eca36dc6bb26f04bc36a8d66f.addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
+        
+    
+            var circle_marker_9951c4f94c6def2f2896f57bc0333402 = L.circleMarker(
+                [-14.8864, -70.5889],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9467bd", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
+        
+    
+        var popup_970ed0d80488062ad6ad1b2fb4d6c531 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0952340c65e8fc7b7b56f206919a042a = $(`<div id="html_0952340c65e8fc7b7b56f206919a042a" style="width: 100.0%; height: 100.0%;"><b>Puno | Ayaviri</b><br>Cluster: 4<br>Piso: puna_alta</div>`)[0];
+                popup_970ed0d80488062ad6ad1b2fb4d6c531.setContent(html_0952340c65e8fc7b7b56f206919a042a);
+            
+        
+
+        circle_marker_9951c4f94c6def2f2896f57bc0333402.bindPopup(popup_970ed0d80488062ad6ad1b2fb4d6c531)
+        ;
+
+        
+    
+    
+            circle_marker_9951c4f94c6def2f2896f57bc0333402.bindTooltip(
+                `<div>
+                     C4: Ayaviri
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ec3664229e93e0701bedfb3e52e8c337 = L.circleMarker(
+                [-13.4099, -76.1324],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
+        
+    
+        var popup_20506bb9f4d50f42b12ce55f3a32dd9e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_73fab586e322d368dc59a9ac18d6583c = $(`<div id="html_73fab586e322d368dc59a9ac18d6583c" style="width: 100.0%; height: 100.0%;"><b>Ica | Chincha Alta</b><br>Cluster: 2<br>Piso: costa</div>`)[0];
+                popup_20506bb9f4d50f42b12ce55f3a32dd9e.setContent(html_73fab586e322d368dc59a9ac18d6583c);
+            
+        
+
+        circle_marker_ec3664229e93e0701bedfb3e52e8c337.bindPopup(popup_20506bb9f4d50f42b12ce55f3a32dd9e)
+        ;
+
+        
+    
+    
+            circle_marker_ec3664229e93e0701bedfb3e52e8c337.bindTooltip(
+                `<div>
+                     C2: Chincha Alta
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5b0425a043684736c726faadbfba1fef = L.circleMarker(
+                [-12.0313, -75.2222],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
+        
+    
+        var popup_7812dfb605b85ee195b9b332e4be8c9b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bb9ee0a2909b7b21335a2d5e8bbc4478 = $(`<div id="html_bb9ee0a2909b7b21335a2d5e8bbc4478" style="width: 100.0%; height: 100.0%;"><b>Junin | El Tambo</b><br>Cluster: 0<br>Piso: sierra</div>`)[0];
+                popup_7812dfb605b85ee195b9b332e4be8c9b.setContent(html_bb9ee0a2909b7b21335a2d5e8bbc4478);
+            
+        
+
+        circle_marker_5b0425a043684736c726faadbfba1fef.bindPopup(popup_7812dfb605b85ee195b9b332e4be8c9b)
+        ;
+
+        
+    
+    
+            circle_marker_5b0425a043684736c726faadbfba1fef.bindTooltip(
+                `<div>
+                     C0: El Tambo
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2bb841d637bb608c6884e2d417b1daa7 = L.circleMarker(
+                [-7.8121, -78.0487],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
+        
+    
+        var popup_6227ad7f797dd7171691b7e2eed5f144 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a135d21451caddba674c3cea6b6f187c = $(`<div id="html_a135d21451caddba674c3cea6b6f187c" style="width: 100.0%; height: 100.0%;"><b>La Libertad | Huamachuco</b><br>Cluster: 0<br>Piso: sierra</div>`)[0];
+                popup_6227ad7f797dd7171691b7e2eed5f144.setContent(html_a135d21451caddba674c3cea6b6f187c);
+            
+        
+
+        circle_marker_2bb841d637bb608c6884e2d417b1daa7.bindPopup(popup_6227ad7f797dd7171691b7e2eed5f144)
+        ;
+
+        
+    
+    
+            circle_marker_2bb841d637bb608c6884e2d417b1daa7.bindTooltip(
+                `<div>
+                     C0: Huamachuco
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cd452421cbdf65c31e068542e3ef0d30 = L.circleMarker(
+                [-16.0866, -69.6354],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9467bd", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
+        
+    
+        var popup_88e9057a28f63afa0f81f3e45dc74e6c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c3b326e73417a6c85ff7aa5012164ef3 = $(`<div id="html_c3b326e73417a6c85ff7aa5012164ef3" style="width: 100.0%; height: 100.0%;"><b>Puno | Ilave</b><br>Cluster: 4<br>Piso: altiplano_lacustre</div>`)[0];
+                popup_88e9057a28f63afa0f81f3e45dc74e6c.setContent(html_c3b326e73417a6c85ff7aa5012164ef3);
+            
+        
+
+        circle_marker_cd452421cbdf65c31e068542e3ef0d30.bindPopup(popup_88e9057a28f63afa0f81f3e45dc74e6c)
+        ;
+
+        
+    
+    
+            circle_marker_cd452421cbdf65c31e068542e3ef0d30.bindTooltip(
+                `<div>
+                     C4: Ilave
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_48f0315894ff8926a0cb11e03abb4575 = L.circleMarker(
+                [-6.0344, -76.9742],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
+        
+    
+        var popup_c99d3018045ebd7b1ed0870906e474aa = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2cc4d62f0b97e34526eaf477d60ec5c8 = $(`<div id="html_2cc4d62f0b97e34526eaf477d60ec5c8" style="width: 100.0%; height: 100.0%;"><b>San Martin | Moyobamba</b><br>Cluster: 1<br>Piso: selva_alto_mayo</div>`)[0];
+                popup_c99d3018045ebd7b1ed0870906e474aa.setContent(html_2cc4d62f0b97e34526eaf477d60ec5c8);
+            
+        
+
+        circle_marker_48f0315894ff8926a0cb11e03abb4575.bindPopup(popup_c99d3018045ebd7b1ed0870906e474aa)
+        ;
+
+        
+    
+    
+            circle_marker_48f0315894ff8926a0cb11e03abb4575.bindTooltip(
+                `<div>
+                     C1: Moyobamba
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a4d6c7281264f7bb4db43a9975cb8af4 = L.circleMarker(
+                [-10.9489, -75.2264],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
+        
+    
+        var popup_22ebb8d0648af50308b36bebf06ff837 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1fc4b7b89b4b01ea178b63d1748c4379 = $(`<div id="html_1fc4b7b89b4b01ea178b63d1748c4379" style="width: 100.0%; height: 100.0%;"><b>Junin | Perene</b><br>Cluster: 1<br>Piso: selva_alta</div>`)[0];
+                popup_22ebb8d0648af50308b36bebf06ff837.setContent(html_1fc4b7b89b4b01ea178b63d1748c4379);
+            
+        
+
+        circle_marker_a4d6c7281264f7bb4db43a9975cb8af4.bindPopup(popup_22ebb8d0648af50308b36bebf06ff837)
+        ;
+
+        
+    
+    
+            circle_marker_a4d6c7281264f7bb4db43a9975cb8af4.bindTooltip(
+                `<div>
+                     C1: Perene
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5b7bd45cf0a98a7ce665eb93523672f0 = L.circleMarker(
+                [-11.1656, -74.2353],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
+        
+    
+        var popup_e286ddce17f23f527c1274e66fec2d35 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6acffeb1df3870ae8254de7998ab0ace = $(`<div id="html_6acffeb1df3870ae8254de7998ab0ace" style="width: 100.0%; height: 100.0%;"><b>Junin | Rio Tambo</b><br>Cluster: 1<br>Piso: selva_baja</div>`)[0];
+                popup_e286ddce17f23f527c1274e66fec2d35.setContent(html_6acffeb1df3870ae8254de7998ab0ace);
+            
+        
+
+        circle_marker_5b7bd45cf0a98a7ce665eb93523672f0.bindPopup(popup_e286ddce17f23f527c1274e66fec2d35)
+        ;
+
+        
+    
+    
+            circle_marker_5b7bd45cf0a98a7ce665eb93523672f0.bindTooltip(
+                `<div>
+                     C1: Rio Tambo
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0766fb587dbd44deaeb56426739e4dd2 = L.circleMarker(
+                [-4.9039, -80.6853],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
+        
+    
+        var popup_21b342c59825379336afcbd8fc14592a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_215a9068555338b164b0e5da99349d21 = $(`<div id="html_215a9068555338b164b0e5da99349d21" style="width: 100.0%; height: 100.0%;"><b>Piura | Sullana</b><br>Cluster: 3<br>Piso: valle_chira</div>`)[0];
+                popup_21b342c59825379336afcbd8fc14592a.setContent(html_215a9068555338b164b0e5da99349d21);
+            
+        
+
+        circle_marker_0766fb587dbd44deaeb56426739e4dd2.bindPopup(popup_21b342c59825379336afcbd8fc14592a)
+        ;
+
+        
+    
+    
+            circle_marker_0766fb587dbd44deaeb56426739e4dd2.bindTooltip(
+                `<div>
+                     C3: Sullana
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4788022368a6cb6248582a20ab56b2fe = L.circleMarker(
+                [-4.9269, -80.3447],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
+        
+    
+        var popup_23b6e7fac6b2dc578e7a0e6a7bd20b51 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2bec426b3e1891982c8a78402ff04de6 = $(`<div id="html_2bec426b3e1891982c8a78402ff04de6" style="width: 100.0%; height: 100.0%;"><b>Piura | Tambogrande</b><br>Cluster: 3<br>Piso: bosque_seco</div>`)[0];
+                popup_23b6e7fac6b2dc578e7a0e6a7bd20b51.setContent(html_2bec426b3e1891982c8a78402ff04de6);
+            
+        
+
+        circle_marker_4788022368a6cb6248582a20ab56b2fe.bindPopup(popup_23b6e7fac6b2dc578e7a0e6a7bd20b51)
+        ;
+
+        
+    
+    
+            circle_marker_4788022368a6cb6248582a20ab56b2fe.bindTooltip(
+                `<div>
+                     C3: Tambogrande
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ffd1668e07383102c8edd7ace0f53728 = L.circleMarker(
+                [-8.1877, -76.5205],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
+        
+    
+        var popup_8e2d99c14b6a96cda8ac9450e86ebd2e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_194fde006e757065e281585e72a4878b = $(`<div id="html_194fde006e757065e281585e72a4878b" style="width: 100.0%; height: 100.0%;"><b>San Martin | Tocache</b><br>Cluster: 1<br>Piso: selva_huallaga</div>`)[0];
+                popup_8e2d99c14b6a96cda8ac9450e86ebd2e.setContent(html_194fde006e757065e281585e72a4878b);
+            
+        
+
+        circle_marker_ffd1668e07383102c8edd7ace0f53728.bindPopup(popup_8e2d99c14b6a96cda8ac9450e86ebd2e)
+        ;
+
+        
+    
+    
+            circle_marker_ffd1668e07383102c8edd7ace0f53728.bindTooltip(
+                `<div>
+                     C1: Tocache
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6c368daa5ab8f565e90a98ec30d849c3 = L.circleMarker(
+                [-8.4143, -78.7524],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
+        
+    
+        var popup_06dc6e1fcc160ab88e7fb89af32555b4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bfae09e8551a34c6d2d6224ce946683a = $(`<div id="html_bfae09e8551a34c6d2d6224ce946683a" style="width: 100.0%; height: 100.0%;"><b>La Libertad | Viru</b><br>Cluster: 2<br>Piso: costa</div>`)[0];
+                popup_06dc6e1fcc160ab88e7fb89af32555b4.setContent(html_bfae09e8551a34c6d2d6224ce946683a);
+            
+        
+
+        circle_marker_6c368daa5ab8f565e90a98ec30d849c3.bindPopup(popup_06dc6e1fcc160ab88e7fb89af32555b4)
+        ;
+
+        
+    
+    
+            circle_marker_6c368daa5ab8f565e90a98ec30d849c3.bindTooltip(
+                `<div>
+                     C2: Viru
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
