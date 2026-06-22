@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_313768be475525708817b6d1968c3bea {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div id="panel-perfil" style="display:none;position:fixed;top:0;right:0;width:400px;height:100%;
+     background:white;box-shadow:-6px 0 24px rgba(0,0,0,0.25);z-index:9999;
+     font-family:sans-serif;overflow-y:auto;">
+  <div id="panel-perfil-header" style="padding:26px 24px;background:#4C78A8;color:white;position:relative;">
+    <span onclick="document.getElementById('panel-perfil').style.display='none'"
+          style="position:absolute;top:18px;right:20px;cursor:pointer;font-size:26px;
+                 line-height:1;font-weight:bold;">&times;</span>
+    <div style="font-size:12px;opacity:0.85;letter-spacing:1.5px;text-transform:uppercase;">
+      Cluster de perfil productivo</div>
+    <div id="panel-perfil-titulo" style="font-size:23px;font-weight:bold;margin-top:10px;line-height:1.3;"></div>
+  </div>
+  <div style="padding:24px;">
+    <div style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">
+      Region y cultivo</div>
+    <div id="panel-perfil-info" style="font-size:16px;margin-bottom:26px;color:#333;"></div>
+    <div style="font-size:12px;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">
+      Descripcion</div>
+    <div id="panel-perfil-desc" style="font-size:16px;line-height:1.7;color:#333;"></div>
+  </div>
+</div>
+    <div style="position:fixed;bottom:24px;left:24px;z-index:9999;background:white;padding:10px;border:1px solid #ccc;border-radius:4px;font-size:12px;max-width:220px;"><b>Perfiles productivos por cluster</b><br><div style="margin-bottom:3px"><span style="background:#1f77b4;width:14px;height:14px;display:inline-block;margin-right:6px;border:1px solid #333;"></span>C0 = Cierre de ano</div><div style="margin-bottom:3px"><span style="background:#ff7f0e;width:14px;height:14px;display:inline-block;margin-right:6px;border:1px solid #333;"></span>C1 = Invierno</div><div style="margin-bottom:3px"><span style="background:#2ca02c;width:14px;height:14px;display:inline-block;margin-right:6px;border:1px solid #333;"></span>C2 = Todo el ano</div><div style="margin-bottom:3px"><span style="background:#d62728;width:14px;height:14px;display:inline-block;margin-right:6px;border:1px solid #333;"></span>C3 = Ventana exportadora</div><div style="margin-bottom:3px"><span style="background:#9467bd;width:14px;height:14px;display:inline-block;margin-right:6px;border:1px solid #333;"></span>C4 = Todo o nada</div><div style="margin-bottom:3px"><span style="background:#8c564b;width:14px;height:14px;display:inline-block;margin-right:6px;border:1px solid #333;"></span>C5 = Papa atipica</div><div style="margin-bottom:3px"><span style="background:#e377c2;width:14px;height:14px;display:inline-block;margin-right:6px;border:1px solid #333;"></span>C6 = Otono andino</div><div style="margin-top:4px;color:#666;font-size:10px">Clic en un punto para ver ficha &rarr;</div></div>
+    
+            <div class="folium-map" id="map_313768be475525708817b6d1968c3bea" ></div>
+        
+</body>
+<script>
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_7515a823548511669cc94748c3be494c.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#2ca02c';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C2 = Todo el ano';
+                document.getElementById('panel-perfil-info').innerHTML = 'Ica | alfalfa<br>Mes pico: 0.18 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Yuca, platano, palma, cana, alfalfa, esparrago, naranja, pina, arroz y maiz (San Martin): perennes o bajo riego tecnificado, cosecha continua sin pico marcado.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_e3bf5dc5f3e643e11e9735b17ba023cc.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#2ca02c';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C2 = Todo el ano';
+                document.getElementById('panel-perfil-info').innerHTML = 'Ica | esparrago<br>Mes pico: 0.16 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Yuca, platano, palma, cana, alfalfa, esparrago, naranja, pina, arroz y maiz (San Martin): perennes o bajo riego tecnificado, cosecha continua sin pico marcado.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_7161a3c6b870b074e8ec6de93a5fbbde.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#ff7f0e';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C1 = Invierno';
+                document.getElementById('panel-perfil-info').innerHTML = 'Ica | maiz_amarillo_duro<br>Mes pico: 0.19 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Citricos, palta, cafe, papa, arroz, maiz amarillo y avena: pico may-jul, cierre de lluvias andinas e invierno costero.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_0d589addc9207b8365a745c0bc6c87d8.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#ff7f0e';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C1 = Invierno';
+                document.getElementById('panel-perfil-info').innerHTML = 'Ica | mandarina<br>Mes pico: 0.24 | Meses cosecha: 11';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Citricos, palta, cafe, papa, arroz, maiz amarillo y avena: pico may-jul, cierre de lluvias andinas e invierno costero.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_cc1060dda46b2617e01cb04092a32c69.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#ff7f0e';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C1 = Invierno';
+                document.getElementById('panel-perfil-info').innerHTML = 'Ica | palta<br>Mes pico: 0.26 | Meses cosecha: 10';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Citricos, palta, cafe, papa, arroz, maiz amarillo y avena: pico may-jul, cierre de lluvias andinas e invierno costero.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_a2e574850cdbc817b7175ca7f9c9f1af.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#8c564b';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C5 = Papa atipica';
+                document.getElementById('panel-perfil-info').innerHTML = 'Ica | papa<br>Mes pico: 0.45 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Unico perfil de papa fuera de la sierra/altiplano (Ica), con pico en agosto — cluster de un solo elemento.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_b12a44ceb2e695afe58863af2cce46b4.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#1f77b4';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C0 = Cierre de ano';
+                document.getElementById('panel-perfil-info').innerHTML = 'Ica | tomate<br>Mes pico: 0.30 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Tomate (Ica) y uva (Piura): pico nov-dic.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_b32b763331267216c043d841eb9800d7.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#d62728';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C3 = Ventana exportadora';
+                document.getElementById('panel-perfil-info').innerHTML = 'Ica | uva<br>Mes pico: 0.37 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Uva (Ica) y mango (Piura): pico en enero para abastecer al Hemisferio Norte en su invierno.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_544b31b7c0b587ead34b4201e2a3f697.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#2ca02c';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C2 = Todo el ano';
+                document.getElementById('panel-perfil-info').innerHTML = 'Junin | alfalfa<br>Mes pico: 0.09 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Yuca, platano, palma, cana, alfalfa, esparrago, naranja, pina, arroz y maiz (San Martin): perennes o bajo riego tecnificado, cosecha continua sin pico marcado.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_46cd883b026036c7ba0466fd72bce32b.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#ff7f0e';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C1 = Invierno';
+                document.getElementById('panel-perfil-info').innerHTML = 'Junin | avena_forrajera<br>Mes pico: 0.27 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Citricos, palta, cafe, papa, arroz, maiz amarillo y avena: pico may-jul, cierre de lluvias andinas e invierno costero.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_e4f200dbe27470417efcdb4cf7f7f7eb.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#ff7f0e';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C1 = Invierno';
+                document.getElementById('panel-perfil-info').innerHTML = 'Junin | cafe_pergamino<br>Mes pico: 0.22 | Meses cosecha: 8';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Citricos, palta, cafe, papa, arroz, maiz amarillo y avena: pico may-jul, cierre de lluvias andinas e invierno costero.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_ba61ea6d8ef96f6223020d3e605d621a.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#e377c2';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C6 = Otono andino';
+                document.getElementById('panel-perfil-info').innerHTML = 'Junin | maiz_choclo<br>Mes pico: 0.41 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Maiz choclo (Junin) y alfalfa (Puno): pico en abril, cierre de temporada de lluvias andina.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_85f0d5a4d4fb5825ce185144f088aac4.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#2ca02c';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C2 = Todo el ano';
+                document.getElementById('panel-perfil-info').innerHTML = 'Junin | naranja<br>Mes pico: 0.12 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Yuca, platano, palma, cana, alfalfa, esparrago, naranja, pina, arroz y maiz (San Martin): perennes o bajo riego tecnificado, cosecha continua sin pico marcado.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_842f2aabf92ef84ebda51891563d5df6.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#ff7f0e';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C1 = Invierno';
+                document.getElementById('panel-perfil-info').innerHTML = 'Junin | papa<br>Mes pico: 0.24 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Citricos, palta, cafe, papa, arroz, maiz amarillo y avena: pico may-jul, cierre de lluvias andinas e invierno costero.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_2329c1f6b8e02dcb2488652769e0b890.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#2ca02c';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C2 = Todo el ano';
+                document.getElementById('panel-perfil-info').innerHTML = 'Junin | pina<br>Mes pico: 0.10 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Yuca, platano, palma, cana, alfalfa, esparrago, naranja, pina, arroz y maiz (San Martin): perennes o bajo riego tecnificado, cosecha continua sin pico marcado.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_af49d4b1b077a4dc537dbe8886f66c66.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#2ca02c';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C2 = Todo el ano';
+                document.getElementById('panel-perfil-info').innerHTML = 'Junin | platano<br>Mes pico: 0.09 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Yuca, platano, palma, cana, alfalfa, esparrago, naranja, pina, arroz y maiz (San Martin): perennes o bajo riego tecnificado, cosecha continua sin pico marcado.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_6373120391fb1bbb7ad197c3b425115d.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#2ca02c';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C2 = Todo el ano';
+                document.getElementById('panel-perfil-info').innerHTML = 'Junin | yuca<br>Mes pico: 0.15 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Yuca, platano, palma, cana, alfalfa, esparrago, naranja, pina, arroz y maiz (San Martin): perennes o bajo riego tecnificado, cosecha continua sin pico marcado.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_6e4baea2863d1d01745d3262f571557b.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#9467bd';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C4 = Todo o nada';
+                document.getElementById('panel-perfil-info').innerHTML = 'La Libertad | arroz_cascara<br>Mes pico: 0.41 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Arroz (La Libertad), avena y papa (Puno): un solo ciclo fuerte (abr-may); si falla, no hay plan B.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_f8b4843e43694c4ca409f595c32e2d8f.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#2ca02c';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C2 = Todo el ano';
+                document.getElementById('panel-perfil-info').innerHTML = 'La Libertad | cana_para_azucar<br>Mes pico: 0.11 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Yuca, platano, palma, cana, alfalfa, esparrago, naranja, pina, arroz y maiz (San Martin): perennes o bajo riego tecnificado, cosecha continua sin pico marcado.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_6075da019ce35f983d0f8c3d61539289.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#ff7f0e';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C1 = Invierno';
+                document.getElementById('panel-perfil-info').innerHTML = 'La Libertad | palta<br>Mes pico: 0.28 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Citricos, palta, cafe, papa, arroz, maiz amarillo y avena: pico may-jul, cierre de lluvias andinas e invierno costero.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_f66f8bcd54bd3508a86e1a3f02759aa8.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#ff7f0e';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C1 = Invierno';
+                document.getElementById('panel-perfil-info').innerHTML = 'La Libertad | papa<br>Mes pico: 0.19 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Citricos, palta, cafe, papa, arroz, maiz amarillo y avena: pico may-jul, cierre de lluvias andinas e invierno costero.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_21f2c9388f20342ad640de2bdbc90b61.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#ff7f0e';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C1 = Invierno';
+                document.getElementById('panel-perfil-info').innerHTML = 'Piura | arroz_cascara<br>Mes pico: 0.30 | Meses cosecha: 11';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Citricos, palta, cafe, papa, arroz, maiz amarillo y avena: pico may-jul, cierre de lluvias andinas e invierno costero.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_6e2600496ae0282ffb24185f605ac353.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#2ca02c';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C2 = Todo el ano';
+                document.getElementById('panel-perfil-info').innerHTML = 'Piura | cana_para_azucar<br>Mes pico: 0.12 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Yuca, platano, palma, cana, alfalfa, esparrago, naranja, pina, arroz y maiz (San Martin): perennes o bajo riego tecnificado, cosecha continua sin pico marcado.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_b5317cf70eecfeb975102d26374e1fee.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#d62728';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C3 = Ventana exportadora';
+                document.getElementById('panel-perfil-info').innerHTML = 'Piura | mango<br>Mes pico: 0.40 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Uva (Ica) y mango (Piura): pico en enero para abastecer al Hemisferio Norte en su invierno.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_f0ddec8c5001fcb3399dfa414c10e5bc.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#2ca02c';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C2 = Todo el ano';
+                document.getElementById('panel-perfil-info').innerHTML = 'Piura | platano<br>Mes pico: 0.10 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Yuca, platano, palma, cana, alfalfa, esparrago, naranja, pina, arroz y maiz (San Martin): perennes o bajo riego tecnificado, cosecha continua sin pico marcado.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_1786addcfb464fe8e4f02548364c4748.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#1f77b4';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C0 = Cierre de ano';
+                document.getElementById('panel-perfil-info').innerHTML = 'Piura | uva<br>Mes pico: 0.38 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Tomate (Ica) y uva (Piura): pico nov-dic.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_c6777937ef72559d1350c34db694e472.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#e377c2';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C6 = Otono andino';
+                document.getElementById('panel-perfil-info').innerHTML = 'Puno | alfalfa<br>Mes pico: 0.31 | Meses cosecha: 9';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Maiz choclo (Junin) y alfalfa (Puno): pico en abril, cierre de temporada de lluvias andina.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_b6c4629fea66fe0d6ef2d40d0d43cb16.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#9467bd';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C4 = Todo o nada';
+                document.getElementById('panel-perfil-info').innerHTML = 'Puno | avena_forrajera<br>Mes pico: 0.55 | Meses cosecha: 5';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Arroz (La Libertad), avena y papa (Puno): un solo ciclo fuerte (abr-may); si falla, no hay plan B.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_e950bc31200664d003f6f16dd731ff39.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#9467bd';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C4 = Todo o nada';
+                document.getElementById('panel-perfil-info').innerHTML = 'Puno | papa<br>Mes pico: 0.48 | Meses cosecha: 9';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Arroz (La Libertad), avena y papa (Puno): un solo ciclo fuerte (abr-may); si falla, no hay plan B.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_9c5c7eae4ca45737465df4cfa965fa08.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#2ca02c';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C2 = Todo el ano';
+                document.getElementById('panel-perfil-info').innerHTML = 'San Martin | arroz_cascara<br>Mes pico: 0.10 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Yuca, platano, palma, cana, alfalfa, esparrago, naranja, pina, arroz y maiz (San Martin): perennes o bajo riego tecnificado, cosecha continua sin pico marcado.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_a7ae20067d527bb918c708713012a1b0.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#2ca02c';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C2 = Todo el ano';
+                document.getElementById('panel-perfil-info').innerHTML = 'San Martin | maiz_amarillo_duro<br>Mes pico: 0.20 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Yuca, platano, palma, cana, alfalfa, esparrago, naranja, pina, arroz y maiz (San Martin): perennes o bajo riego tecnificado, cosecha continua sin pico marcado.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_ff56a810080590e50f478a6ec7b474fd.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#2ca02c';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C2 = Todo el ano';
+                document.getElementById('panel-perfil-info').innerHTML = 'San Martin | palma_aceitera<br>Mes pico: 0.13 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Yuca, platano, palma, cana, alfalfa, esparrago, naranja, pina, arroz y maiz (San Martin): perennes o bajo riego tecnificado, cosecha continua sin pico marcado.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_720b80ae3cb8cb0d9f2c989ff777d7bd.on('click', function(e) {
+                document.getElementById('panel-perfil-header').style.background = '#2ca02c';
+                document.getElementById('panel-perfil-titulo').innerHTML = 'C2 = Todo el ano';
+                document.getElementById('panel-perfil-info').innerHTML = 'San Martin | platano<br>Mes pico: 0.11 | Meses cosecha: 12';
+                document.getElementById('panel-perfil-desc').innerHTML = 'Yuca, platano, palma, cana, alfalfa, esparrago, naranja, pina, arroz y maiz (San Martin): perennes o bajo riego tecnificado, cosecha continua sin pico marcado.';
+                document.getElementById('panel-perfil').style.display = 'block';
+            });
+        });
+    
+    
+            var map_313768be475525708817b6d1968c3bea = L.map(
+                "map_313768be475525708817b6d1968c3bea",
+                {
+                    center: [-9.5, -75.5],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_a8778cd2311e233992f6724d09118c02 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_a8778cd2311e233992f6724d09118c02.addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            var circle_marker_7515a823548511669cc94748c3be494c = L.circleMarker(
+                [-14.0678, -75.3786],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_7515a823548511669cc94748c3be494c.bindTooltip(
+                `<div>
+                     C2 = Todo el ano — alfalfa
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e3bf5dc5f3e643e11e9735b17ba023cc = L.circleMarker(
+                [-13.820312626584709, -75.4811126265847],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_e3bf5dc5f3e643e11e9735b17ba023cc.bindTooltip(
+                `<div>
+                     C2 = Todo el ano — esparrago
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7161a3c6b870b074e8ec6de93a5fbbde = L.circleMarker(
+                [-13.7178, -75.7286],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_7161a3c6b870b074e8ec6de93a5fbbde.bindTooltip(
+                `<div>
+                     C1 = Invierno — maiz_amarillo_duro
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0d589addc9207b8365a745c0bc6c87d8 = L.circleMarker(
+                [-13.820312626584709, -75.9760873734153],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_0d589addc9207b8365a745c0bc6c87d8.bindTooltip(
+                `<div>
+                     C1 = Invierno — mandarina
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cc1060dda46b2617e01cb04092a32c69 = L.circleMarker(
+                [-14.0678, -76.0786],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_cc1060dda46b2617e01cb04092a32c69.bindTooltip(
+                `<div>
+                     C1 = Invierno — palta
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a2e574850cdbc817b7175ca7f9c9f1af = L.circleMarker(
+                [-14.315287373415291, -75.9760873734153],
+                {"bubblingMouseEvents": true, "color": "#8c564b", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8c564b", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_a2e574850cdbc817b7175ca7f9c9f1af.bindTooltip(
+                `<div>
+                     C5 = Papa atipica — papa
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b12a44ceb2e695afe58863af2cce46b4 = L.circleMarker(
+                [-14.4178, -75.7286],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_b12a44ceb2e695afe58863af2cce46b4.bindTooltip(
+                `<div>
+                     C0 = Cierre de ano — tomate
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b32b763331267216c043d841eb9800d7 = L.circleMarker(
+                [-14.315287373415291, -75.4811126265847],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_b32b763331267216c043d841eb9800d7.bindTooltip(
+                `<div>
+                     C3 = Ventana exportadora — uva
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_544b31b7c0b587ead34b4201e2a3f697 = L.circleMarker(
+                [-12.0651, -74.8549],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_544b31b7c0b587ead34b4201e2a3f697.bindTooltip(
+                `<div>
+                     C2 = Todo el ano — alfalfa
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_46cd883b026036c7ba0466fd72bce32b = L.circleMarker(
+                [-11.84012433660971, -74.93678444490835],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_46cd883b026036c7ba0466fd72bce32b.bindTooltip(
+                `<div>
+                     C1 = Invierno — avena_forrajera
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e4f200dbe27470417efcdb4cf7f7f7eb = L.circleMarker(
+                [-11.720417286445727, -75.14412313781656],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_e4f200dbe27470417efcdb4cf7f7f7eb.bindTooltip(
+                `<div>
+                     C1 = Invierno — cafe_pergamino
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ba61ea6d8ef96f6223020d3e605d621a = L.circleMarker(
+                [-11.761991108675446, -75.37989999999999],
+                {"bubblingMouseEvents": true, "color": "#e377c2", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e377c2", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_ba61ea6d8ef96f6223020d3e605d621a.bindTooltip(
+                `<div>
+                     C6 = Otono andino — maiz_choclo
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_85f0d5a4d4fb5825ce185144f088aac4 = L.circleMarker(
+                [-11.945392949836014, -75.53379241727507],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_85f0d5a4d4fb5825ce185144f088aac4.bindTooltip(
+                `<div>
+                     C2 = Todo el ano — naranja
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_842f2aabf92ef84ebda51891563d5df6 = L.circleMarker(
+                [-12.184807050163982, -75.53379241727507],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_842f2aabf92ef84ebda51891563d5df6.bindTooltip(
+                `<div>
+                     C1 = Invierno — papa
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2329c1f6b8e02dcb2488652769e0b890 = L.circleMarker(
+                [-12.368208891324553, -75.37989999999999],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_2329c1f6b8e02dcb2488652769e0b890.bindTooltip(
+                `<div>
+                     C2 = Todo el ano — pina
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_af49d4b1b077a4dc537dbe8886f66c66 = L.circleMarker(
+                [-12.409782713554272, -75.14412313781656],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_af49d4b1b077a4dc537dbe8886f66c66.bindTooltip(
+                `<div>
+                     C2 = Todo el ano — platano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6373120391fb1bbb7ad197c3b425115d = L.circleMarker(
+                [-12.290075663390288, -74.93678444490835],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_6373120391fb1bbb7ad197c3b425115d.bindTooltip(
+                `<div>
+                     C2 = Todo el ano — yuca
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6e4baea2863d1d01745d3262f571557b = L.circleMarker(
+                [-8.1116, -78.67880000000001],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9467bd", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_6e4baea2863d1d01745d3262f571557b.bindTooltip(
+                `<div>
+                     C4 = Todo o nada — arroz_cascara
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f8b4843e43694c4ca409f595c32e2d8f = L.circleMarker(
+                [-7.7616, -79.0288],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_f8b4843e43694c4ca409f595c32e2d8f.bindTooltip(
+                `<div>
+                     C2 = Todo el ano — cana_para_azucar
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6075da019ce35f983d0f8c3d61539289 = L.circleMarker(
+                [-8.1116, -79.3788],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_6075da019ce35f983d0f8c3d61539289.bindTooltip(
+                `<div>
+                     C1 = Invierno — palta
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f66f8bcd54bd3508a86e1a3f02759aa8 = L.circleMarker(
+                [-8.461599999999999, -79.0288],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_f66f8bcd54bd3508a86e1a3f02759aa8.bindTooltip(
+                `<div>
+                     C1 = Invierno — papa
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_21f2c9388f20342ad640de2bdbc90b61 = L.circleMarker(
+                [-5.1945, -80.28280000000001],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_21f2c9388f20342ad640de2bdbc90b61.bindTooltip(
+                `<div>
+                     C1 = Invierno — arroz_cascara
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6e2600496ae0282ffb24185f605ac353 = L.circleMarker(
+                [-4.861630219296696, -80.52464405196878],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_6e2600496ae0282ffb24185f605ac353.bindTooltip(
+                `<div>
+                     C2 = Todo el ano — cana_para_azucar
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b5317cf70eecfeb975102d26374e1fee = L.circleMarker(
+                [-4.988775161697634, -80.91595594803124],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_b5317cf70eecfeb975102d26374e1fee.bindTooltip(
+                `<div>
+                     C3 = Ventana exportadora — mango
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f0ddec8c5001fcb3399dfa414c10e5bc = L.circleMarker(
+                [-5.400224838302365, -80.91595594803124],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_f0ddec8c5001fcb3399dfa414c10e5bc.bindTooltip(
+                `<div>
+                     C2 = Todo el ano — platano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1786addcfb464fe8e4f02548364c4748 = L.circleMarker(
+                [-5.527369780703303, -80.52464405196878],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_1786addcfb464fe8e4f02548364c4748.bindTooltip(
+                `<div>
+                     C0 = Cierre de ano — uva
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c6777937ef72559d1350c34db694e472 = L.circleMarker(
+                [-15.8402, -69.67190000000001],
+                {"bubblingMouseEvents": true, "color": "#e377c2", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e377c2", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_c6777937ef72559d1350c34db694e472.bindTooltip(
+                `<div>
+                     C6 = Otono andino — alfalfa
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b6c4629fea66fe0d6ef2d40d0d43cb16 = L.circleMarker(
+                [-15.537091108675446, -70.1969],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9467bd", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_b6c4629fea66fe0d6ef2d40d0d43cb16.bindTooltip(
+                `<div>
+                     C4 = Todo o nada — avena_forrajera
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e950bc31200664d003f6f16dd731ff39 = L.circleMarker(
+                [-16.14330889132455, -70.1969],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9467bd", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_e950bc31200664d003f6f16dd731ff39.bindTooltip(
+                `<div>
+                     C4 = Todo o nada — papa
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9c5c7eae4ca45737465df4cfa965fa08 = L.circleMarker(
+                [-6.0344, -76.6242],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_9c5c7eae4ca45737465df4cfa965fa08.bindTooltip(
+                `<div>
+                     C2 = Todo el ano — arroz_cascara
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a7ae20067d527bb918c708713012a1b0 = L.circleMarker(
+                [-5.6844, -76.9742],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_a7ae20067d527bb918c708713012a1b0.bindTooltip(
+                `<div>
+                     C2 = Todo el ano — maiz_amarillo_duro
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ff56a810080590e50f478a6ec7b474fd = L.circleMarker(
+                [-6.0344, -77.32419999999999],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_ff56a810080590e50f478a6ec7b474fd.bindTooltip(
+                `<div>
+                     C2 = Todo el ano — palma_aceitera
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_720b80ae3cb8cb0d9f2c989ff777d7bd = L.circleMarker(
+                [-6.384399999999999, -76.9742],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 2}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            circle_marker_720b80ae3cb8cb0d9f2c989ff777d7bd.bindTooltip(
+                `<div>
+                     C2 = Todo el ano — platano
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_6ec20bc6d64c82be42e6f28d0b311351 = L.marker(
+                [-5.1945, -80.6328],
+                {
+}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            var icon_4dd065085ac47037f9c3f09db4c50119 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_6ec20bc6d64c82be42e6f28d0b311351.bindTooltip(
+                `<div>
+                     Piura
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6ec20bc6d64c82be42e6f28d0b311351.setIcon(icon_4dd065085ac47037f9c3f09db4c50119);
+            
+    
+            var marker_74671037320b7a33505fc4dcd0eaafd3 = L.marker(
+                [-8.1116, -79.0288],
+                {
+}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            var icon_032ea8503c1826c0e71053c41401d092 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_74671037320b7a33505fc4dcd0eaafd3.bindTooltip(
+                `<div>
+                     La Libertad
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_74671037320b7a33505fc4dcd0eaafd3.setIcon(icon_032ea8503c1826c0e71053c41401d092);
+            
+    
+            var marker_48f7e769a5b2ffaa610a1fdae99fc949 = L.marker(
+                [-14.0678, -75.7286],
+                {
+}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            var icon_de938128c077042d2d5be537c068a56c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_48f7e769a5b2ffaa610a1fdae99fc949.bindTooltip(
+                `<div>
+                     Ica
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_48f7e769a5b2ffaa610a1fdae99fc949.setIcon(icon_de938128c077042d2d5be537c068a56c);
+            
+    
+            var marker_4e1c5a656a8b6293544d1d837e7580fe = L.marker(
+                [-6.0344, -76.9742],
+                {
+}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            var icon_5ebe5a091c62d253116b190cb8c2cfd4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_4e1c5a656a8b6293544d1d837e7580fe.bindTooltip(
+                `<div>
+                     San Martin
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4e1c5a656a8b6293544d1d837e7580fe.setIcon(icon_5ebe5a091c62d253116b190cb8c2cfd4);
+            
+    
+            var marker_76610eab3d523d523a438ee0cb58037e = L.marker(
+                [-12.0651, -75.2049],
+                {
+}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            var icon_a5442eef23d5755458819f43888d7266 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_76610eab3d523d523a438ee0cb58037e.bindTooltip(
+                `<div>
+                     Junin
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_76610eab3d523d523a438ee0cb58037e.setIcon(icon_a5442eef23d5755458819f43888d7266);
+            
+    
+            var marker_f652affa28ed8b68d544fb5b3d3fb010 = L.marker(
+                [-15.8402, -70.0219],
+                {
+}
+            ).addTo(map_313768be475525708817b6d1968c3bea);
+        
+    
+            var icon_260b2ab483fc0f6aabb15ca2db6d33ec = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_f652affa28ed8b68d544fb5b3d3fb010.bindTooltip(
+                `<div>
+                     Puno
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f652affa28ed8b68d544fb5b3d3fb010.setIcon(icon_260b2ab483fc0f6aabb15ca2db6d33ec);
+            
+</script>
+</html>
