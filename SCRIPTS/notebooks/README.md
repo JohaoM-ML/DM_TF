@@ -1,40 +1,58 @@
 # Pipeline Jupyter — orden de ejecución
 
-Ejecutar **en orden** para trazabilidad completa (cada notebook consume los CSV del anterior).
-
 ## Fase 1 — Datos
 
-| # | Notebook | Genera | Requiere |
-|---|----------|--------|----------|
-| 01 | `01_midagri_pipeline.ipynb` | `OUTPUTS/midagri_largo.csv` | Excel en `BDS/YYYY/` |
-| 00 | `00_build_mapping_cultivo_distrito.ipynb` | `mapping_cultivo_distrito_v2*.csv` | 01, mapping v1 ref. |
-| 02 | `02_nasa_pipeline.ipynb` | `OUTPUTS/nasa_2020_2025.csv` | Red (API NASA POWER) |
-| 03 | `03_build_dataset_integrado.ipynb` | `dataset_integrado.csv`, `dataset_regional.csv`, `dataset_por_cultivo.csv` | 01, 00, 02 |
+Consolidada en un único notebook: `00_pipeline_integrado.ipynb` (`make preprocess`, o
+`python SCRIPTS/run_notebook.py SCRIPTS/notebooks/00_pipeline_integrado.ipynb`).
+Genera `OUTPUTS/midagri_largo.csv`, `BDS/mapping/mapping_cultivo_distrito_v2*.csv`,
+`OUTPUTS/nasa_2020_2025.csv` y `dataset_integrado.csv`/`dataset_regional.csv`/`dataset_por_cultivo.csv`,
+en ese orden interno. Requiere Excel en `BDS/YYYY/` y acceso a la API NASA POWER.
+
+Los 4 notebooks originales (`00`-`03`) con el detalle celda a celda quedan archivados en
+[`BORRADORES/`](../../BORRADORES/) para revisión paso a paso; no forman parte del pipeline canónico.
 
 ## Fase 2 — Exploración
 
 | # | Notebook | Genera |
 |---|----------|--------|
-| 04 | `04_eda_regional.ipynb` | Figuras EDA en `OUTPUTS/figures/` |
-| 05 | `05_eda_por_cultivo.ipynb` | Correlaciones por cultivo |
+| 04 | `04_eda.ipynb` | Figuras EDA regional y por cultivo, correlaciones, en `OUTPUTS/figures/` |
 
-## Fase 3 — Clustering (tres enfoques)
+## Fase 3 — Clustering (consolidado, dos enfoques)
 
-| # | Notebook | Unidad | Pregunta que responde |
-|---|----------|--------|----------------------|
-| 06 | `06_clustering_cultivos.ipynb` | 33 perfiles `(región, cultivo)` | Tipología clima + producción (KMeans, jerárquico, DBSCAN) + **mapa Folium** |
-| 06a | `06a_zonas_agroclimaticas.ipynb` | ~12 zonas climáticas | ¿Qué tipos de clima hay en el territorio? |
-| 06b | `06b_perfiles_productivos.ipynb` | 33 perfiles | ¿Qué cultivos comparten patrón productivo estacional? |
+Consolidado en un único notebook: `06_clustering_final.ipynb` (`make cluster`, o
+`python SCRIPTS/run_notebook.py SCRIPTS/notebooks/06_clustering_final.ipynb`).
 
-Comparativa metodológica: [`DOCUMENTACIÓN/comparacion_clustering.md`](../../DOCUMENTACIÓN/comparacion_clustering.md)
+| Sección | Unidad | Pregunta que responde |
+|---|--------|----------------------|
+| A — Zonas agroclimáticas | 28 zonas climáticas (distrito) | ¿Qué tipos de clima hay en el territorio? |
+| B — Perfiles productivos | perfiles `(región, cultivo)` | ¿Qué cultivos comparten patrón productivo estacional? |
+
+Cada sección sigue el mismo orden: explicación breve → métricas (Silhouette, ARI
+KMeans-vs-Jerárquico) → mapa Folium de los clusters → gráficos complementarios
+(clima/producción por cluster).
+
+El notebook original (`06_clustering_cultivos.ipynb`, mezcla clima+producción con
+barridos DBSCAN/PCA/NMF) quedó archivado en
+[`BORRADORES/`](../../BORRADORES/) junto con `06a_zonas_agroclimaticas.ipynb` y
+`06b_perfiles_productivos.ipynb` (detalle paso a paso de cada análisis individual,
+ya integrados en `06_clustering_final.ipynb`); la razón del descarte del enfoque mixto
+está documentada en la primera celda de `06_clustering_cultivos.ipynb`.
+
+## Fase 4 — Análisis profundo por cluster
+
+`07_analisis_clusters.ipynb` no vuelve a clusterizar: consume los CSV de
+`06_clustering_final.ipynb` y profundiza en cada cluster (medias de clima/producción,
+evolución anual 2020–2025, cultivos representativos), separado por sección A (zona) /
+B (perfil), más allá de la visualización geográfica de puntos.
 
 ## Salidas clave en OUTPUTS/
 
-- `clustering_perfiles.csv`, `clustering_metricas.csv` (notebook 06)
-- `figures/mapa_clusters_folium.html` — abrir con **Live Server** en Cursor
-- `figures/06a_mapa_zonas.html` (notebook 06a)
+- `06a_zonas_clusters.csv`, `06a_produccion_por_zona.csv` (notebook 06, sección A)
+- `06b_perfiles_productivos_clusters.csv` (notebook 06, sección B)
+- `figures/06a_mapa_zonas.html`, `figures/06b_mapa_perfiles.html` — abrir con **Live Server** en Cursor
+- `figures/07a_evolucion_cultivos_zona.png`, `figures/07b_evolucion_cultivos_perfil.png` (notebook 07)
 
 ## Notas
 
-- Toda la lógica está en notebooks; no hay `pipeline_integrado.py`.
+- Preprocesamiento (00-03) consolidado en `00_pipeline_integrado.ipynb`; clustering consolidado en `06_clustering_final.ipynb`. Versiones originales paso a paso (00-03 y 06/06a/06b) en `BORRADORES/`.
 - Mapping canónico para el merge: `mapping_cultivo_distrito_v2_pipeline.csv`.

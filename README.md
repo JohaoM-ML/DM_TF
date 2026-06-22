@@ -9,26 +9,25 @@ Proyecto de **Data Mining** (Universidad del Pacífico, 2026-I): pipeline reprod
 
 ```bash
 pip install -r requirements.txt
+make preprocess
 jupyter lab SCRIPTS/notebooks/
 ```
 
-Ejecutar notebooks **en orden** (ver tabla abajo). Los CSV en `OUTPUTS/` se regeneran al correr el pipeline; no se versionan en git.
+`00_pipeline_integrado.ipynb` (notebook, evidencia de flujo celda a celda) genera los insumos (MIDAGRI, mapping, NASA, dataset integrado); luego se ejecutan los notebooks de exploración y clustering **en orden** (ver tabla abajo). Los CSV en `OUTPUTS/` se regeneran al correr el pipeline; no se versionan en git.
 
-## Pipeline (notebooks)
+## Pipeline
 
-Ubicación canónica: `SCRIPTS/notebooks/`
+| Paso | Genera |
+|------|--------|
+| `SCRIPTS/notebooks/00_pipeline_integrado.ipynb` | `OUTPUTS/midagri_largo.csv`, `BDS/mapping/mapping_cultivo_distrito_v2*.csv`, `OUTPUTS/nasa_2020_2025.csv`, `dataset_integrado.csv` (+ regional, por_cultivo) |
+
+Detalle paso a paso de esta etapa (notebooks 00-03 originales, archivados): [`BORRADORES/`](BORRADORES/)
 
 | # | Notebook | Genera |
 |---|----------|--------|
-| 01 | `01_midagri_pipeline.ipynb` | `OUTPUTS/midagri_largo.csv` |
-| 00 | `00_build_mapping_cultivo_distrito.ipynb` | `BDS/mapping/mapping_cultivo_distrito_v2*.csv` |
-| 02 | `02_nasa_pipeline.ipynb` | `OUTPUTS/nasa_2020_2025.csv` |
-| 03 | `03_build_dataset_integrado.ipynb` | `dataset_integrado.csv` (+ regional, por_cultivo) |
-| 04 | `04_eda_regional.ipynb` | Figuras EDA regional |
-| 05 | `05_eda_por_cultivo.ipynb` | Correlaciones exploratorias |
-| 06 | `06_clustering_cultivos.ipynb` | Clustering clima+producción, mapa Folium |
-| 06a | `06a_zonas_agroclimaticas.ipynb` | Tipologías por **zona climática** (12 distritos) |
-| 06b | `06b_perfiles_productivos.ipynb` | Tipologías por **patrón productivo** estacional |
+| 04 | `04_eda.ipynb` | Figuras EDA regional y por cultivo, correlaciones exploratorias |
+| 06 | `06_clustering_final.ipynb` | Clustering consolidado: zonas agroclimáticas (clima puro, 28 distritos) + perfiles productivos (patrón estacional por cultivo), con mapas Folium y ARI por método |
+| 07 | `07_analisis_clusters.ipynb` | Análisis profundo por cluster (medias clima/producción, evolución anual, cultivos representativos) |
 
 Detalle: [`SCRIPTS/notebooks/README.md`](SCRIPTS/notebooks/README.md)
 
@@ -41,15 +40,16 @@ DM_TF/
 ├── BDS/
 │   └── mapping/              # mapping v2 (canónico: *_v2_pipeline.csv)
 ├── SCRIPTS/
-│   ├── notebooks/            # Pipeline 00–06, 06a, 06b
-│   └── legacy/               # Referencia de notebooks retirados
+│   ├── notebooks/            # 00 preprocesamiento, 04 EDA, 06 clustering (consolidado), 07 analisis por cluster
+│   ├── run_notebook.py       # Ejecuta un notebook in-place
+│   └── viz_style.py          # Paleta y template de Plotly compartidos
+├── BORRADORES/                # Notebooks 00-03 y 06/06a/06b originales, archivados
 ├── OUTPUTS/                  # Artefactos generados (CSV/PNG gitignored)
-│   └── figures/              # PNG + mapas HTML (Folium, 06a)
-├── DOCUMENTACIÓN/            # Esquemas, defensa, comparativa clustering
+│   └── figures/              # PNG + mapas HTML (Folium, 06a/06b)
+├── DOCUMENTACIÓN/            # Esquemas, defensa
 ├── ENTREGAS/                 # Informe LaTeX, presentación, figuras finales
 ├── EXPERIMENTOS/             # Ablación mapping v1 vs v2
 ├── tests/                    # Layout repo + validación OUTPUTS (integración)
-├── tools/                    # Scripts de mantenimiento de notebooks
 └── agentes/                  # Prompts de auditoría del pipeline
 ```
 
@@ -59,7 +59,7 @@ DM_TF/
 |--------|-----------|
 | MIDAGRI C-18 (Excel) | `BDS/YYYY/` (local; `.xlsx` gitignored) |
 | Mapping activo | `BDS/mapping/mapping_cultivo_distrito_v2_pipeline.csv` |
-| NASA POWER | Descargado en notebook 02 (requiere red) |
+| NASA POWER | Descargado por `00_pipeline_integrado.ipynb` (requiere red) |
 
 ## Tests
 
@@ -75,4 +75,4 @@ Ver [ENTREGAS/LIMITACIONES.md](ENTREGAS/LIMITACIONES.md)
 ## Fuentes
 
 - MIDAGRI — Agro en Cifras (cuadro C-18)
-- NASA POWER — 12 variables, 14 distritos proxy
+- NASA POWER — 12 variables, 34 distritos proxy (14 originales + 20 refinados con SISAGRI)

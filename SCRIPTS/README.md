@@ -1,24 +1,21 @@
 # SCRIPTS
 
-Pipeline del proyecto en **`notebooks/`** únicamente.
+Preprocesamiento y clustering, todo en `notebooks/` (notebooks Jupyter, para evidencia de flujo).
 
 ```
 notebooks/
-  00_build_mapping_cultivo_distrito.ipynb
-  01_midagri_pipeline.ipynb
-  02_nasa_pipeline.ipynb
-  03_build_dataset_integrado.ipynb
-  04_eda_regional.ipynb
-  05_eda_por_cultivo.ipynb
-  06_clustering_cultivos.ipynb
-  06a_zonas_agroclimaticas.ipynb
-  06b_perfiles_productivos.ipynb
+  00_pipeline_integrado.ipynb  # MIDAGRI + mapping + NASA POWER -> dataset_integrado.csv
+  04_eda.ipynb
+  06_clustering_final.ipynb    # zonas agroclimaticas + perfiles productivos (consolida 06/06a/06b)
+  07_analisis_clusters.ipynb   # analisis profundo por cluster (medias, evolucion anual, cultivos)
 ```
 
 | Carpeta / archivo | Uso |
 |-------------------|-----|
-| [`notebooks/`](notebooks/) | Pipeline canónico |
-| [`legacy/`](legacy/) | Referencia de notebooks retirados de la raíz |
-| `annotate_notebooks.py`, `add_hash_comments.py` | Mantenimiento (inyectar comentarios); ver también [`tools/`](../tools/) |
+| [`notebooks/00_pipeline_integrado.ipynb`](notebooks/00_pipeline_integrado.ipynb) | Preprocesamiento consolidado (reemplaza los notebooks 00-03 originales) |
+| [`notebooks/`](notebooks/) | EDA y clustering (04, 06, 07) |
+| [`../BORRADORES/`](../BORRADORES/) | Notebooks 00-03 y 06/06a/06b originales, archivados con detalle paso a paso |
+| `run_notebook.py` | Ejecuta un notebook in-place (usado por `make preprocess`/`make cluster`) |
+| `viz_style.py` | Paleta de colores y template de Plotly compartidos por los notebooks de EDA |
 
-Orden de ejecución: [`notebooks/README.md`](notebooks/README.md)
+Orden de ejecución: `make preprocess` (o `python run_notebook.py notebooks/00_pipeline_integrado.ipynb`), luego [`notebooks/README.md`](notebooks/README.md)
