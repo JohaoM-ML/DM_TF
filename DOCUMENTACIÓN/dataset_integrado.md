@@ -15,11 +15,13 @@
 ## Cómo generarlo
 
 ```bash
-jupyter execute SCRIPTS/notebooks/03_build_dataset_integrado.ipynb
-# o ejecutar el notebook 03 en Jupyter tras 01, 00 y 02
+make preprocess
+# o: python SCRIPTS/run_notebook.py SCRIPTS/notebooks/00_pipeline_integrado.ipynb
 ```
 
-Opciones CLI: `--mapping`, `--output-dir`, `--pareto-threshold`.
+El notebook ejecuta en orden interno `build_midagri_largo` → `build_mapping` →
+`download_nasa_power` → `build_dataset_integrado`. Los notebooks originales 00-03
+(detalle celda a celda, versión previa) quedaron archivados en `BORRADORES/`.
 
 ---
 
@@ -27,14 +29,14 @@ Opciones CLI: `--mapping`, `--output-dir`, `--pareto-threshold`.
 
 | Archivo | Filas | Descripción |
 |---------|------:|-------------|
-| `dataset_integrado.csv` | 2.376 | **Maestro Pareto-80** |
+| `dataset_integrado.csv` | 2.376 | **Maestro de productos significativos** |
 | `dataset_por_cultivo.csv` | 15.120 | Todos los cultivos con mapping |
 | `dataset_regional.csv` | 1.008 | Agregado por piso |
 | `dataset_por_cultivo_filtrado.csv` | 2.376 | Copia de `dataset_integrado` (compatibilidad) |
 
 **Dimensiones del maestro:** 33 combinaciones × 72 meses = 2.376 filas × 20 columnas.
 
-### Pareto-80 por región (mapping v2)
+### Productos significativos por región (mapping v2)
 
 | Región | Cultivos | % acumulado |
 |--------|:--------:|------------:|
@@ -59,7 +61,7 @@ Opciones CLI: `--mapping`, `--output-dir`, `--pareto-threshold`.
 | `numero_mes` | int | 1–12 |
 | `mes` | str | Nombre del mes |
 | `produccion_ton` | float | Producción mensual (ton); NaN = mes sin dato |
-| 12 vars clima | float | Ver `RENAME_CLIMA` en `pipeline_integrado.py` |
+| 12 vars clima | float | Ver `RENAME_CLIMA` en `00_pipeline_integrado.ipynb` |
 
 **Unidades climáticas:** `radiacion_solar` MJ/m²/día; `humedad_especifica` kg/kg; `precipitacion` mm/día.
 
@@ -67,17 +69,18 @@ Opciones CLI: `--mapping`, `--output-dir`, `--pareto-threshold`.
 
 ## Calidad de datos
 
-| Métrica | Valor (v2) |
+| Métrica | Valor |
 |---------|------------|
 | NaN en `produccion_ton` | 166 (por diseño) |
 | NaN en clima | 0 |
-| Combos Pareto | 33 |
-| Distritos únicos | 12 |
+| Combos significativos | 33 |
+| Distritos únicos | 28 (de 34 en el inventario NASA; 14 originales + 20 refinados con SISAGRI) |
 
 ---
 
 ## Limitaciones
 
-- Clima idéntico para cultivos del mismo (región, piso).
+- Clima idéntico para cultivos que comparten el mismo distrito proxy (persiste para los combos sin
+  evidencia SISAGRI: La Libertad-caña, San Martín-palma — ver `EXPERIMENTOS/sisagri_v3/`).
 - Producción en volumen (t), no rendimiento t/ha.
-- Ver `OUTPUTS/robustez/` para sensibilidad Pareto y estabilidad de clusters.
+- Ver `OUTPUTS/robustez/` para sensibilidad del umbral de productos significativos y estabilidad de clusters.

@@ -20,7 +20,7 @@
 
 ```bash
 pip install -r requirements.txt
-python SCRIPTS/pipeline_integrado.py
+make preprocess
 make cluster
 ```
 
@@ -38,9 +38,9 @@ make cluster
 
 ---
 
-## 6. ¿Por qué Pareto 80%?
+## 6. ¿Por qué nos quedamos con los productos mayoritarios (80%)?
 
-**Respuesta:** Convención de concentración productiva. Sensibilidad documentada en `OUTPUTS/robustez/pareto_sensibilidad.csv`: 70% → 24 combos; 80% → 33; 90% → 49.
+**Respuesta:** Convención de concentración productiva: se conservan los cultivos que en conjunto explican el 80% de la producción regional (productos mayoritarios o significativos), no un percentil arbitrario. Sensibilidad documentada en `OUTPUTS/robustez/pareto_sensibilidad.csv`: con el umbral en 70% quedan 24 combinaciones región-cultivo; en 80%, 33; en 90%, 49.
 
 ---
 

@@ -17,10 +17,11 @@
 \usepackage{cite}
 
 \spanishdecimal{.}
+\renewcommand{\tablename}{Tabla}
 
 \begin{document}
 
-\title{Análisis Agroclimático y Tipologías de Cultivo en el Perú mediante un Enfoque Multi-distrito y \textit{Clustering} no Supervisado (2020--2025)}
+\title{Más Allá de la Región: Tipologías Agroclimáticas y Productivas del Agro Peruano (2020--2025)}
 
 \author{
 \IEEEauthorblockN{Johao Mendoza, Joyssie Rivas, Thiago Ormeño}
@@ -33,7 +34,7 @@ Lima, Perú \\
 \maketitle
 
 \begin{abstract}
-Este estudio analiza la relación entre variables climáticas y producción agrícola en seis regiones del Perú (Ica, Junín, La Libertad, Piura, Puno y San Martín) durante 2020--2025, integrando producción mensual del MIDAGRI con variables climáticas de NASA POWER bajo la metodología CRISP-DM. Debido a la heterogeneidad ecológica intra-regional, se implementó una estrategia multi-distrito basada en 14 unidades representativas por piso ecológico. La producción mensual fue recuperada desde los acumulados oficiales mediante diferenciación temporal y manejo explícito de datos faltantes. El análisis exploratorio muestra que los determinantes climáticos varían según el piso ecológico: la radiación domina en costa, la humedad de suelo y temperatura máxima en sierra y altiplano, y la humedad relativa en selva. La sequía altoandina de 2022 redujo la producción de quinua ($-64\%$) y oca ($-62\%$) en Puno, mientras que el Fenómeno del Niño 2023--2024 produjo anomalías diferenciadas (Piura $+121\%$ de precipitación). Como fase de modelado, se aplicó \textit{clustering} no supervisado (KMeans, jerárquico Ward, DBSCAN) sobre los perfiles agroclimáticos. Se demuestra, mediante el Índice de Rand Ajustado (ARI), que el clustering ingenuo sobre perfiles región--cultivo reproduce la geografía (ARI $=0.59$ con la región) en lugar de tipificar cultivos, debido a la degeneración de las \textit{features} climáticas. Se proponen y validan dos modelos corregidos: tipologías agroclimáticas territoriales y tipologías de patrón productivo independientes de la geografía (ARI $=0.06$). Los resultados validan el enfoque multi-distrito y aportan una metodología reproducible de caracterización agroclimática.
+Este estudio analiza la relación entre variables climáticas y producción agrícola en seis regiones del Perú (Ica, Junín, La Libertad, Piura, Puno y San Martín) durante 2020--2025, integrando producción mensual del MIDAGRI con variables climáticas de NASA POWER bajo la metodología CRISP-DM. Debido a la heterogeneidad ecológica intra-regional, se implementó una estrategia multi-distrito basada en 34 distritos representativos por piso ecológico (14 originales más 20 incorporados mediante un refinamiento con series SISAGRI). La producción mensual fue recuperada desde los acumulados oficiales mediante diferenciación temporal y manejo explícito de datos faltantes. El análisis exploratorio muestra que los determinantes climáticos varían según el piso ecológico: la humedad relativa domina en costa, la humedad de suelo en sierra y altiplano, y la temperatura en selva. La sequía altoandina de 2022 redujo la producción de quinua ($-64\%$) y oca ($-62\%$) en Puno, mientras que el Fenómeno del Niño 2023--2024 produjo anomalías diferenciadas (Piura $+85\%$ de precipitación). Como fase de modelado, se aplicó \textit{clustering} no supervisado (KMeans, jerárquico Ward, DBSCAN) sobre los perfiles agroclimáticos. Se demuestra, mediante el Índice de Rand Ajustado (ARI) frente a la región, que el clustering ingenuo sobre perfiles región--cultivo reproduce parcialmente la geografía (ARI $=0.40$) en lugar de tipificar cultivos, debido a la degeneración de las variables climáticas. Se proponen y validan dos modelos corregidos: tipologías agroclimáticas territoriales (Modelo A, $K=6$, Silhouette $=0.50$) y tipologías de patrón productivo prácticamente independientes de la geografía (Modelo B, $K=7$, ARI $=0.04$ con la región). Los resultados validan el enfoque multi-distrito y aportan una metodología reproducible de caracterización agroclimática.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -41,7 +42,7 @@ Agricultura, cambio climático, NASA POWER, MIDAGRI, análisis agroclimático, p
 \end{IEEEkeywords}
 
 \section{Introducción}
-La agricultura representa el 4.8\% del PBI peruano en 2025 \cite{bcrp2025} y emplea aproximadamente 4.3 millones de personas (24\% de la PEA) \cite{inei2024}. Las agroexportaciones crecieron de USD 7,791 millones en 2020 a USD 15,066 millones en 2025 \cite{adex2026}. La producción exhibe alta variabilidad por eventos climáticos (sequías, heladas, El Niño) cuya relación con los rendimientos por cultivo no ha sido analizada sistemáticamente con técnicas de \textit{Data Mining} a granularidad mensual.
+La agricultura representa el 4.8\% del PBI peruano en 2025 \cite{bcrp2025} y emplea aproximadamente 4.3 millones de personas (24\% de la PEA) \cite{inei2024}. Las agroexportaciones crecieron de USD 7,791 millones en 2020 a USD 15,066 millones en 2025 \cite{adex2026}. La producción exhibe alta variabilidad por eventos climáticos (sequías, heladas, El Niño) cuya relación con los rendimientos por cultivo no ha sido analizada sistemáticamente con técnicas de minería de datos a granularidad mensual.
 
 La complejidad metodológica del análisis agroclimático en el Perú es estructural: las regiones son ecológicamente heterogéneas (una sola región puede combinar costa, sierra y selva), y los datos públicos de producción del MIDAGRI se reportan a nivel regional acumulado, no por piso ecológico ni a granularidad mensual directa. Trabajos previos enfrentan estas limitaciones usando agregados anuales \cite{senamhi2009, unap2016}, asumiendo un único punto climático por región, o restringiéndose a un solo cultivo. La presente investigación combina cuatro aportes: (i) recuperación de producción mensual desde los acumulados publicados; (ii) muestreo climático multi-distrito por piso ecológico; (iii) integración cultivo--piso con criterio agronómico documentado; y (iv) una fase de modelado no supervisado que tipifica el agro peruano y expone un sesgo metodológico habitual en el \textit{clustering} agroclimático.
 
@@ -50,14 +51,16 @@ El objetivo general es caracterizar la relación entre variables climáticas y p
     \item Construir un dataset integrado clima--producción a granularidad cultivo--piso.
     \item Identificar los determinantes climáticos por región y piso ecológico.
     \item Detectar patrones de vulnerabilidad y estacionalidad por cultivo.
-    \item Validar la utilidad del enfoque multi-distrito mediante la sequía altoandina 2022 y el Fenómeno del Niño 2023--2024.
+    \item Evaluar el impacto de eventos climáticos extremos sobre la producción agrícola a nivel de piso ecológico y cultivo.
     \item Construir tipologías agroclimáticas y de patrón productivo mediante \textit{clustering} no supervisado, evaluando críticamente su validez interna e interpretabilidad.
 \end{enumerate}
 
-\section{Estado del Arte}
-Diversos estudios han analizado la relación entre variabilidad climática y producción agrícola en el Perú, especialmente frente a eventos ENSO, sequías y cambios de temperatura y precipitación. Restrepo et al. \cite{restrepo2017} evidenciaron que eventos extremos de El Niño alteran significativamente patrones ambientales e hidrológicos en Sudamérica, afectando sistemas agrícolas vulnerables. Asimismo, estudios nacionales destacan diferencias agroclimáticas entre costa, sierra y selva debido a la heterogeneidad ecológica del territorio peruano.
+En este marco, se plantea la siguiente hipótesis: la heterogeneidad agroecológica intra-regional implica que (i) el piso ecológico, y no la región, es la unidad territorial que mejor organiza la variabilidad climática y su vínculo con la producción agrícola; y que (ii) el patrón productivo de un cultivo --- su comportamiento estacional de cosecha --- constituye una dimensión de tipificación distinta e independiente de la geografía, que el \textit{clustering} agroclimático ingenuo no logra capturar debido a la degeneración estructural de sus variables climáticas.
 
-En paralelo, el uso de metodologías de \textit{Data Mining} y CRISP-DM en agricultura ha crecido en los últimos años. Chapapría y Viladrich \cite{chapapria2024} desarrollaron un modelo agroclimático basado en CRISP-DM, mientras que Canchano \cite{canchano2024} aplicó técnicas predictivas para productos agrícolas. Sin embargo, estos enfoques se centran principalmente en tareas predictivas y presentan limitaciones en la integración espacial y temporal de datos.
+\section{Estado del Arte}
+Diversos estudios han analizado la relación entre variabilidad climática y producción agrícola en el Perú, especialmente frente a eventos ENSO (El Niño--Oscilación del Sur), sequías y cambios de temperatura y precipitación. Restrepo et al. \cite{restrepo2017} evidenciaron que eventos extremos de El Niño alteran significativamente patrones ambientales e hidrológicos en Sudamérica, afectando sistemas agrícolas vulnerables. Asimismo, estudios nacionales destacan diferencias agroclimáticas entre costa, sierra y selva debido a la heterogeneidad ecológica del territorio peruano.
+
+En paralelo, el uso de metodologías de minería de datos y CRISP-DM en agricultura ha crecido en los últimos años. Chapapría y Viladrich \cite{chapapria2024} desarrollaron un modelo agroclimático basado en CRISP-DM, mientras que Canchano \cite{canchano2024} aplicó técnicas predictivas para productos agrícolas. Sin embargo, estos enfoques se centran principalmente en tareas predictivas y presentan limitaciones en la integración espacial y temporal de datos.
 
 Por otro lado, trabajos de zonificación agroecológica desarrollados por MIDAGRI \cite{midagri2025} y la Universidad Nacional del Altiplano \cite{una2023} resaltan la importancia de considerar pisos ecológicos en estudios agrícolas. No obstante, gran parte de la literatura emplea agregados anuales, análisis de un solo cultivo o un único punto climático por región, limitando la representación de microclimas y dinámicas intra-regionales. En particular, el \textit{clustering} agroclimático suele aplicarse sin auditar si la partición resultante captura información productiva o si simplemente reproduce la estructura geográfica de los datos, vacío metodológico que este trabajo aborda explícitamente.
 
@@ -65,8 +68,11 @@ En consecuencia, persiste un vacío en la integración de producción agrícola 
 
 \section{Metodología}
 
-\subsection{Fuentes de datos y variables}
-Se adoptó la metodología CRISP-DM \cite{chapman2000} en sus fases de comprensión del negocio, comprensión y preparación de datos, modelado y evaluación. Se integraron dos fuentes públicas: (i) la hoja \texttt{c-18} de los reportes mensuales del MIDAGRI \cite{midagrihist}, con producción acumulada por región, mes y cultivo para 2020--2025; y (ii) variables agroclimáticas de NASA POWER \cite{nasa2025}. Las variables climáticas fueron seleccionadas por su relevancia sobre fenología, disponibilidad hídrica y rendimiento \cite{viladrich} (Tabla~\ref{tab:variables}).
+Se adoptó la metodología CRISP-DM \cite{chapman2000}, cuyas fases se distribuyen explícitamente a lo largo del artículo: la \emph{comprensión del negocio} se desarrolla en la Introducción (objetivos e hipótesis); la \emph{comprensión y preparación de los datos}, en las Secciones~\ref{ssec:fuentes}--\ref{ssec:multidistrito}; el \emph{modelado}, en la Sección~\ref{ssec:modelado}; la \emph{evaluación}, en el diagnóstico de validez de la Sección~\ref{sec:clustering}; y el \emph{despliegue}, en las implicancias de política agraria discutidas en la Sección de Discusión.
+
+\subsection{Fuentes de datos y variables (comprensión de los datos)}
+\label{ssec:fuentes}
+Se integraron dos fuentes públicas: (i) la hoja \texttt{c-18} de los reportes mensuales del MIDAGRI \cite{midagrihist}, con producción acumulada por región, mes y cultivo para 2020--2025; y (ii) variables agroclimáticas de NASA POWER \cite{nasa2025}. Las variables climáticas fueron seleccionadas por su relevancia sobre la fenología del cultivo (sus etapas de desarrollo), la disponibilidad hídrica y el rendimiento \cite{viladrich} (Tabla~\ref{tab:variables}).
 
 \begin{table}[h]
 \centering
@@ -87,7 +93,7 @@ GWETROOT & Humedad de suelo (zona radicular) \\
 \end{tabular}
 \end{table}
 
-\subsection{Recuperación y calidad de los datos}
+\subsection{Recuperación y calidad de los datos (comprensión y preparación de los datos)}
 La hoja \texttt{c-18} reporta producción acumulada anual y no mensual directa. La producción mensual se recuperó mediante diferenciación entre meses consecutivos:
 \begin{equation}
 Prod_{m} = Acum_{m} - Acum_{m-1}
@@ -113,14 +119,15 @@ Eventos extremos & Conservados como señal \\
 \end{tabular}
 \end{table}
 
-No se aplicó remoción de outliers mediante IQR o Z-score debido a la alta presencia de ceros estructurales y a que eventos extremos como la sequía 2022 en Puno \cite{rcr2023} y El Niño Costero 2023--2024 \cite{senamhi2024} constituyen la señal de interés del estudio.
+No se aplicó remoción de valores atípicos mediante rango interquartílico (IQR) o puntuación Z debido a la alta presencia de ceros estructurales y a que eventos extremos como la sequía 2022 en Puno \cite{rcr2023} y El Niño Costero 2023--2024 \cite{senamhi2024} constituyen la señal de interés del estudio.
 
-\subsection{Estrategia multi-distrito y construcción de datasets}
-Debido a la heterogeneidad ecológica de las regiones peruanas, se seleccionaron 14 distritos representativos distribuidos por piso ecológico para evitar sesgos derivados de un único punto climático regional. La selección consideró especialización agrícola y representatividad agroecológica (Tabla~\ref{tab:distritos}).
+\subsection{Estrategia multi-distrito y construcción de datasets (preparación de los datos)}
+\label{ssec:multidistrito}
+Debido a la heterogeneidad ecológica de las regiones peruanas, se seleccionaron inicialmente 14 distritos representativos distribuidos por piso ecológico para evitar sesgos derivados de un único punto climático regional. La selección consideró especialización agrícola y representatividad agroecológica (Tabla~\ref{tab:distritos}). Posteriormente, esta muestra se amplió a 34 distritos mediante un refinamiento del mapeo cultivo--distrito con series SISAGRI 2016--2025, que permitió asignar a cada combinación (región, cultivo) el distrito de mejor ajuste agronómico dentro de su piso ecológico, en lugar de un único distrito fijo por piso. Los resultados reportados en este artículo usan la muestra ampliada de 34 distritos.
 
 \begin{table}[h]
 \centering
-\caption{Distritos representativos por piso ecológico}
+\caption{Distritos representativos iniciales por piso ecológico (muestra semilla, luego ampliada a 34 con SISAGRI)}
 \label{tab:distritos}
 \small
 \begin{tabular}{l l l}
@@ -147,17 +154,18 @@ Puno & Ayaviri & Puna alta \\
 
 {\footnotesize Fuente: elaboración propia basada en \cite{redesarrolloica2021, esan2023, cepiura2023, dataperu2021, inei1996, midagripuno2020}.}
 
-Se construyeron tres datasets: (i) un dataset regional agregado por región y distrito; (ii) un dataset clima--producción por cultivo (2{,}376 observaciones cultivo--mes); y (iii) un dataset filtrado mediante Pareto-80, conservando los cultivos que representan el 80\% de la producción regional total (33 combinaciones región--cultivo).
+Se construyeron tres datasets: (i) un dataset regional agregado por región, piso ecológico y distrito (2{,}448 observaciones, 34 unidades $\times$ 72 meses); (ii) un dataset clima--producción por cultivo (2{,}376 observaciones cultivo--mes); y (iii) un dataset filtrado conservando solo las combinaciones región--cultivo más representativas de la producción regional total (33 combinaciones región--cultivo).
 
 \subsection{Fase de modelado: clustering no supervisado}
-Como fase de modelado CRISP-DM se aplicaron tres algoritmos de \textit{clustering} no supervisado: KMeans (partición por minimización de inercia), aglomerativo jerárquico con enlace de Ward, y DBSCAN (densidad). La selección de $K$ se realizó mediante barrido $K=2,\dots,8$ con consenso entre el coeficiente de Silhouette (cohesión vs. separación, mayor es mejor) y el índice de Davies--Bouldin (menor es mejor). Todas las \textit{features} se estandarizaron por $z$-score; para DBSCAN se reportó Silhouette excluyendo los puntos de ruido (etiqueta $-1$).
+\label{ssec:modelado}
+Como fase de modelado CRISP-DM se aplicaron tres algoritmos de \textit{clustering} no supervisado: KMeans (partición por minimización de inercia), aglomerativo jerárquico con enlace de Ward, y DBSCAN (densidad). La selección de $K$ se realizó mediante barrido $K=2,\dots,8$ con consenso entre el coeficiente de Silhouette (cohesión vs. separación, mayor es mejor) y el índice de Davies--Bouldin (menor es mejor). Todas las variables se estandarizaron por $z$-score; para DBSCAN se reportó Silhouette excluyendo los puntos de ruido (etiqueta $-1$).
 
-Para auditar \emph{qué} información captura cada partición se empleó el Índice de Rand Ajustado (ARI) entre las etiquetas de cluster y la región administrativa: un ARI alto indica que el modelo reproduce la geografía, mientras que un ARI bajo indica que el modelo captura estructura distinta (p.~ej.\ patrones productivos). Esta auditoría guió el rediseño del esquema de \textit{features}, descrito en la Sección~\ref{sec:clustering}.
+Para auditar \emph{qué} información captura cada partición se empleó el Índice de Rand Ajustado (ARI) entre las etiquetas de cluster y la región: un ARI alto indica que el modelo reproduce la geografía, mientras que un ARI bajo indica que el modelo captura estructura distinta (p.~ej.\ patrones productivos). Esta auditoría guió el rediseño del esquema de variables, descrito en la Sección~\ref{sec:clustering}.
 
 \section{Resultados}
 
 \subsection{Heterogeneidad climática y concentración productiva}
-La distribución mensual de temperatura por región y piso (Fig.~\ref{fig:boxplot_temp}) confirma la premisa central del estudio: una misma región administrativa combina pisos térmicamente contrastados. La Libertad, por ejemplo, agrupa costa ($\sim$20\,°C) y sierra ($\sim$11\,°C); Junín combina selva ($\sim$24\,°C), sierra ($\sim$9\,°C) y puna. Esta heterogeneidad invalida el uso de un único punto climático regional y justifica el muestreo multi-distrito.
+La distribución mensual de temperatura por región y piso (Fig.~\ref{fig:boxplot_temp}) confirma la premisa central del estudio: una misma región combina pisos térmicamente contrastados. La Libertad, por ejemplo, agrupa costa ($\sim$21\,°C) y sierra ($\sim$12\,°C); Junín combina selva alta ($\sim$21\,°C), selva baja ($\sim$24\,°C) y sierra ($\sim$8\,°C). Esta heterogeneidad invalida el uso de un único punto climático regional y justifica el muestreo multi-distrito.
 
 \begin{figure}[h]
     \centering
@@ -166,36 +174,36 @@ La distribución mensual de temperatura por región y piso (Fig.~\ref{fig:boxplo
     \label{fig:boxplot_temp}
 \end{figure}
 
-La producción agregada 2020--2025 muestra fuerte concentración en pocas unidades región--piso (Fig.~\ref{fig:prod_unidad}). La Libertad--Costa (Virú) lidera con 36.84\,M\,tn, dominada por caña de azúcar agroindustrial. Le siguen las unidades altoandinas de Puno: puna alta (Ayaviri, 20.36\,M\,tn) y altiplano lacustre (Ilave, 10.19\,M\,tn), asociadas a avena forrajera y alfalfa. Ica--Costa (Chincha Alta, 9.32\,M\,tn) exhibe el perfil agroexportador más diversificado. El rango entre la unidad más y menos productiva (Cascas--Yunga, 0.36\,M\,tn) abarca dos órdenes de magnitud.
+La producción agregada 2020--2025 muestra fuerte concentración en pocas unidades región--piso (Fig.~\ref{fig:prod_unidad}). La Libertad--Costa (Virú) lidera con 37.47\,M\,tn, dominada por caña de azúcar agroindustrial. Le siguen las unidades altoandinas de Puno: altiplano lacustre (15.73\,M\,tn) y puna alta (15.58\,M\,tn), asociadas a avena forrajera y alfalfa. Ica--Costa (10.56\,M\,tn, agregando sus seis distritos representativos) exhibe el perfil agroexportador más diversificado. El rango entre la unidad más y menos productiva (La Libertad--Yunga/Cascas, 0.56\,M\,tn) abarca cerca de dos órdenes de magnitud.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.46\textwidth]{eda_regional_volumen_unidad.png}
-    \caption{Producción acumulada 2020--2025 por unidad región--piso (Pareto-80).}
+    \caption{Producción acumulada 2020--2025 por unidad (región $\times$ piso $\times$ distrito), 34 unidades representativas.}
     \label{fig:prod_unidad}
 \end{figure}
 
-El calendario mensual de cosechas (Fig.~\ref{fig:calendario}) revela contrastes de estacionalidad. Las unidades altoandinas de Puno concentran producción entre marzo y mayo, reflejando el ciclo único de cultivos andinos, mientras que La Libertad--Costa e Ica--Costa mantienen producción uniforme durante el año, propia de sistemas agroexportadores intensivos y cultivos perennes. Las unidades de selva presentan estacionalidad intermedia.
+El calendario mensual de cosechas (Fig.~\ref{fig:calendario}) revela contrastes de estacionalidad. Las unidades altoandinas de Puno concentran su producción en abril (puna alta: 55\% de la producción anual en un solo mes; altiplano lacustre: 36\%), reflejando el ciclo único de cultivos andinos, mientras que La Libertad--Costa y Ica--Costa mantienen producción casi uniforme durante el año (10--14\% en el mes pico), propia de sistemas agroexportadores intensivos y cultivos perennes. Las unidades de selva presentan estacionalidad intermedia (9--14\% en el mes pico).
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.48\textwidth]{eda_regional_patron_estacional.png}
-    \caption{Patrón estacional promedio por unidad región--piso. La puna alta de Puno concentra su producción en abril--mayo.}
+    \caption{Patrón estacional promedio por región y piso ecológico. La puna alta de Puno concentra su producción en abril.}
     \label{fig:calendario}
 \end{figure}
 
 \subsection{Relaciones clima--cultivo por piso ecológico}
-Las correlaciones de Pearson entre producción mensual y clima por cultivo dominante (Fig.~\ref{fig:corr_clima}) muestran patrones coherentes con la fisiología de cada piso. En la costa iqueña, la uva correlaciona positivamente con humedad relativa ($r=+0.62$), radiación ($r=+0.62$) y temperatura mínima ($r=+0.55$). En la selva de Junín, la humedad relativa domina cultivos como piña ($r=+0.76$), que a su vez correlaciona negativamente con radiación ($r=-0.61$). Los cultivos andinos muestran fuerte sensibilidad hídrica y térmica: la alfalfa de Puno depende de la humedad de suelo ($r=+0.66$) y la papa de Junín responde negativamente a la temperatura máxima ($r=-0.52$). Las correlaciones cambian de magnitud y signo entre pisos para variables equivalentes, evidenciando que los agregados regionales ocultan relaciones agroclimáticas relevantes.
+Las correlaciones de Pearson entre producción mensual y clima por cultivo dominante (Fig.~\ref{fig:corr_clima}) muestran patrones coherentes con la fisiología de cada piso. En la costa iqueña, la uva correlaciona positivamente con humedad relativa ($r=+0.63$), precipitación ($r=+0.53$) y temperatura mínima ($r=+0.52$), pero no con radiación ($r=-0.19$). En la selva de Junín, la humedad relativa domina cultivos como piña ($r=+0.78$), que a su vez correlaciona negativamente con radiación ($r=-0.56$) y temperatura media ($r=-0.54$). Los cultivos andinos muestran fuerte sensibilidad hídrica: la alfalfa de Puno depende de la humedad de suelo ($r=+0.66$) y la papa de Junín responde negativamente a la temperatura máxima ($r=-0.42$). Las correlaciones cambian de magnitud y signo entre pisos para variables equivalentes, evidenciando que los agregados regionales ocultan relaciones agroclimáticas relevantes.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.48\textwidth]{corr_clima_cultivo.png}
-    \caption{Correlación de Pearson entre variables climáticas y producción mensual por cultivo dominante. Las relaciones cambian de signo entre pisos ecológicos.}
+    \includegraphics[width=0.48\textwidth]{eda_cultivo_correlacion_dominantes.png}
+    \caption{Correlación de Pearson entre variables climáticas y producción mensual del cultivo de mayor volumen por región (más alfalfa de Puno y papa de Junín). Las relaciones cambian de signo entre pisos ecológicos.}
     \label{fig:corr_clima}
 \end{figure}
 
 \subsection{Eventos climáticos extremos: sequía 2022 y El Niño 2023--2024}
-El año 2022 registró en Puno la menor humedad de suelo del periodo (Fig.~\ref{fig:puno_sequia}), con caídas de producción cercanas al 50\% en altiplano lacustre y 37\% en puna alta respecto a 2020. El impacto fue más severo en cultivos andinos tradicionales: quinua cayó 64\%, oca 62\%, cebada forrajera 55\% y papa 47\%, mientras que la avena forrajera mostró mayor resiliencia hídrica, amortiguando la caída agregada. Estos resultados validan la necesidad del análisis desagregado por cultivo.
+El año 2022 registró en Puno la menor humedad de suelo del periodo (Fig.~\ref{fig:puno_sequia}), con caídas de producción de 47\% en altiplano lacustre y 34\% en puna alta respecto a 2020 (40\% a nivel regional agregado). El impacto fue más severo en cultivos andinos tradicionales: quinua cayó 64\%, oca 62\%, cebada forrajera 55\% y papa 49\%, mientras que la avena forrajera --- el cultivo de mayor volumen de la región --- mostró mayor resiliencia hídrica (-29\%), amortiguando la caída agregada. Estos resultados validan la necesidad del análisis desagregado por cultivo.
 
 \begin{figure}[h]
     \centering
@@ -204,7 +212,7 @@ El año 2022 registró en Puno la menor humedad de suelo del periodo (Fig.~\ref{
     \label{fig:puno_sequia}
 \end{figure}
 
-El periodo 2023--2024 registró anomalías consistentes con el Fenómeno del Niño Costero (Fig.~\ref{fig:nino}). Todas las regiones incrementaron su temperatura media entre 4.8\% y 9.2\%. Piura presentó la mayor anomalía de precipitación ($+121\%$), coherente con la intensificación de lluvias en la costa norte reportada por SENAMHI \cite{senamhi2024}, mientras que San Martín redujo su precipitación ($-28\%$) y humedad relativa ($-8.6\%$), evidenciando respuestas regionales diferenciadas.
+El periodo 2023--2024 registró anomalías consistentes con el Fenómeno del Niño Costero (Fig.~\ref{fig:nino}). Todas las regiones incrementaron su temperatura media entre 5.0\% y 9.3\% respecto a la línea base 2020--2022. Piura presentó la mayor anomalía de precipitación ($+85\%$), coherente con la intensificación de lluvias en la costa norte reportada por SENAMHI \cite{senamhi2024}, mientras que San Martín redujo su precipitación ($-30\%$) y humedad relativa ($-9.9\%$), evidenciando respuestas regionales diferenciadas: el calentamiento fue generalizado, pero el cambio en precipitación y humedad fue de signo opuesto entre la costa norte y la selva.
 
 \begin{figure}[h]
     \centering
@@ -213,43 +221,72 @@ El periodo 2023--2024 registró anomalías consistentes con el Fenómeno del Ni�
     \label{fig:nino}
 \end{figure}
 
-\subsection{Tipologías agroclimáticas mediante clustering}
-\label{sec:clustering}
-
-\subsubsection{Enfoque inicial y diagnóstico crítico}
-El primer modelo agrupó los 33 perfiles región--cultivo descritos por 13 \textit{features}: media y desviación estándar de cinco variables climáticas, más producción total, media de cosecha y coeficiente de variación. El barrido de $K$ (Fig.~\ref{fig:seleccion_k}) seleccionó $K=6$ por coincidencia de Silhouette máximo (0.514) y Davies--Bouldin mínimo (0.604). El dendrograma Ward (Fig.~\ref{fig:dendro06}) y el mapa de calor de centroides (Fig.~\ref{fig:heatmap06}) confirman seis grupos bien separados.
+Como verificación independiente de estos hallazgos, se aplicó un detector de anomalías no supervisado (\textit{Isolation Forest}) sobre las variables climáticas y de producción estandarizadas por unidad, sin indicarle al modelo dónde buscar (Fig.~\ref{fig:deteccion_eventos}). El método marca como anómalas el 12.5\% de las filas de la sequía de Puno 2022 y el 8.2\% de El Niño Costero 2023--2024, frente a una tasa base de 5.0\% en el resto del dataset --- confirmando ambos eventos de forma independiente. El método detecta además un tercer episodio no analizado en este artículo: lluvias intensas en Junín e Ica entre febrero y mayo de 2025 (53.1\% de detección, 10.6 veces la tasa base), consistente con alertas de SENAMHI de esas fechas \cite{senamhi2025marzo}. Su impacto en la producción aún no es observable en los datos, por la cercanía del evento al final de la serie.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.48\textwidth]{seleccion_k_perfiles.png}
-    \caption{Selección de $K$ para los perfiles región--cultivo: inercia (codo), Silhouette y Davies--Bouldin. El óptimo es $K=6$.}
-    \label{fig:seleccion_k}
+    \includegraphics[width=0.46\textwidth]{tasa_deteccion_eventos.png}
+    \caption{Tasa de detección de anomalías (Isolation Forest) por evento, frente a la tasa base del dataset. El método identifica los tres eventos sin supervisión previa.}
+    \label{fig:deteccion_eventos}
 \end{figure}
+
+\subsection{Tipologías agroclimáticas mediante clustering}
+\label{sec:clustering}
+
+\subsubsection{Enfoque inicial y diagnóstico crítico (evaluación)}
+El primer modelo agrupó los 33 perfiles región--cultivo descritos por 13 variables: media y desviación estándar de cinco variables climáticas, más producción total, media de cosecha y coeficiente de variación. El barrido de $K$ seleccionó $K=7$ por consenso entre Silhouette (0.428) y Davies--Bouldin (0.698). El dendrograma Ward (Fig.~\ref{fig:dendro06}) y el mapa de calor de centroides (Fig.~\ref{fig:heatmap06}) muestran grupos aparentemente bien separados.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.48\textwidth]{dendrograma_perfiles.png}
-    \caption{Dendrograma Ward de los perfiles región--cultivo. La línea roja indica la altura de corte que produce $K=6$ clusters.}
+    \caption{Dendrograma Ward de los perfiles región--cultivo. La línea roja indica la altura de corte que produce $K=7$ clusters.}
     \label{fig:dendro06}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.48\textwidth]{heatmap_perfiles_kmeans.png}
-    \caption{Centroides normalizados (min--max) por cluster KMeans del enfoque inicial. Las \textit{features} climáticas dominan sobre las productivas.}
+    \caption{Centroides normalizados (min--max) por cluster KMeans del enfoque inicial. Las variables climáticas dominan sobre las productivas.}
     \label{fig:heatmap06}
 \end{figure}
 
-Sin embargo, una auditoría con el Índice de Rand Ajustado revela un problema de validez: el ARI entre los clusters y la región administrativa es 0.59, y eliminar por completo las variables de producción altera la partición en menos del 20\% de los casos. La causa es una degeneración estructural: dado que el clima es constante por distrito, las 10 \textit{features} climáticas solo toman 11 valores distintos (los distritos) y dominan numéricamente a las 3 \textit{features} productivas. \emph{El modelo no tipifica cultivos: reproduce la geografía}. El Silhouette alto es, en este caso, un artefacto de la redundancia espacial y no evidencia de una tipología agronómica genuina. Este diagnóstico motivó dos rediseños.
+Sin embargo, una auditoría con el Índice de Rand Ajustado frente a la región revela un problema de validez: el ARI es 0.40. La causa es una degeneración estructural --- en términos simples, el clima casi no cambia dentro de un mismo distrito, por lo que aporta poca información nueva y termina pesando más que la producción en el cálculo del agrupamiento --- : dado que el clima es prácticamente constante dentro de cada distrito, las 10 variables climáticas solo toman tantos valores distintos como distritos hay entre los 33 perfiles (28) y dominan numéricamente a las 3 variables productivas. Adicionalmente, un barrido complementario con DBSCAN alcanzó un Silhouette de 0.91 descartando como ruido el 70\% de los perfiles --- una métrica alta que en realidad señala que el método es inutilizable, no que sea superior. \emph{El modelo no tipifica cultivos de forma confiable: reproduce en buena medida la geografía}. Este diagnóstico motivó dos rediseños.
 
 \subsubsection{Modelo A --- Tipologías agroclimáticas territoriales}
-El primer rediseño asume explícitamente que la unidad real de análisis es la zona climática. Se agruparon las 12 zonas (distritos) usando solo \textit{features} climáticas, y la producción se reservó como variable descriptiva \emph{a posteriori}. El modelo produce $K=5$ tipologías nítidas (Silhouette 0.415, ARI con región 0.40), interpretables sin ambigüedad (Fig.~\ref{fig:heatmap_zonas}): sierra templada, selva húmeda, costa árida, costa norte/bosque seco y altiplano frío. La caracterización productiva \emph{a posteriori} (Fig.~\ref{fig:prod_zonas}) responde la pregunta agronómica ``qué se cultiva en cada clima'': la costa árida concentra caña, uva y palta; el altiplano frío, forrajeras de alto volumen; la selva húmeda, arroz, plátano y palma.
+El primer rediseño asume explícitamente que la unidad real de análisis es la zona climática. Se agruparon las 34 zonas (distritos) usando solo variables climáticas (media y desviación estándar de cinco variables), y la producción se reservó como variable descriptiva \emph{a posteriori}. El modelo produce $K=6$ tipologías nítidas (Silhouette 0.498, ARI con región 0.39 --- esperable, ya que el clima covaría con la geografía por construcción; el ARI entre KMeans y el jerárquico Ward con el mismo $K$ es 0.83, evidencia de que la partición es robusta al algoritmo --- confirmado visualmente por el dendrograma, Fig.~\ref{fig:dendro_a}), interpretables sin ambigüedad (Fig.~\ref{fig:heatmap_zonas}, Tabla~\ref{tab:modelo_a}): \textbf{C1 = Oasis Piura}, un oasis irrigado de arroz, mango y uva (Castilla, Ignacio Escudero, Querecotillo, Tambogrande); \textbf{C2 = Sierra papera}, sierra papera y ganadera (Huamachuco y sierra de Junín: Huasahuasi, Matahuasi, San Agustín, San José de Quero); \textbf{C3 = Selva SM-Junín}, selva arrocera y palmicultora de San Martín y Junín; \textbf{C4 = Puna Puno}, puna forrajera del altiplano (Ilave, Pucará, Taraco); \textbf{C5 = Costa cañera}, costa cañera y paltera (El Carmen, Independencia, Nazca, Virú); y \textbf{C6 = Costa uvera}, costa uvera, arrocera y esparraguera (Guadalupe, Salas, Santiago). La caracterización productiva \emph{a posteriori} (Fig.~\ref{fig:prod_zonas}) responde la pregunta agronómica ``qué se cultiva en cada clima'': la costa cañera concentra caña y palta; la puna, forrajeras de alto volumen; la selva, arroz, plátano, caña y palma aceitera.
+
+\begin{table}[h]
+\centering
+\caption{Modelo A --- perfil climático medio por tipología territorial}
+\label{tab:modelo_a}
+\small
+\begin{tabular}{l c c c c}
+\toprule
+\textbf{Cluster} & \textbf{Distritos} & \textbf{Temp.} & \textbf{Precip.} & \textbf{HR} \\
+ & (n) & (°C) & (mm/día) & (\%) \\
+\midrule
+C1 Oasis Piura & 4 & 25.6 & 0.5 & 61.9 \\
+C2 Sierra papera & 5 & 8.9 & 1.0 & 73.2 \\
+C3 Selva SM-Junín & 9 & 22.2 & 1.5 & 70.8 \\
+C4 Puna Puno & 3 & 8.8 & 1.7 & 62.3 \\
+C5 Costa cañera & 4 & 19.9 & 0.3 & 71.2 \\
+C6 Costa uvera & 3 & 19.9 & 0.6 & 61.7 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.48\textwidth]{06a_heatmap_zonas.png}
     \caption{Modelo A: perfil climático normalizado por cluster. Cada columna corresponde a una tipología agroclimática territorial.}
     \label{fig:heatmap_zonas}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.46\textwidth]{06a_dendrograma_zonas.png}
+    \caption{Modelo A: dendrograma Ward de las 34 zonas climáticas, con la línea de corte para $K=6$.}
+    \label{fig:dendro_a}
 \end{figure}
 
 \begin{figure}[h]
@@ -262,7 +299,28 @@ El primer rediseño asume explícitamente que la unidad real de análisis es la 
 \subsubsection{Modelo B --- Tipologías de patrón productivo}
 El segundo rediseño busca que el cultivo, y no la geografía, determine el agrupamiento. Cada perfil región--cultivo se describió por su \emph{estacionalidad}: un vector de 12 fracciones mensuales de producción (forma del calendario, independiente de la escala), más \texttt{log1p}(producción total), concentración del mes pico, número de meses de cosecha y coeficiente de variación; el clima se redujo a solo 2 componentes principales para evitar que dominara. El transformado logarítmico neutraliza el \textit{outlier} de la caña de Virú.
 
-El modelo produce $K=6$ tipologías de patrón productivo (Fig.~\ref{fig:heatmap_b}) con ARI de apenas 0.06 con la región: el vínculo con la geografía se ha roto. Cultivos de regiones distintas se agrupan por compartir calendario --- por ejemplo, un cluster ``permanente/plano'' reúne espárrago de Ica, caña de La Libertad y de Piura, palma y plátano de selva (concentración mensual $\approx0.08$), mientras que otro cluster agrupa las forrajeras de Puno por su cosecha concentrada en abril--mayo. El dendrograma (Fig.~\ref{fig:dendro_b}) y la proyección PCA (Fig.~\ref{fig:pca_b}) muestran grupos definidos por la forma del ciclo productivo.
+El modelo produce $K=7$ tipologías de patrón productivo (Fig.~\ref{fig:heatmap_b}, Tabla~\ref{tab:modelo_b}) con ARI de apenas 0.04 con la región (el vínculo con la geografía prácticamente se rompe), y ARI de 0.75 entre KMeans y el jerárquico Ward, evidencia de partición robusta. Cultivos de regiones distintas se agrupan por compartir calendario, sin importar dónde se siembren: \textbf{C1 = Cierre de año} (tomate de Ica y uva de Piura, pico nov--dic); \textbf{C2 = Invierno} (maíz amarillo duro, mandarina y palta de Ica, avena forrajera, café y papa de Junín, palta y papa de La Libertad, arroz de Piura, pico may--jul); \textbf{C3 = Todo el año} (yuca, plátano, palma, caña, alfalfa, espárrago, naranja y piña de Ica, Junín, La Libertad, Piura y San Martín, perennes o con riego tecnificado, sin pico marcado); \textbf{C4 = Ventana exportadora} (uva de Ica y mango de Piura, pico compartido en enero, coincidiendo con el invierno del Hemisferio Norte); \textbf{C5 = Todo o nada} (arroz de La Libertad con avena y papa de Puno, dependientes de un único ciclo concentrado en abril--mayo, sin margen de recuperación si éste falla); \textbf{C6 = Papa atípica} (papa de Ica, único cultivo de este patrón en su región); y \textbf{C7 = Otoño andino} (maíz choclo de Junín y alfalfa de Puno, pico mar--may). El dendrograma (Fig.~\ref{fig:dendro_b}) y la proyección PCA (Fig.~\ref{fig:pca_b}) muestran grupos definidos por la forma del ciclo productivo: el primer componente (33\% de la varianza) separa cosecha corta de abril--mayo frente a cosecha extendida hacia fin de año, y el segundo (19\%) separa el pico de mitad de año frente al pico de diciembre--enero muy concentrado.
+
+\begin{table}[h]
+\centering
+\caption{Modelo B --- estadísticas de estacionalidad por tipología productiva}
+\label{tab:modelo_b}
+\small
+\begin{tabular}{l c c c c}
+\toprule
+\textbf{Cluster} & \textbf{Perfiles} & \textbf{Pico} & \textbf{Meses} & \textbf{CV} \\
+ & (n) & (\% mes) & cosecha & mensual \\
+\midrule
+C1 Cierre de año & 2 & 34 & 12.0 & 1.31 \\
+C2 Invierno & 9 & 24 & 11.1 & 0.97 \\
+C3 Todo el año & 14 & 13 & 12.0 & 0.28 \\
+C4 Ventana exportadora & 2 & 39 & 12.0 & 1.56 \\
+C5 Todo o nada & 3 & 48 & 8.7 & 1.95 \\
+C6 Papa atípica & 1 & 45 & 12.0 & 1.68 \\
+C7 Otoño andino & 2 & 36 & 10.5 & 1.43 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \begin{figure}[h]
     \centering
@@ -274,19 +332,19 @@ El modelo produce $K=6$ tipologías de patrón productivo (Fig.~\ref{fig:heatmap
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.48\textwidth]{06b_dendrograma_perfiles.png}
-    \caption{Modelo B: dendrograma Ward de los perfiles productivos, con la línea de corte para $K=6$.}
+    \caption{Modelo B: dendrograma Ward de los perfiles productivos, con la línea de corte para $K=7$.}
     \label{fig:dendro_b}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.46\textwidth]{06b_pca_perfiles.png}
-    \caption{Modelo B: proyección PCA de los perfiles productivos coloreada por cluster.}
+    \caption{Modelo B: proyección PCA de los perfiles productivos coloreada por cluster. PC1 (33\% var.) separa cosecha corta abril--mayo de cosecha extendida oct--dic; PC2 (19\% var.) separa pico de mitad de año de pico dic--ene concentrado.}
     \label{fig:pca_b}
 \end{figure}
 
 \subsubsection{Comparación de los tres enfoques}
-La Fig.~\ref{fig:comparativa} resume la comparación. El Silhouette no es comparable directamente entre enfoques porque cada uno opera en un espacio de \textit{features} distinto: el alto valor del modelo inicial premia la redundancia geográfica. El ARI con la región es el discriminador clave: 0.59 (inicial, geografía), 0.40 (Modelo A, territorial por diseño) y 0.06 (Modelo B, patrón productivo). El ARI entre las particiones inicial y B es 0.18, confirmando que responden preguntas distintas. En síntesis, el modelo inicial promete tipificar cultivos pero tipifica regiones; el Modelo A tipifica el territorio y lo asume; el Modelo B sí tipifica cultivos por su comportamiento productivo.
+La Fig.~\ref{fig:comparativa} resume la comparación. El Silhouette no es comparable directamente entre enfoques porque cada uno opera en un espacio de variables distinto. El ARI con la región es el discriminador clave: 0.40 (inicial, mezcla clima+producción), 0.39 (Modelo A, territorial por diseño --- el clima covaría con la geografía) y 0.04 (Modelo B, patrón productivo). El ARI entre las particiones inicial y B es 0.28, confirmando que responden preguntas distintas pese a operar sobre los mismos 33 perfiles. En síntesis, el modelo inicial promete tipificar cultivos pero termina dominado por la geografía a través del clima; el Modelo A tipifica el territorio y lo asume explícitamente; el Modelo B es el único que tipifica cultivos por su comportamiento productivo, prácticamente libre de la huella geográfica.
 
 \begin{figure}[h]
     \centering
@@ -296,15 +354,15 @@ La Fig.~\ref{fig:comparativa} resume la comparación. El Silhouette no es compar
 \end{figure}
 
 \section{Discusión y conclusiones}
-Los resultados muestran que el agro peruano responde a dinámicas climáticas diferenciadas según el piso ecológico más que según la unidad administrativa regional. La radiación domina la estacionalidad costera, mientras que la humedad de suelo y la temperatura máxima condicionan la productividad en sierra y altiplano; en selva, la humedad relativa adquiere mayor relevancia. Estas relaciones cambian de signo entre pisos para variables equivalentes, comportamiento que permanecería oculto bajo promedios regionales.
+Los resultados muestran que el agro peruano responde a dinámicas climáticas diferenciadas según el piso ecológico más que según la unidad administrativa regional. La humedad relativa domina la estacionalidad costera, mientras que la humedad de suelo condiciona la productividad en sierra y altiplano; en selva, la temperatura adquiere mayor relevancia. Estas relaciones cambian de signo entre pisos para variables equivalentes, comportamiento que permanecería oculto bajo promedios regionales.
 
-Los eventos extremos refuerzan esta heterogeneidad. La sequía altoandina de 2022 redujo la producción agregada de Puno entre 37\% y 50\%, pero el análisis desagregado mostró impactos mucho más severos en cultivos andinos tradicionales (quinua $-64\%$, oca $-62\%$, papa $-47\%$), parcialmente amortiguados por la avena forrajera. El Fenómeno del Niño 2023--2024 produjo respuestas contrastantes: Piura con anomalías extremas de precipitación ($+121\%$) y San Martín con reducción pese al calentamiento generalizado.
+Los eventos extremos refuerzan esta heterogeneidad. La sequía altoandina de 2022 redujo la producción agregada de Puno en 40\%, con caídas de 47\% en altiplano lacustre y 34\% en puna alta, pero el análisis desagregado mostró impactos mucho más severos en cultivos andinos tradicionales (quinua $-64\%$, oca $-62\%$, papa $-49\%$), parcialmente amortiguados por la avena forrajera. El Fenómeno del Niño 2023--2024 produjo respuestas contrastantes: Piura con anomalías extremas de precipitación ($+85\%$) y San Martín con reducción de precipitación y humedad pese al calentamiento generalizado.
 
-La fase de modelado aporta una contribución metodológica más allá del caso peruano: demostramos que el \textit{clustering} de perfiles agroclimáticos puede reproducir trivialmente la geografía cuando las \textit{features} climáticas están degeneradas, y que métricas internas como Silhouette no detectan este sesgo. El Índice de Rand Ajustado frente a la geografía es un diagnóstico simple y efectivo. A partir de él derivamos dos modelos válidos y complementarios: tipologías territoriales (Modelo A) para caracterizar el territorio, y tipologías de patrón productivo (Modelo B) para tipificar cultivos independientemente de su ubicación.
+La fase de modelado aporta una contribución metodológica más allá del caso peruano: demostramos que el \textit{clustering} de perfiles agroclimáticos puede reproducir trivialmente la geografía cuando las variables climáticas están degeneradas, y que métricas internas como Silhouette no detectan este sesgo. El Índice de Rand Ajustado frente a la geografía es un diagnóstico simple y efectivo. A partir de él derivamos dos modelos válidos y complementarios: tipologías territoriales (Modelo A) para caracterizar el territorio, y tipologías de patrón productivo (Modelo B) para tipificar cultivos independientemente de su ubicación. Estos dos modelos confirman la hipótesis planteada en la Introducción: el Modelo A muestra que el piso ecológico, no la región, organiza la variabilidad climática del territorio; y el Modelo B demuestra que el patrón productivo de un cultivo es una dimensión de tipificación distinta e independiente de la geografía (ARI $=0.04$ con la región).
 
-El estudio presenta cuatro limitaciones. Primero, la asociación cultivo--distrito se construyó con criterio agronómico documentado, pero no puede validarse directamente porque MIDAGRI publica producción solo a nivel regional. Segundo, la resolución de NASA POWER ($\sim$50\,km) limita la captura de microclimas en zonas andinas de topografía compleja \cite{ramirez2012}. Tercero, el análisis se realizó en toneladas físicas y no en valor económico, subponderando cultivos de alta rentabilidad. Finalmente, los reportes del MIDAGRI contienen revisiones retroactivas sobre datos preliminares (``p/''), introduciendo incertidumbre en las series recientes; y el número reducido de unidades (33 perfiles, 12 zonas) limita el poder estadístico del \textit{clustering}, por lo que las tipologías deben leerse como exploratorias.
+El estudio presenta cuatro limitaciones. Primero, la asociación cultivo--distrito se construyó con criterio agronómico documentado, pero no puede validarse directamente porque MIDAGRI publica producción solo a nivel regional. Segundo, la resolución de NASA POWER ($\sim$50\,km) limita la captura de microclimas en zonas andinas de topografía compleja \cite{ramirez2012}. Tercero, el análisis se realizó en toneladas físicas y no en valor económico, subponderando cultivos de alta rentabilidad. Finalmente, los reportes del MIDAGRI contienen revisiones retroactivas sobre datos preliminares (``p/''), introduciendo incertidumbre en las series recientes; y el número reducido de unidades (33 perfiles, 34 zonas climáticas) limita el poder estadístico del \textit{clustering}, por lo que las tipologías deben leerse como exploratorias.
 
-Como trabajo futuro, los datasets construidos permiten desarrollar modelos predictivos por cultivo--piso (Random Forest, \textit{gradient boosting}), incorporar índices ENSO y estimar impactos económicos mediante precios FOB \cite{chlingaryan2018}. La conclusión principal es que la región administrativa no constituye la unidad analítica natural del agro peruano: la heterogeneidad intra-regional exige enfoques de muestreo, análisis y modelado que respeten la estructura ecológica del territorio. Esto sugiere que las políticas agrarias frente al cambio climático deberían diseñarse por piso ecológico y patrón productivo, y no únicamente por delimitaciones regionales.
+Como trabajo futuro, los datasets construidos permiten desarrollar modelos predictivos por cultivo--piso (Random Forest, \textit{gradient boosting}), incorporar índices ENSO y estimar impactos económicos mediante precios FOB \cite{chlingaryan2018}. La conclusión principal es que la región no constituye la unidad analítica natural del agro peruano: la heterogeneidad intra-regional exige enfoques de muestreo, análisis y modelado que respeten la estructura ecológica del territorio. Esto sugiere que las políticas agrarias frente al cambio climático deberían diseñarse por piso ecológico y patrón productivo, y no únicamente por delimitaciones regionales.
 
 \begin{thebibliography}{00}
 
@@ -341,6 +399,8 @@ Como trabajo futuro, los datasets construidos permiten desarrollar modelos predi
 \bibitem{senamhi2024} SENAMHI, ``El Niño Costero 2023--2024 fue el más intenso de los últimos 20 años en el oeste de Sudamérica,'' Abr. 25, 2024. [Online]. Available: \url{https://www.gob.pe/institucion/senamhi/noticias/944204}
 
 \bibitem{rcr2023} Redacción RCR Perú, ``Producción agraria en Puno cayó en 70 por ciento desde el 2022 por sequía,'' Jul. 14, 2023.
+
+\bibitem{senamhi2025marzo} SENAMHI, ``Escenario probabilístico de lluvias. Informe técnico N.º 09-2025/SENAMHI-DMA-SPC,'' Mar. 2025. [Online]. Available: \url{https://www.senamhi.gob.pe/load/file/02261SENA-18.pdf}
 
 \bibitem{cepiura2023} Centro de Estudios Piura, ``Estructura productiva de la región Piura,'' Gobierno Regional Piura, 2023.
 
