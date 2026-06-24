@@ -17,6 +17,7 @@ notebooks-help:
 	@echo   04 - EDA y correlaciones, regional y por cultivo (SCRIPTS/notebooks/)
 	@echo   06_clustering_final - clustering, dos enfoques consolidados: zonas agroclimaticas + perfiles productivos
 	@echo   07_analisis_clusters - analisis profundo por cluster (medias, evolucion anual, cultivos)
+	@echo   08_modelo_clasificador - Random Forest/KNN que valida la tipologia de zona y clasifica distritos nuevos
 	@echo   BORRADORES/ - notebooks 00-03 y 06/06a/06b originales (version previa, detalle paso a paso)
 
 preprocess:
@@ -26,3 +27,4 @@ cluster:
 	$(PYTHON) SCRIPTS/run_notebook.py SCRIPTS/notebooks/04_eda.ipynb
 	$(PYTHON) SCRIPTS/run_notebook.py SCRIPTS/notebooks/06_clustering_final.ipynb
 	$(PYTHON) SCRIPTS/run_notebook.py SCRIPTS/notebooks/07_analisis_clusters.ipynb
+	$(PYTHON) SCRIPTS/run_notebook.py SCRIPTS/notebooks/08_modelo_clasificador.ipynb

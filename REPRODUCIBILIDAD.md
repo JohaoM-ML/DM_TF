@@ -33,17 +33,15 @@ conda activate dmtf
 |--------|-----------|--------|
 | Mapping v2 | `BDS/mapping/mapping_cultivo_distrito_v2_pipeline.csv` | Sí |
 | Excel MIDAGRI C-18 | `BDS/YYYY/2020.xlsx` … `2025.xlsx` | No — ver [`BDS/YYYY/README.md`](../BDS/YYYY/README.md) |
-| NASA POWER | Descargado en notebook 02 | No — requiere internet |
+| NASA POWER | Descargado por `00_pipeline_integrado.ipynb` | No — requiere internet |
 
 ## 4. Ejecutar pipeline
 
-Abrir Jupyter y correr **en orden**:
+```bash
+make preprocess        # ejecuta SCRIPTS/notebooks/00_pipeline_integrado.ipynb: midagri_largo, mapping, nasa, dataset_integrado
+```
 
-```
-SCRIPTS/notebooks/
-  01 → 00 → 02 → 03 → 04 → 05 → 06
-  (opcional) 06a, 06b
-```
+Luego, en Jupyter, correr en orden: `SCRIPTS/notebooks/04 → 06_clustering_final`.
 
 Detalle: [`SCRIPTS/notebooks/README.md`](../SCRIPTS/notebooks/README.md)
 
@@ -56,7 +54,7 @@ make test-integration      # tras generar OUTPUTS/ (requiere CSV locales)
 
 ## 6. Mapas interactivos
 
-- `OUTPUTS/figures/mapa_clusters_folium.html` — notebook 06
+- `OUTPUTS/figures/06a_mapa_zonas.html`, `OUTPUTS/figures/06b_mapa_perfiles.html` — notebook 06_clustering_final
 - Abrir con extensión **Live Server** en Cursor/VS Code, o doble clic en el navegador
 
 ## Qué no va en git

@@ -16,15 +16,15 @@ def test_dataset_integrado_schema(dataset_integrado_path):
 
 @pytest.mark.integration
 def test_clustering_outputs_exist():
-    for name in ("clustering_perfiles.csv", "clustering_metricas.csv"):
-        assert (OUTPUTS / name).exists(), f"Ejecutar notebook 06: falta {name}"
+    for name in ("06a_zonas_clusters.csv", "06b_perfiles_productivos_clusters.csv"):
+        assert (OUTPUTS / name).exists(), f"Ejecutar notebook 06_clustering_final: falta {name}"
 
 
 @pytest.mark.integration
 def test_folium_map_exported():
-    path = FIGURES / "mapa_clusters_folium.html"
+    path = FIGURES / "06a_mapa_zonas.html"
     if not path.exists():
-        pytest.skip("Ejecutar celda Folium en notebook 06")
+        pytest.skip("Ejecutar celda Folium en notebook 06_clustering_final")
     html = path.read_text(encoding="utf-8")
     assert "leaflet" in html.lower()
 

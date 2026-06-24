@@ -25,7 +25,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_a86f0eabbf08b1608c3e458e7533ad33 {
+                #map_d12f9185550122fa3c63e060677f4a99 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -38,16 +38,347 @@
 </head>
 <body>
     
-    <div style="position:fixed;bottom:24px;left:24px;z-index:9999;background:white;padding:10px;border:1px solid #ccc;border-radius:4px;font-size:12px;"><b>Zonas agroclimaticas</b><br><div><span style="background:#1f77b4;width:14px;height:14px;display:inline-block;margin-right:6px;border:1px solid #333;"></span>Cluster 0</div><div><span style="background:#ff7f0e;width:14px;height:14px;display:inline-block;margin-right:6px;border:1px solid #333;"></span>Cluster 1</div><div><span style="background:#2ca02c;width:14px;height:14px;display:inline-block;margin-right:6px;border:1px solid #333;"></span>Cluster 2</div><div><span style="background:#d62728;width:14px;height:14px;display:inline-block;margin-right:6px;border:1px solid #333;"></span>Cluster 3</div><div><span style="background:#9467bd;width:14px;height:14px;display:inline-block;margin-right:6px;border:1px solid #333;"></span>Cluster 4</div></div>
     
-            <div class="folium-map" id="map_a86f0eabbf08b1608c3e458e7533ad33" ></div>
+<div style="position:fixed;top:12px;left:50%;transform:translateX(-50%);
+     z-index:9997;background:rgba(255,255,255,0.96);
+     padding:10px 28px;border-radius:28px;
+     box-shadow:0 2px 14px rgba(0,0,0,0.16);
+     font-family:sans-serif;text-align:center;white-space:nowrap;">
+  <div style="font-size:18px;font-weight:bold;color:#222;">
+    Zonas Agroclimáticas del Perú (2020&ndash;2025)
+  </div>
+</div>
+    
+<div style="position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
+     z-index:9997;background:rgba(235,243,255,0.97);
+     padding:7px 24px;border-radius:28px;
+     box-shadow:0 2px 10px rgba(0,0,0,0.13);
+     font-family:sans-serif;text-align:center;white-space:nowrap;">
+  <div style="font-size:13px;color:#4C78A8;">
+    Modelo A &mdash; 6 clusters K-Means &nbsp;&middot;&nbsp; Silhouette&nbsp;=&nbsp;0.498
+  </div>
+</div>
+    
+<div id="panel-zona" style="display:none;position:fixed;top:0;right:0;width:400px;height:100%;
+     background:white;box-shadow:-6px 0 24px rgba(0,0,0,0.25);z-index:9999;
+     font-family:sans-serif;overflow-y:auto;">
+  <div id="panel-zona-header" style="padding:26px 24px;background:#4C78A8;color:white;position:relative;">
+    <span onclick="document.getElementById('panel-zona').style.display='none'"
+          style="position:absolute;top:18px;right:20px;cursor:pointer;font-size:26px;
+                 line-height:1;font-weight:bold;">&times;</span>
+    <div style="font-size:12px;opacity:0.85;letter-spacing:1.5px;text-transform:uppercase;">
+      Nombre Cluster</div>
+    <div id="panel-zona-titulo" style="font-size:23px;font-weight:bold;margin-top:10px;line-height:1.3;"></div>
+  </div>
+  <div style="padding:24px;">
+    <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">
+      Ubicación</div>
+    <div id="panel-zona-ubicacion" style="font-size:16px;margin-bottom:22px;color:#333;"></div>
+    <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">
+      Descripción</div>
+    <div id="panel-zona-desc" style="font-size:15px;line-height:1.8;color:#333;"></div>
+  </div>
+</div>
+    <div style="position:fixed;bottom:65px;left:24px;z-index:9999;background:white;padding:16px 20px;border:2px solid #ccc;border-radius:10px;box-shadow:0 4px 18px rgba(0,0,0,0.18);font-family:sans-serif;max-width:270px;"><div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Nombre Cluster</div><div style="margin-bottom:7px;display:flex;align-items:center;"><span style="background:#1f77b4;width:20px;height:20px;flex-shrink:0;display:inline-block;margin-right:10px;border-radius:50%;border:2px solid rgba(0,0,0,0.15);"></span><span style="font-size:14px;">Oasis Piura</span></div><div style="margin-bottom:7px;display:flex;align-items:center;"><span style="background:#ff7f0e;width:20px;height:20px;flex-shrink:0;display:inline-block;margin-right:10px;border-radius:50%;border:2px solid rgba(0,0,0,0.15);"></span><span style="font-size:14px;">Sierra papera</span></div><div style="margin-bottom:7px;display:flex;align-items:center;"><span style="background:#2ca02c;width:20px;height:20px;flex-shrink:0;display:inline-block;margin-right:10px;border-radius:50%;border:2px solid rgba(0,0,0,0.15);"></span><span style="font-size:14px;">Selva SM-Junín</span></div><div style="margin-bottom:7px;display:flex;align-items:center;"><span style="background:#d62728;width:20px;height:20px;flex-shrink:0;display:inline-block;margin-right:10px;border-radius:50%;border:2px solid rgba(0,0,0,0.15);"></span><span style="font-size:14px;">Puna Puno</span></div><div style="margin-bottom:7px;display:flex;align-items:center;"><span style="background:#9467bd;width:20px;height:20px;flex-shrink:0;display:inline-block;margin-right:10px;border-radius:50%;border:2px solid rgba(0,0,0,0.15);"></span><span style="font-size:14px;">Costa cañera</span></div><div style="margin-bottom:7px;display:flex;align-items:center;"><span style="background:#8c564b;width:20px;height:20px;flex-shrink:0;display:inline-block;margin-right:10px;border-radius:50%;border:2px solid rgba(0,0,0,0.15);"></span><span style="font-size:14px;">Costa uvera</span></div><div style="margin-top:8px;color:#aaa;font-size:11px;text-align:center;">Clic en un punto para ver ficha &#8594;</div></div>
+    
+<script>
+var SCALER_MEAN  = [18.277931547619044, 1.3110847399529495, 1.0297867063492063, 1.128275782707721, 68.14572420634921, 6.476493382116932, 18.695729166666666, 2.154579649814163, 0.4592807539682541, 0.04131829138711489];
+var SCALER_SCALE = [6.439343048712457, 0.3894183888750833, 0.6374685595462094, 0.4169565056739136, 5.551961255241508, 2.2255824265806257, 2.486751873737702, 0.8976411559729122, 0.08382224349269916, 0.018712516016329558];
+var X_TRAIN      = [[1.2120562875927705, 0.5014122788055893, 2.049673137558039, 0.5603193358102438, 0.25553496735155423, 1.208253754492281, -0.830470314678826, -0.9425311326789456, 2.0532513536890153, -0.9494288878083494], [1.1336321383931132, 1.4531576628304619, -0.8546095304480898, 0.2985228835598027, -1.1290858463930689, -1.3921614810595768, 0.5790546668467742, 0.14657054111612283, -0.601175332222577, -0.6453668004482935], [0.23229364254480023, 1.2363796273300127, -1.301254651934404, -1.821355083556528, 0.8160726206709588, -0.8186889998876703, 0.34246759937669363, 2.6619103876558308, -1.5141523009724447, -1.294419797558275], [0.5319273831063057, -0.798743863951633, -0.32059626568567273, -0.6503903923931231, -0.015165168613513434, -0.5116293646322166, 0.5154956293630755, 0.45197286784311513, -0.7486434814398876, -0.23858764605475571], [-1.0139946382732914, -1.08552225754748, 0.2384727010137816, -0.293957928337917, 0.3434668570029004, -0.05303510956831173, -0.11311330462553978, -0.17938246919022505, 0.4460142217700108, 0.2662071699785178], [-1.3862936589925654, -1.0887902193735879, -0.4944610495618086, -0.560012247857399, 1.2935815565642415, -1.1057782659020068, -0.5805905838334181, -0.63012586360268, -0.39902798161008385, 1.0638575343496122], [1.1336321383931132, 1.4531576628304619, -0.8546095304480898, 0.2985228835598027, -1.1290858463930689, -1.3921614810595768, 0.29996458749172344, 0.20926955839261033, -0.601175332222577, -0.6453668004482935], [-1.3519992703161476, -0.7183670560541544, 1.170980564409598, 1.4576592023484278, -0.5157140107283884, 0.43371396049440575, 1.5262407096289066, 0.28475127953329366, -0.00467495336603945, 1.0165613715463067], [0.23229364254480023, 1.2363796273300127, -1.301254651934404, -1.821355083556528, 0.8160726206709588, -0.8186889998876703, 0.34246759937669363, 2.6619103876558308, -1.5141523009724447, -1.294419797558275], [-0.08082059671026592, -1.3026222897816548, 1.0400372873299517, 0.6109806398810222, 1.027334301497592, -0.5277205372524051, -1.0299719683622852, -0.6963360506290176, 0.1958154517496297, -0.11835560738140055], [-1.7326885534222936, -1.12691124358469, -0.19052449128209728, -0.11636628813467456, 0.700247684942442, -0.43023318299629165, -0.5805905838334181, -0.63012586360268, 0.06325981200373292, 1.9284242682859847], [0.793966708911211, -0.1901571813101131, 1.3145606302922712, 0.9535829245749244, 0.7841019364677108, 0.5253508826519927, -0.9392132373332754, -0.8520137361087593, 1.2347202782581004, -0.3369039975362447], [0.21734646559338025, 1.5572455608885813, -1.1010269121071248, -1.6312101997465145, -0.6515769104997862, -0.65181141308342, 1.1816926408793955, 1.2299024843993673, -2.1620179902305177, -1.0227678046349014], [0.35892405507262937, -0.6211781621106924, 0.6759670444013516, 0.9931571278389802, 0.7278655529865637, 1.0851560799608013, -1.2825884240202587, -1.1237802562222103, 0.792315830606168, 1.1763472357783766], [0.26128210693543263, -0.8769269475348693, -0.31580300096728314, -0.29879827954501786, 0.6211214923486431, 0.3700083982145252, -1.4687974143283928, -0.9330547997214683, 0.7972866670966399, 0.05665386778351752], [0.26128210693543263, -0.8769269475348693, -0.31580300096728314, -0.29879827954501786, 0.6211214923486431, 0.3700083982145252, -1.391666455835431, -0.8675174376551279, 0.7972866670966399, 0.05665386778351752], [-1.7617632930045646, 0.9835314573813135, 1.171198440078616, 1.8825680353060428, -1.0442559636597206, 0.9337660680937608, 1.38912521136662, 0.3520612958983243, 0.18918766976233514, 1.2366215250363692], [1.1336321383931132, 1.4531576628304619, -0.8546095304480898, 0.2985228835598027, -1.1290858463930689, -1.3921614810595768, 0.29996458749172344, 0.20926955839261033, -0.601175332222577, -0.6453668004482935], [0.9175774897316825, -0.10354504075975879, 0.19555119421729217, -0.02626207143231185, -0.36501651335720425, 1.3659485672964553, -1.2825884240202587, -1.1237802562222103, 1.183354967856565, -0.8224394315479985], [0.9175774897316825, -0.10354504075975879, 0.19555119421729217, -0.02626207143231185, -0.36501651335720425, 1.3659485672964553, -1.2825884240202587, -1.1237802562222103, 1.183354967856565, -0.8224394315479985], [0.11690057372792347, -0.6733514842549583, -0.8047160022430335, -0.9098800744827817, -1.7397809502817343, 1.62278766447255, 1.2878105417748524, 0.9368687891728148, -0.7155045715034134, -0.3496715489245382], [-1.4220547259268423, -1.22894802293544, 0.1602553358364222, 0.41997054502755926, 1.538439973607592, -0.7969473881494715, 0.20434677363223896, -0.032022704049395376, 0.19250156075598177, 1.9758007052813353], [-1.7326885534222936, -1.12691124358469, -0.19052449128209728, -0.11636628813467456, 0.700247684942442, -0.43023318299629165, 0.20434677363223896, -0.032022704049395376, 0.06325981200373292, 1.9284242682859847], [0.11690057372792347, -0.6638842312726048, -0.8047160022430335, -0.9035668757984431, -1.7397809502817343, 1.6387202600502526, 1.6518507933730555, 1.1487054486011763, -0.7155045715034134, -0.34313942022478594], [1.1336321383931132, 1.4531576628304619, -0.8546095304480898, 0.2985228835598027, -1.1290858463930689, -1.3921614810595768, 0.29996458749172344, 0.20926955839261033, -0.601175332222577, -0.6453668004482935], [-1.3116440494271053, 0.768224923984146, 0.968356192223124, 1.8000216300523515, -1.6092715140623677, 0.4327195955656706, 1.557629267683248, -0.004259654547836375, -0.12728892013099505, 0.7643981555962317], [0.7863960608449067, 0.219293915693018, 2.4651620383748196, 1.2022428810019206, 1.0627071868367113, 1.219957186606465, -1.3412325271466956, -1.0722319788781476, 1.9985721522938333, 0.16975640744489637], [0.3026941989220501, 0.27123318961641824, -1.0866471179519555, -1.600012692127447, 1.2540059521749312, -0.8589270148160766, 0.44098969262910614, -0.25949699367340967, -0.8845130121794323, -1.465665804579947]];
+var Y_TRAIN      = [2, 0, 4, 5, 1, 1, 0, 3, 4, 2, 1, 2, 4, 2, 2, 2, 3, 0, 2, 2, 5, 1, 1, 5, 0, 3, 2, 4];
+var DISTRITOS_DATA  = [{"distrito": "Bajo Biavo", "region": "San Martin", "features": [26.0828, 1.5063, 2.3364, 1.3619, 69.5644, 9.1656, 16.6306, 1.3085, 0.6314, 0.0236], "lat": null, "lon": null}, {"distrito": "Castilla", "region": "Piura", "features": [25.5778, 1.877, 0.485, 1.2527, 61.8771, 3.3781, 20.1357, 2.2861, 0.4089, 0.0292], "lat": null, "lon": null}, {"distrito": "El Carmen", "region": "Ica", "features": [19.7737, 1.7926, 0.2003, 0.3688, 72.6765, 4.6544, 19.5474, 4.544, 0.3324, 0.0171], "lat": null, "lon": null}, {"distrito": "Guadalupe", "region": "La Libertad", "features": [21.7032, 1.0, 0.8254, 0.8571, 68.0615, 5.3378, 19.9776, 2.5603, 0.3965, 0.0369], "lat": null, "lon": null}, {"distrito": "Huamachuco", "region": "La Libertad", "features": [11.7485, 0.8884, 1.1818, 1.0057, 70.0526, 6.3585, 18.4144, 1.9936, 0.4967, 0.0463], "lat": -7.8121, "lon": -78.0487}, {"distrito": "Huasahuasi", "region": "Junin", "features": [9.3511, 0.8871, 0.7146, 0.8948, 75.3276, 4.0155, 17.2519, 1.589, 0.4258, 0.0612], "lat": null, "lon": null}, {"distrito": "Ignacio Escudero", "region": "Piura", "features": [25.5778, 1.877, 0.485, 1.2527, 61.8771, 3.3781, 19.4417, 2.3424, 0.4089, 0.0292], "lat": null, "lon": null}, {"distrito": "Ilave", "region": "Puno", "features": [9.5719, 1.0313, 1.7763, 1.7361, 65.2825, 7.4418, 22.4911, 2.4102, 0.4589, 0.0603], "lat": -16.0866, "lon": -69.6354}, {"distrito": "Independencia", "region": "Ica", "features": [19.7737, 1.7926, 0.2003, 0.3688, 72.6765, 4.6544, 19.5474, 4.544, 0.3324, 0.0171], "lat": null, "lon": null}, {"distrito": "Jilili", "region": "Piura", "features": [17.7575, 0.8038, 1.6928, 1.383, 73.8494, 5.302, 16.1344, 1.5295, 0.4757, 0.0391], "lat": null, "lon": null}, {"distrito": "Matahuasi", "region": "Junin", "features": [7.1206, 0.8722, 0.9083, 1.0798, 72.0335, 5.519, 17.2519, 1.589, 0.4646, 0.0774], "lat": null, "lon": null}, {"distrito": "Moyobamba", "region": "San Martin", "features": [23.3906, 1.237, 1.8678, 1.5259, 72.499, 7.6457, 16.3601, 1.3898, 0.5628, 0.035], "lat": -6.0344, "lon": -76.9742}, {"distrito": "Nazca", "region": "Ica", "features": [19.6775, 1.9175, 0.3279, 0.4481, 64.5282, 5.0258, 21.6343, 3.2586, 0.2781, 0.0222], "lat": null, "lon": null}, {"distrito": "Pangoa", "region": "Junin", "features": [20.5892, 1.0692, 1.4607, 1.5424, 72.1868, 8.8916, 15.5063, 1.1458, 0.5257, 0.0633], "lat": null, "lon": null}, {"distrito": "Perene", "region": "Junin", "features": [19.9604, 0.9696, 0.8285, 1.0037, 71.5942, 7.3, 15.0432, 1.317, 0.5261, 0.0424], "lat": -10.9489, "lon": -75.2264}, {"distrito": "Pichanaqui", "region": "Junin", "features": [19.9604, 0.9696, 0.8285, 1.0037, 71.5942, 7.3, 15.235, 1.3759, 0.5261, 0.0424], "lat": null, "lon": null}, {"distrito": "Pucara", "region": "Puno", "features": [6.9333, 1.6941, 1.7764, 1.9132, 62.3481, 8.5547, 22.1501, 2.4706, 0.4751, 0.0645], "lat": null, "lon": null}, {"distrito": "Querecotillo", "region": "Piura", "features": [25.5778, 1.877, 0.485, 1.2527, 61.8771, 3.3781, 19.4417, 2.3424, 0.4089, 0.0292], "lat": null, "lon": null}, {"distrito": "Rio Negro", "region": "Junin", "features": [24.1865, 1.2708, 1.1544, 1.1173, 66.1192, 9.5165, 15.5063, 1.1458, 0.5585, 0.0259], "lat": null, "lon": null}, {"distrito": "Rio Tambo", "region": "Junin", "features": [24.1865, 1.2708, 1.1544, 1.1173, 66.1192, 9.5165, 15.5063, 1.1458, 0.5585, 0.0259], "lat": -11.1656, "lon": -74.2353}, {"distrito": "Salas", "region": "Ica", "features": [19.0307, 1.0489, 0.5168, 0.7489, 58.4865, 10.0881, 21.8982, 2.9956, 0.3993, 0.0348], "lat": null, "lon": null}, {"distrito": "San Agustin", "region": "Junin", "features": [9.1208, 0.8325, 1.1319, 1.3034, 76.6871, 4.7028, 19.2039, 2.1258, 0.4754, 0.0783], "lat": null, "lon": null}, {"distrito": "San Jose de Quero", "region": "Junin", "features": [7.1206, 0.8722, 0.9083, 1.0798, 72.0335, 5.519, 19.2039, 2.1258, 0.4646, 0.0774], "lat": null, "lon": null}, {"distrito": "Santiago", "region": "Ica", "features": [19.0307, 1.0526, 0.5168, 0.7515, 58.4865, 10.1236, 22.8035, 3.1857, 0.3993, 0.0349], "lat": null, "lon": null}, {"distrito": "Tambogrande", "region": "Piura", "features": [25.5778, 1.877, 0.485, 1.2527, 61.8771, 3.3781, 19.4417, 2.3424, 0.4089, 0.0292], "lat": -4.9269, "lon": -80.3447}, {"distrito": "Taraco", "region": "Puno", "features": [9.8318, 1.6102, 1.6471, 1.8788, 59.2111, 7.4395, 22.5692, 2.1508, 0.4486, 0.0556], "lat": null, "lon": null}, {"distrito": "Tocache", "region": "San Martin", "features": [23.3418, 1.3965, 2.6012, 1.6296, 74.0458, 9.1916, 15.3604, 1.1921, 0.6268, 0.0445], "lat": -8.1877, "lon": -76.5205}, {"distrito": "Viru", "region": "La Libertad", "features": [20.2271, 1.4167, 0.3371, 0.4611, 75.1079, 4.5649, 19.7924, 1.9216, 0.3851, 0.0139], "lat": -8.4143, "lon": -78.7524}];
+var CLUSTER_NOMBRES = {"0": "Oasis Piura", "1": "Sierra papera", "2": "Selva SM-Junín", "3": "Puna Puno", "4": "Costa cañera", "5": "Costa uvera"};
+var CLUSTER_RIESGOS = {"0": "Agua río arriba y El Niño", "1": "Heladas", "2": "Deforestación y cambios de cultivo", "3": "Heladas que arruinan campañas enteras", "4": "Sequía extrema", "5": "Falta de agua para riego continuo"};
+var CLUSTER_COLORS  = {"0": "#1f77b4", "1": "#ff7f0e", "2": "#2ca02c", "3": "#d62728", "4": "#9467bd", "5": "#8c564b"};
+var predMarker = null;
+
+function knnPredict(xRaw) {
+    var xStd = xRaw.map(function(v, i) { return (v - SCALER_MEAN[i]) / SCALER_SCALE[i]; });
+    var dists = X_TRAIN.map(function(xi, idx) {
+        var s = 0;
+        for (var j = 0; j < xi.length; j++) s += (xi[j] - xStd[j]) * (xi[j] - xStd[j]);
+        return {d: Math.sqrt(s), lbl: Y_TRAIN[idx]};
+    });
+    dists.sort(function(a, b) { return a.d - b.d; });
+    var votes = {};
+    for (var k = 0; k < 3; k++) {
+        var l = String(dists[k].lbl);
+        votes[l] = (votes[l] || 0) + 1;
+    }
+    var best = Object.keys(votes).sort(function(a, b) { return votes[b] - votes[a]; });
+    var margin = votes[best[0]] / 3 - (best[1] ? votes[best[1]] / 3 : 0);
+    return {cluster: parseInt(best[0]), margin: margin};
+}
+
+function filtrarDistritos(q) {
+    var dd = document.getElementById('pred-dropdown');
+    if (!q || q.length < 2) { dd.style.display = 'none'; return; }
+    var lq = q.toLowerCase();
+    var hits = DISTRITOS_DATA.filter(function(d) {
+        return d.distrito.toLowerCase().indexOf(lq) !== -1 ||
+               d.region.toLowerCase().indexOf(lq) !== -1;
+    }).slice(0, 6);
+    dd.innerHTML = '';
+    if (!hits.length) { dd.style.display = 'none'; return; }
+    hits.forEach(function(d) {
+        var el = document.createElement('div');
+        el.innerHTML = '<b>' + d.distrito + '</b>'
+            + '<span style="color:#888;font-size:11px;"> — ' + d.region + '</span>';
+        el.style.cssText = 'padding:8px 12px;cursor:pointer;border-bottom:1px solid #f0f0f0;font-size:13px;';
+        el.onmouseover = function() { this.style.background = '#f0f5ff'; };
+        el.onmouseout  = function() { this.style.background = 'white'; };
+        (function(dato) { el.onclick = function() { seleccionarDistrito(dato); }; })(d);
+        dd.appendChild(el);
+    });
+    dd.style.display = 'block';
+}
+
+function seleccionarDistrito(d) {
+    document.getElementById('pred-search').value = d.distrito + ' (' + d.region + ')';
+    document.getElementById('pred-dropdown').style.display = 'none';
+    var inputs = document.querySelectorAll('.pred-input');
+    d.features.forEach(function(v, i) { if (inputs[i]) inputs[i].value = v; });
+    if (d.lat !== null && d.lat !== undefined) {
+        document.getElementById('pred-lat').value = d.lat;
+        document.getElementById('pred-lon').value = d.lon;
+    }
+}
+
+function predecirZona() {
+    var xRaw = [], valid = true;
+    document.querySelectorAll('.pred-input').forEach(function(inp) {
+        var v = parseFloat(inp.value);
+        if (isNaN(v)) valid = false;
+        xRaw.push(v);
+    });
+    if (!valid || xRaw.length !== 10) {
+        alert('Completa todos los campos climáticos.');
+        return;
+    }
+    var res = knnPredict(xRaw);
+    var cl  = res.cluster;
+    var col = CLUSTER_COLORS[String(cl)];
+    var conf = res.margin >= 0.67 ? 'Alta' : res.margin >= 0.33 ? 'Media' : 'Baja';
+
+    document.getElementById('pred-result').style.display = 'block';
+    document.getElementById('pred-result-header').style.background = col;
+    document.getElementById('pred-result-nombre').textContent = CLUSTER_NOMBRES[String(cl)];
+    document.getElementById('pred-result-conf').textContent = conf + ' — margen ' + res.margin.toFixed(2);
+    document.getElementById('pred-result-riesgo').textContent = CLUSTER_RIESGOS[String(cl)];
+
+    var lat = parseFloat(document.getElementById('pred-lat').value);
+    var lon = parseFloat(document.getElementById('pred-lon').value);
+    var theMap = window['map_d12f9185550122fa3c63e060677f4a99'];
+    if (!isNaN(lat) && !isNaN(lon) && theMap) {
+        if (predMarker) theMap.removeLayer(predMarker);
+        predMarker = L.circleMarker([lat, lon], {
+            radius: 14, color: 'white', weight: 3,
+            fillColor: col, fillOpacity: 1,
+        }).addTo(theMap);
+        predMarker.bindTooltip('Predicción: ' + CLUSTER_NOMBRES[String(cl)]).openTooltip();
+        theMap.setView([lat, lon], 7);
+    }
+}
+</script>
+    
+<div id="btn-predictor"
+     onclick="document.getElementById('pred-overlay').style.display='flex'"
+     style="position:fixed;bottom:16px;right:16px;z-index:9998;
+            background:#4C78A8;color:white;padding:9px 18px;border-radius:28px;
+            box-shadow:0 2px 12px rgba(0,0,0,0.25);cursor:pointer;
+            font-family:sans-serif;font-size:13px;font-weight:bold;user-select:none;">
+  &#43;&nbsp;Predecir zona nueva
+</div>
+
+<div id="pred-overlay"
+     style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+            z-index:10000;align-items:center;justify-content:center;
+            background:rgba(0,0,0,0.4);"
+     onclick="if(event.target===this){this.style.display='none';
+              document.getElementById('pred-result').style.display='none';}">
+  <div style="background:white;width:460px;max-height:88vh;border-radius:14px;
+              box-shadow:0 8px 40px rgba(0,0,0,0.3);overflow-y:auto;font-family:sans-serif;">
+
+    <div style="background:#4C78A8;color:white;padding:18px 22px;
+                border-radius:14px 14px 0 0;
+                display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-size:10px;opacity:0.8;letter-spacing:1.5px;text-transform:uppercase;">
+          Clasificador KNN (k=3) &middot; Modelo A</div>
+        <div style="font-size:17px;font-weight:bold;margin-top:4px;">Predecir zona nueva</div>
+      </div>
+      <span onclick="document.getElementById('pred-overlay').style.display='none';
+                     document.getElementById('pred-result').style.display='none';"
+            style="cursor:pointer;font-size:26px;line-height:1;opacity:0.85;">&times;</span>
+    </div>
+
+    <div style="padding:18px 22px;">
+      <div style="font-size:10px;color:#888;text-transform:uppercase;
+                  letter-spacing:0.5px;margin-bottom:6px;">
+        Verificar distrito o encuentra tu distrito</div>
+      <div style="position:relative;margin-bottom:4px;">
+        <input id="pred-search" type="text"
+               placeholder="Escribe un distrito o región..."
+               oninput="filtrarDistritos(this.value)"
+               autocomplete="off"
+               style="width:100%;padding:8px 12px;border:1.5px solid #4C78A8;
+                      border-radius:8px;font-size:13px;box-sizing:border-box;">
+        <div id="pred-dropdown"
+             style="display:none;position:absolute;top:100%;left:0;right:0;
+                    background:white;border:1px solid #ddd;border-radius:0 0 8px 8px;
+                    box-shadow:0 4px 12px rgba(0,0,0,0.12);z-index:10;
+                    max-height:150px;overflow-y:auto;"></div>
+      </div>
+      <div style="font-size:11px;color:#bbb;margin-bottom:14px;">
+        Al seleccionar se autocompletan los valores climáticos y coordenadas.</div>
+
+      <div style="font-size:10px;color:#888;text-transform:uppercase;
+                  letter-spacing:0.5px;margin-bottom:4px;">
+        Variables climáticas (2020&#8211;2025)</div>
+<div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin:12px 0 5px;">Temperatura</div><div style="display:flex;align-items:center;margin-bottom:5px;"><span style="font-size:12px;color:#555;width:160px;flex-shrink:0;">Temperatura media <span style="color:#bbb;font-size:10px;">(°C)</span></span><input type="number" step="any" class="pred-input" placeholder="°C" style="flex:1;min-width:0;padding:5px 8px;border:1px solid #ddd;border-radius:5px;font-size:12px;"></div><div style="display:flex;align-items:center;margin-bottom:5px;"><span style="font-size:12px;color:#555;width:160px;flex-shrink:0;">Variab. temperatura <span style="color:#bbb;font-size:10px;">(°C)</span></span><input type="number" step="any" class="pred-input" placeholder="°C" style="flex:1;min-width:0;padding:5px 8px;border:1px solid #ddd;border-radius:5px;font-size:12px;"></div><div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin:12px 0 5px;">Precipitación</div><div style="display:flex;align-items:center;margin-bottom:5px;"><span style="font-size:12px;color:#555;width:160px;flex-shrink:0;">Precipitación media <span style="color:#bbb;font-size:10px;">(mm/día)</span></span><input type="number" step="any" class="pred-input" placeholder="mm/día" style="flex:1;min-width:0;padding:5px 8px;border:1px solid #ddd;border-radius:5px;font-size:12px;"></div><div style="display:flex;align-items:center;margin-bottom:5px;"><span style="font-size:12px;color:#555;width:160px;flex-shrink:0;">Variab. precipitación <span style="color:#bbb;font-size:10px;">(mm/día)</span></span><input type="number" step="any" class="pred-input" placeholder="mm/día" style="flex:1;min-width:0;padding:5px 8px;border:1px solid #ddd;border-radius:5px;font-size:12px;"></div><div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin:12px 0 5px;">Humedad relativa</div><div style="display:flex;align-items:center;margin-bottom:5px;"><span style="font-size:12px;color:#555;width:160px;flex-shrink:0;">Humedad relativa <span style="color:#bbb;font-size:10px;">(%)</span></span><input type="number" step="any" class="pred-input" placeholder="%" style="flex:1;min-width:0;padding:5px 8px;border:1px solid #ddd;border-radius:5px;font-size:12px;"></div><div style="display:flex;align-items:center;margin-bottom:5px;"><span style="font-size:12px;color:#555;width:160px;flex-shrink:0;">Variab. humedad <span style="color:#bbb;font-size:10px;">(%)</span></span><input type="number" step="any" class="pred-input" placeholder="%" style="flex:1;min-width:0;padding:5px 8px;border:1px solid #ddd;border-radius:5px;font-size:12px;"></div><div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin:12px 0 5px;">Radiación solar</div><div style="display:flex;align-items:center;margin-bottom:5px;"><span style="font-size:12px;color:#555;width:160px;flex-shrink:0;">Radiación solar <span style="color:#bbb;font-size:10px;">(MJ/m²/día)</span></span><input type="number" step="any" class="pred-input" placeholder="MJ/m²/día" style="flex:1;min-width:0;padding:5px 8px;border:1px solid #ddd;border-radius:5px;font-size:12px;"></div><div style="display:flex;align-items:center;margin-bottom:5px;"><span style="font-size:12px;color:#555;width:160px;flex-shrink:0;">Variab. radiación <span style="color:#bbb;font-size:10px;">(MJ/m²/día)</span></span><input type="number" step="any" class="pred-input" placeholder="MJ/m²/día" style="flex:1;min-width:0;padding:5px 8px;border:1px solid #ddd;border-radius:5px;font-size:12px;"></div><div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin:12px 0 5px;">Humedad de suelo</div><div style="display:flex;align-items:center;margin-bottom:5px;"><span style="font-size:12px;color:#555;width:160px;flex-shrink:0;">Humedad suelo <span style="color:#bbb;font-size:10px;">(m³/m³)</span></span><input type="number" step="any" class="pred-input" placeholder="m³/m³" style="flex:1;min-width:0;padding:5px 8px;border:1px solid #ddd;border-radius:5px;font-size:12px;"></div><div style="display:flex;align-items:center;margin-bottom:5px;"><span style="font-size:12px;color:#555;width:160px;flex-shrink:0;">Variab. hum. suelo <span style="color:#bbb;font-size:10px;">(m³/m³)</span></span><input type="number" step="any" class="pred-input" placeholder="m³/m³" style="flex:1;min-width:0;padding:5px 8px;border:1px solid #ddd;border-radius:5px;font-size:12px;"></div>
+      <div style="font-size:10px;color:#888;text-transform:uppercase;
+                  letter-spacing:0.5px;margin:14px 0 5px;">
+        Coordenadas (ubica el punto en el mapa)</div>
+      <div style="display:flex;gap:10px;">
+        <div style="flex:1;">
+          <div style="font-size:11px;color:#555;margin-bottom:3px;">Latitud</div>
+          <input id="pred-lat" type="number" step="any" placeholder="-9.5"
+                 style="width:100%;padding:5px 8px;border:1px solid #ddd;
+                        border-radius:5px;font-size:12px;box-sizing:border-box;">
+        </div>
+        <div style="flex:1;">
+          <div style="font-size:11px;color:#555;margin-bottom:3px;">Longitud</div>
+          <input id="pred-lon" type="number" step="any" placeholder="-75.5"
+                 style="width:100%;padding:5px 8px;border:1px solid #ddd;
+                        border-radius:5px;font-size:12px;box-sizing:border-box;">
+        </div>
+      </div>
+
+      <button onclick="predecirZona()"
+              style="width:100%;margin-top:16px;padding:10px;background:#4C78A8;
+                     color:white;border:none;border-radius:8px;font-size:14px;
+                     font-weight:bold;cursor:pointer;">
+        Predecir zona
+      </button>
+
+      <div id="pred-result" style="display:none;margin-top:14px;border-radius:10px;
+           overflow:hidden;border:1px solid #eee;">
+        <div id="pred-result-header" style="padding:14px 18px;color:white;">
+          <div style="font-size:10px;opacity:0.85;letter-spacing:1.5px;text-transform:uppercase;">
+            Zona predicha</div>
+          <div id="pred-result-nombre"
+               style="font-size:20px;font-weight:bold;margin-top:4px;"></div>
+        </div>
+        <div style="padding:12px 18px;background:#fafafa;">
+          <div style="font-size:10px;color:#888;text-transform:uppercase;margin-bottom:2px;">
+            Confianza</div>
+          <div id="pred-result-conf" style="font-size:13px;margin-bottom:10px;"></div>
+          <div style="font-size:10px;color:#888;text-transform:uppercase;margin-bottom:2px;">
+            Riesgo principal</div>
+          <div id="pred-result-riesgo" style="font-size:13px;"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+    
+            <div class="folium-map" id="map_d12f9185550122fa3c63e060677f4a99" ></div>
         
 </body>
 <script>
     
     
-            var map_a86f0eabbf08b1608c3e458e7533ad33 = L.map(
-                "map_a86f0eabbf08b1608c3e458e7533ad33",
+        window.addEventListener('load', function() {
+            circle_marker_3b0892291a197e2d4f25e7e81ebcbe30.on('click', function(e) {
+                document.getElementById('panel-zona-header').style.background = '#ff7f0e';
+                document.getElementById('panel-zona-titulo').innerHTML = 'Sierra papera';
+                document.getElementById('panel-zona-ubicacion').innerHTML = '<b>La Libertad</b> &nbsp;&bull;&nbsp; Huamachuco<br><span style="color:#888;font-size:14px;font-style:italic;">Piso: Sierra</span>';
+                document.getElementById('panel-zona-desc').innerHTML = '<b>Producción:</b> Papa, alfalfa y avena forrajera para mercado interno y ganado lechero (Mantaro y sierra de La Libertad).<br><br><b>Clima:</b> Temperatura fría (~8.9 °C), precipitación moderada (0.97 mm/día).<br><br><b>Riesgo:</b> Heladas.';
+                document.getElementById('panel-zona').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_8b5973caa9d79d9234bfdb66d2981042.on('click', function(e) {
+                document.getElementById('panel-zona-header').style.background = '#d62728';
+                document.getElementById('panel-zona-titulo').innerHTML = 'Puna Puno';
+                document.getElementById('panel-zona-ubicacion').innerHTML = '<b>Puno</b> &nbsp;&bull;&nbsp; Ilave<br><span style="color:#888;font-size:14px;font-style:italic;">Piso: Altiplano Lacustre</span>';
+                document.getElementById('panel-zona-desc').innerHTML = '<b>Producción:</b> Avena forrajera, alfalfa y papa que sostienen la ganadería de alpaca/vacuno &gt;3 800 m.<br><br><b>Clima:</b> Temperatura muy fría (~8.8 °C), alta precipitación (1.73 mm/día).<br><br><b>Riesgo:</b> Heladas que arruinan campañas enteras.';
+                document.getElementById('panel-zona').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_00ab4f90bec70a25c8bdd1139cf033ea.on('click', function(e) {
+                document.getElementById('panel-zona-header').style.background = '#2ca02c';
+                document.getElementById('panel-zona-titulo').innerHTML = 'Selva SM-Junín';
+                document.getElementById('panel-zona-ubicacion').innerHTML = '<b>San Martin</b> &nbsp;&bull;&nbsp; Moyobamba<br><span style="color:#888;font-size:14px;font-style:italic;">Piso: Selva Alto Mayo</span>';
+                document.getElementById('panel-zona-desc').innerHTML = '<b>Producción:</b> Arroz cáscara, plátano, caña, palma aceitera, piña y naranja en frontera amazónica (incluye Jilili-Piura, agrupado climáticamente con la selva).<br><br><b>Clima:</b> Temperatura cálida (~22.2 °C), alta precipitación (1.55 mm/día).<br><br><b>Riesgo:</b> Deforestación y cambios de cultivo.';
+                document.getElementById('panel-zona').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_e708109ce8e28f5c0fb548fa3dff5505.on('click', function(e) {
+                document.getElementById('panel-zona-header').style.background = '#2ca02c';
+                document.getElementById('panel-zona-titulo').innerHTML = 'Selva SM-Junín';
+                document.getElementById('panel-zona-ubicacion').innerHTML = '<b>Junin</b> &nbsp;&bull;&nbsp; Perene<br><span style="color:#888;font-size:14px;font-style:italic;">Piso: Selva Alta</span>';
+                document.getElementById('panel-zona-desc').innerHTML = '<b>Producción:</b> Arroz cáscara, plátano, caña, palma aceitera, piña y naranja en frontera amazónica (incluye Jilili-Piura, agrupado climáticamente con la selva).<br><br><b>Clima:</b> Temperatura cálida (~22.2 °C), alta precipitación (1.55 mm/día).<br><br><b>Riesgo:</b> Deforestación y cambios de cultivo.';
+                document.getElementById('panel-zona').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_3cf3e8f82c0ea3369add6f69294df6ed.on('click', function(e) {
+                document.getElementById('panel-zona-header').style.background = '#2ca02c';
+                document.getElementById('panel-zona-titulo').innerHTML = 'Selva SM-Junín';
+                document.getElementById('panel-zona-ubicacion').innerHTML = '<b>Junin</b> &nbsp;&bull;&nbsp; Rio Tambo<br><span style="color:#888;font-size:14px;font-style:italic;">Piso: Selva Baja</span>';
+                document.getElementById('panel-zona-desc').innerHTML = '<b>Producción:</b> Arroz cáscara, plátano, caña, palma aceitera, piña y naranja en frontera amazónica (incluye Jilili-Piura, agrupado climáticamente con la selva).<br><br><b>Clima:</b> Temperatura cálida (~22.2 °C), alta precipitación (1.55 mm/día).<br><br><b>Riesgo:</b> Deforestación y cambios de cultivo.';
+                document.getElementById('panel-zona').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_6dc7cf247c5b63e96705cf133e7def81.on('click', function(e) {
+                document.getElementById('panel-zona-header').style.background = '#1f77b4';
+                document.getElementById('panel-zona-titulo').innerHTML = 'Oasis Piura';
+                document.getElementById('panel-zona-ubicacion').innerHTML = '<b>Piura</b> &nbsp;&bull;&nbsp; Tambogrande<br><span style="color:#888;font-size:14px;font-style:italic;">Piso: Bosque Seco</span>';
+                document.getElementById('panel-zona-desc').innerHTML = '<b>Producción:</b> Arroz cáscara, plátano, mango y uva bajo riego en valles desérticos (Chira, Piura) y bosque seco.<br><br><b>Clima:</b> Temperatura cálida (~25.6 °C), precipitación baja (0.49 mm/día).<br><br><b>Riesgo:</b> Agua río arriba y El Niño.';
+                document.getElementById('panel-zona').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_fffd1e627696c07eee37ed32ad5ff5d2.on('click', function(e) {
+                document.getElementById('panel-zona-header').style.background = '#2ca02c';
+                document.getElementById('panel-zona-titulo').innerHTML = 'Selva SM-Junín';
+                document.getElementById('panel-zona-ubicacion').innerHTML = '<b>San Martin</b> &nbsp;&bull;&nbsp; Tocache<br><span style="color:#888;font-size:14px;font-style:italic;">Piso: Selva Huallaga</span>';
+                document.getElementById('panel-zona-desc').innerHTML = '<b>Producción:</b> Arroz cáscara, plátano, caña, palma aceitera, piña y naranja en frontera amazónica (incluye Jilili-Piura, agrupado climáticamente con la selva).<br><br><b>Clima:</b> Temperatura cálida (~22.2 °C), alta precipitación (1.55 mm/día).<br><br><b>Riesgo:</b> Deforestación y cambios de cultivo.';
+                document.getElementById('panel-zona').style.display = 'block';
+            });
+        });
+    
+    
+        window.addEventListener('load', function() {
+            circle_marker_3dffcc1827e87670c8ab6cd6fa47d083.on('click', function(e) {
+                document.getElementById('panel-zona-header').style.background = '#9467bd';
+                document.getElementById('panel-zona-titulo').innerHTML = 'Costa cañera';
+                document.getElementById('panel-zona-ubicacion').innerHTML = '<b>La Libertad</b> &nbsp;&bull;&nbsp; Viru<br><span style="color:#888;font-size:14px;font-style:italic;">Piso: Costa</span>';
+                document.getElementById('panel-zona-desc').innerHTML = '<b>Producción:</b> Caña de azúcar (outlier de Virú) y palta Hass con riego tecnificado.<br><br><b>Clima:</b> Temperatura templada (~19.9 °C), precipitación muy baja (0.27 mm/día).<br><br><b>Riesgo:</b> Sequía extrema.';
+                document.getElementById('panel-zona').style.display = 'block';
+            });
+        });
+    
+    
+            var map_d12f9185550122fa3c63e060677f4a99 = L.map(
+                "map_d12f9185550122fa3c63e060677f4a99",
                 {
                     center: [-9.5, -75.5],
                     crs: L.CRS.EPSG3857,
@@ -64,7 +395,7 @@
 
         
     
-            var tile_layer_b1e0633eca36dc6bb26f04bc36a8d66f = L.tileLayer(
+            var tile_layer_c66be2acd5b0138b4d17678fd5986b9f = L.tileLayer(
                 "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
                 {
   "minZoom": 0,
@@ -81,134 +412,18 @@
             );
         
     
-            tile_layer_b1e0633eca36dc6bb26f04bc36a8d66f.addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
+            tile_layer_c66be2acd5b0138b4d17678fd5986b9f.addTo(map_d12f9185550122fa3c63e060677f4a99);
         
     
-            var circle_marker_9951c4f94c6def2f2896f57bc0333402 = L.circleMarker(
-                [-14.8864, -70.5889],
-                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9467bd", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
-            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
-        
-    
-        var popup_970ed0d80488062ad6ad1b2fb4d6c531 = L.popup({
-  "maxWidth": "100%",
-});
-
-        
-            
-                var html_0952340c65e8fc7b7b56f206919a042a = $(`<div id="html_0952340c65e8fc7b7b56f206919a042a" style="width: 100.0%; height: 100.0%;"><b>Puno | Ayaviri</b><br>Cluster: 4<br>Piso: puna_alta</div>`)[0];
-                popup_970ed0d80488062ad6ad1b2fb4d6c531.setContent(html_0952340c65e8fc7b7b56f206919a042a);
-            
-        
-
-        circle_marker_9951c4f94c6def2f2896f57bc0333402.bindPopup(popup_970ed0d80488062ad6ad1b2fb4d6c531)
-        ;
-
-        
-    
-    
-            circle_marker_9951c4f94c6def2f2896f57bc0333402.bindTooltip(
-                `<div>
-                     C4: Ayaviri
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-            var circle_marker_ec3664229e93e0701bedfb3e52e8c337 = L.circleMarker(
-                [-13.4099, -76.1324],
-                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
-            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
-        
-    
-        var popup_20506bb9f4d50f42b12ce55f3a32dd9e = L.popup({
-  "maxWidth": "100%",
-});
-
-        
-            
-                var html_73fab586e322d368dc59a9ac18d6583c = $(`<div id="html_73fab586e322d368dc59a9ac18d6583c" style="width: 100.0%; height: 100.0%;"><b>Ica | Chincha Alta</b><br>Cluster: 2<br>Piso: costa</div>`)[0];
-                popup_20506bb9f4d50f42b12ce55f3a32dd9e.setContent(html_73fab586e322d368dc59a9ac18d6583c);
-            
-        
-
-        circle_marker_ec3664229e93e0701bedfb3e52e8c337.bindPopup(popup_20506bb9f4d50f42b12ce55f3a32dd9e)
-        ;
-
-        
-    
-    
-            circle_marker_ec3664229e93e0701bedfb3e52e8c337.bindTooltip(
-                `<div>
-                     C2: Chincha Alta
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-            var circle_marker_5b0425a043684736c726faadbfba1fef = L.circleMarker(
-                [-12.0313, -75.2222],
-                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
-            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
-        
-    
-        var popup_7812dfb605b85ee195b9b332e4be8c9b = L.popup({
-  "maxWidth": "100%",
-});
-
-        
-            
-                var html_bb9ee0a2909b7b21335a2d5e8bbc4478 = $(`<div id="html_bb9ee0a2909b7b21335a2d5e8bbc4478" style="width: 100.0%; height: 100.0%;"><b>Junin | El Tambo</b><br>Cluster: 0<br>Piso: sierra</div>`)[0];
-                popup_7812dfb605b85ee195b9b332e4be8c9b.setContent(html_bb9ee0a2909b7b21335a2d5e8bbc4478);
-            
-        
-
-        circle_marker_5b0425a043684736c726faadbfba1fef.bindPopup(popup_7812dfb605b85ee195b9b332e4be8c9b)
-        ;
-
-        
-    
-    
-            circle_marker_5b0425a043684736c726faadbfba1fef.bindTooltip(
-                `<div>
-                     C0: El Tambo
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-            var circle_marker_2bb841d637bb608c6884e2d417b1daa7 = L.circleMarker(
+            var circle_marker_3b0892291a197e2d4f25e7e81ebcbe30 = L.circleMarker(
                 [-7.8121, -78.0487],
-                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
-            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_d12f9185550122fa3c63e060677f4a99);
         
     
-        var popup_6227ad7f797dd7171691b7e2eed5f144 = L.popup({
-  "maxWidth": "100%",
-});
-
-        
-            
-                var html_a135d21451caddba674c3cea6b6f187c = $(`<div id="html_a135d21451caddba674c3cea6b6f187c" style="width: 100.0%; height: 100.0%;"><b>La Libertad | Huamachuco</b><br>Cluster: 0<br>Piso: sierra</div>`)[0];
-                popup_6227ad7f797dd7171691b7e2eed5f144.setContent(html_a135d21451caddba674c3cea6b6f187c);
-            
-        
-
-        circle_marker_2bb841d637bb608c6884e2d417b1daa7.bindPopup(popup_6227ad7f797dd7171691b7e2eed5f144)
-        ;
-
-        
-    
-    
-            circle_marker_2bb841d637bb608c6884e2d417b1daa7.bindTooltip(
+            circle_marker_3b0892291a197e2d4f25e7e81ebcbe30.bindTooltip(
                 `<div>
-                     C0: Huamachuco
+                     C1 = Sierra papera — Huamachuco
                  </div>`,
                 {
   "sticky": true,
@@ -216,32 +431,15 @@
             );
         
     
-            var circle_marker_cd452421cbdf65c31e068542e3ef0d30 = L.circleMarker(
+            var circle_marker_8b5973caa9d79d9234bfdb66d2981042 = L.circleMarker(
                 [-16.0866, -69.6354],
-                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9467bd", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
-            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_d12f9185550122fa3c63e060677f4a99);
         
     
-        var popup_88e9057a28f63afa0f81f3e45dc74e6c = L.popup({
-  "maxWidth": "100%",
-});
-
-        
-            
-                var html_c3b326e73417a6c85ff7aa5012164ef3 = $(`<div id="html_c3b326e73417a6c85ff7aa5012164ef3" style="width: 100.0%; height: 100.0%;"><b>Puno | Ilave</b><br>Cluster: 4<br>Piso: altiplano_lacustre</div>`)[0];
-                popup_88e9057a28f63afa0f81f3e45dc74e6c.setContent(html_c3b326e73417a6c85ff7aa5012164ef3);
-            
-        
-
-        circle_marker_cd452421cbdf65c31e068542e3ef0d30.bindPopup(popup_88e9057a28f63afa0f81f3e45dc74e6c)
-        ;
-
-        
-    
-    
-            circle_marker_cd452421cbdf65c31e068542e3ef0d30.bindTooltip(
+            circle_marker_8b5973caa9d79d9234bfdb66d2981042.bindTooltip(
                 `<div>
-                     C4: Ilave
+                     C3 = Puna Puno — Ilave
                  </div>`,
                 {
   "sticky": true,
@@ -249,230 +447,95 @@
             );
         
     
-            var circle_marker_48f0315894ff8926a0cb11e03abb4575 = L.circleMarker(
+            var circle_marker_00ab4f90bec70a25c8bdd1139cf033ea = L.circleMarker(
                 [-6.0344, -76.9742],
-                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
-            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
-        
-    
-        var popup_c99d3018045ebd7b1ed0870906e474aa = L.popup({
-  "maxWidth": "100%",
-});
-
-        
-            
-                var html_2cc4d62f0b97e34526eaf477d60ec5c8 = $(`<div id="html_2cc4d62f0b97e34526eaf477d60ec5c8" style="width: 100.0%; height: 100.0%;"><b>San Martin | Moyobamba</b><br>Cluster: 1<br>Piso: selva_alto_mayo</div>`)[0];
-                popup_c99d3018045ebd7b1ed0870906e474aa.setContent(html_2cc4d62f0b97e34526eaf477d60ec5c8);
-            
-        
-
-        circle_marker_48f0315894ff8926a0cb11e03abb4575.bindPopup(popup_c99d3018045ebd7b1ed0870906e474aa)
-        ;
-
-        
-    
-    
-            circle_marker_48f0315894ff8926a0cb11e03abb4575.bindTooltip(
-                `<div>
-                     C1: Moyobamba
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-            var circle_marker_a4d6c7281264f7bb4db43a9975cb8af4 = L.circleMarker(
-                [-10.9489, -75.2264],
-                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
-            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
-        
-    
-        var popup_22ebb8d0648af50308b36bebf06ff837 = L.popup({
-  "maxWidth": "100%",
-});
-
-        
-            
-                var html_1fc4b7b89b4b01ea178b63d1748c4379 = $(`<div id="html_1fc4b7b89b4b01ea178b63d1748c4379" style="width: 100.0%; height: 100.0%;"><b>Junin | Perene</b><br>Cluster: 1<br>Piso: selva_alta</div>`)[0];
-                popup_22ebb8d0648af50308b36bebf06ff837.setContent(html_1fc4b7b89b4b01ea178b63d1748c4379);
-            
-        
-
-        circle_marker_a4d6c7281264f7bb4db43a9975cb8af4.bindPopup(popup_22ebb8d0648af50308b36bebf06ff837)
-        ;
-
-        
-    
-    
-            circle_marker_a4d6c7281264f7bb4db43a9975cb8af4.bindTooltip(
-                `<div>
-                     C1: Perene
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-            var circle_marker_5b7bd45cf0a98a7ce665eb93523672f0 = L.circleMarker(
-                [-11.1656, -74.2353],
-                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
-            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
-        
-    
-        var popup_e286ddce17f23f527c1274e66fec2d35 = L.popup({
-  "maxWidth": "100%",
-});
-
-        
-            
-                var html_6acffeb1df3870ae8254de7998ab0ace = $(`<div id="html_6acffeb1df3870ae8254de7998ab0ace" style="width: 100.0%; height: 100.0%;"><b>Junin | Rio Tambo</b><br>Cluster: 1<br>Piso: selva_baja</div>`)[0];
-                popup_e286ddce17f23f527c1274e66fec2d35.setContent(html_6acffeb1df3870ae8254de7998ab0ace);
-            
-        
-
-        circle_marker_5b7bd45cf0a98a7ce665eb93523672f0.bindPopup(popup_e286ddce17f23f527c1274e66fec2d35)
-        ;
-
-        
-    
-    
-            circle_marker_5b7bd45cf0a98a7ce665eb93523672f0.bindTooltip(
-                `<div>
-                     C1: Rio Tambo
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-            var circle_marker_0766fb587dbd44deaeb56426739e4dd2 = L.circleMarker(
-                [-4.9039, -80.6853],
-                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
-            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
-        
-    
-        var popup_21b342c59825379336afcbd8fc14592a = L.popup({
-  "maxWidth": "100%",
-});
-
-        
-            
-                var html_215a9068555338b164b0e5da99349d21 = $(`<div id="html_215a9068555338b164b0e5da99349d21" style="width: 100.0%; height: 100.0%;"><b>Piura | Sullana</b><br>Cluster: 3<br>Piso: valle_chira</div>`)[0];
-                popup_21b342c59825379336afcbd8fc14592a.setContent(html_215a9068555338b164b0e5da99349d21);
-            
-        
-
-        circle_marker_0766fb587dbd44deaeb56426739e4dd2.bindPopup(popup_21b342c59825379336afcbd8fc14592a)
-        ;
-
-        
-    
-    
-            circle_marker_0766fb587dbd44deaeb56426739e4dd2.bindTooltip(
-                `<div>
-                     C3: Sullana
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-            var circle_marker_4788022368a6cb6248582a20ab56b2fe = L.circleMarker(
-                [-4.9269, -80.3447],
-                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d62728", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
-            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
-        
-    
-        var popup_23b6e7fac6b2dc578e7a0e6a7bd20b51 = L.popup({
-  "maxWidth": "100%",
-});
-
-        
-            
-                var html_2bec426b3e1891982c8a78402ff04de6 = $(`<div id="html_2bec426b3e1891982c8a78402ff04de6" style="width: 100.0%; height: 100.0%;"><b>Piura | Tambogrande</b><br>Cluster: 3<br>Piso: bosque_seco</div>`)[0];
-                popup_23b6e7fac6b2dc578e7a0e6a7bd20b51.setContent(html_2bec426b3e1891982c8a78402ff04de6);
-            
-        
-
-        circle_marker_4788022368a6cb6248582a20ab56b2fe.bindPopup(popup_23b6e7fac6b2dc578e7a0e6a7bd20b51)
-        ;
-
-        
-    
-    
-            circle_marker_4788022368a6cb6248582a20ab56b2fe.bindTooltip(
-                `<div>
-                     C3: Tambogrande
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-            var circle_marker_ffd1668e07383102c8edd7ace0f53728 = L.circleMarker(
-                [-8.1877, -76.5205],
-                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff7f0e", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
-            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
-        
-    
-        var popup_8e2d99c14b6a96cda8ac9450e86ebd2e = L.popup({
-  "maxWidth": "100%",
-});
-
-        
-            
-                var html_194fde006e757065e281585e72a4878b = $(`<div id="html_194fde006e757065e281585e72a4878b" style="width: 100.0%; height: 100.0%;"><b>San Martin | Tocache</b><br>Cluster: 1<br>Piso: selva_huallaga</div>`)[0];
-                popup_8e2d99c14b6a96cda8ac9450e86ebd2e.setContent(html_194fde006e757065e281585e72a4878b);
-            
-        
-
-        circle_marker_ffd1668e07383102c8edd7ace0f53728.bindPopup(popup_8e2d99c14b6a96cda8ac9450e86ebd2e)
-        ;
-
-        
-    
-    
-            circle_marker_ffd1668e07383102c8edd7ace0f53728.bindTooltip(
-                `<div>
-                     C1: Tocache
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-            var circle_marker_6c368daa5ab8f565e90a98ec30d849c3 = L.circleMarker(
-                [-8.4143, -78.7524],
                 {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
-            ).addTo(map_a86f0eabbf08b1608c3e458e7533ad33);
+            ).addTo(map_d12f9185550122fa3c63e060677f4a99);
         
     
-        var popup_06dc6e1fcc160ab88e7fb89af32555b4 = L.popup({
-  "maxWidth": "100%",
-});
-
-        
-            
-                var html_bfae09e8551a34c6d2d6224ce946683a = $(`<div id="html_bfae09e8551a34c6d2d6224ce946683a" style="width: 100.0%; height: 100.0%;"><b>La Libertad | Viru</b><br>Cluster: 2<br>Piso: costa</div>`)[0];
-                popup_06dc6e1fcc160ab88e7fb89af32555b4.setContent(html_bfae09e8551a34c6d2d6224ce946683a);
-            
-        
-
-        circle_marker_6c368daa5ab8f565e90a98ec30d849c3.bindPopup(popup_06dc6e1fcc160ab88e7fb89af32555b4)
-        ;
-
-        
-    
-    
-            circle_marker_6c368daa5ab8f565e90a98ec30d849c3.bindTooltip(
+            circle_marker_00ab4f90bec70a25c8bdd1139cf033ea.bindTooltip(
                 `<div>
-                     C2: Viru
+                     C2 = Selva SM-Junín — Moyobamba
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e708109ce8e28f5c0fb548fa3dff5505 = L.circleMarker(
+                [-10.9489, -75.2264],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_d12f9185550122fa3c63e060677f4a99);
+        
+    
+            circle_marker_e708109ce8e28f5c0fb548fa3dff5505.bindTooltip(
+                `<div>
+                     C2 = Selva SM-Junín — Perene
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3cf3e8f82c0ea3369add6f69294df6ed = L.circleMarker(
+                [-11.1656, -74.2353],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_d12f9185550122fa3c63e060677f4a99);
+        
+    
+            circle_marker_3cf3e8f82c0ea3369add6f69294df6ed.bindTooltip(
+                `<div>
+                     C2 = Selva SM-Junín — Rio Tambo
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6dc7cf247c5b63e96705cf133e7def81 = L.circleMarker(
+                [-4.9269, -80.3447],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f77b4", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_d12f9185550122fa3c63e060677f4a99);
+        
+    
+            circle_marker_6dc7cf247c5b63e96705cf133e7def81.bindTooltip(
+                `<div>
+                     C0 = Oasis Piura — Tambogrande
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fffd1e627696c07eee37ed32ad5ff5d2 = L.circleMarker(
+                [-8.1877, -76.5205],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca02c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_d12f9185550122fa3c63e060677f4a99);
+        
+    
+            circle_marker_fffd1e627696c07eee37ed32ad5ff5d2.bindTooltip(
+                `<div>
+                     C2 = Selva SM-Junín — Tocache
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3dffcc1827e87670c8ab6cd6fa47d083 = L.circleMarker(
+                [-8.4143, -78.7524],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9467bd", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_d12f9185550122fa3c63e060677f4a99);
+        
+    
+            circle_marker_3dffcc1827e87670c8ab6cd6fa47d083.bindTooltip(
+                `<div>
+                     C4 = Costa cañera — Viru
                  </div>`,
                 {
   "sticky": true,

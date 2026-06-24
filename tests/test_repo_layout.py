@@ -8,7 +8,7 @@ def test_canonical_notebooks_exist():
 
 
 def test_no_duplicate_eda_at_scripts_root():
-    assert not (ROOT / "SCRIPTS" / "04_eda_regional.ipynb").exists()
+    assert not (ROOT / "SCRIPTS" / "04_eda.ipynb").exists()
 
 
 def test_mapping_v2_pipeline_exists():

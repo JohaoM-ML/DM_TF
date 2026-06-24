@@ -68,7 +68,7 @@ En consecuencia, persiste un vacío en la integración de producción agrícola 
 
 \section{Metodología}
 
-Se adoptó la metodología CRISP-DM \cite{chapman2000}, cuyas fases se distribuyen explícitamente a lo largo del artículo: la \emph{comprensión del negocio} se desarrolla en la Introducción (objetivos e hipótesis); la \emph{comprensión y preparación de los datos}, en las Secciones~\ref{ssec:fuentes}--\ref{ssec:multidistrito}; el \emph{modelado}, en la Sección~\ref{ssec:modelado}; la \emph{evaluación}, en el diagnóstico de validez de la Sección~\ref{sec:clustering}; y el \emph{despliegue}, en las implicancias de política agraria discutidas en la Sección de Discusión.
+Se adoptó la metodología CRISP-DM \cite{chapman2000}, cuyas seis fases oficiales --- \emph{comprensión del negocio}, \emph{comprensión de los datos}, \emph{preparación de los datos}, \emph{modelado}, \emph{evaluación} y \emph{despliegue} --- se distribuyen explícitamente a lo largo del artículo: la comprensión del negocio se desarrolla en la Introducción (objetivos e hipótesis); la comprensión de los datos, en la Sección~\ref{ssec:fuentes}; la preparación de los datos, en las Secciones~\ref{ssec:recuperacion}--\ref{ssec:multidistrito}; el modelado, en la Sección~\ref{ssec:modelado}; la evaluación, en el diagnóstico de validez de la Sección~\ref{sec:clustering} y en la clasificación supervisada de la Sección~\ref{sec:clasificador}; y el despliegue, en la aplicación ilustrativa a distritos no observados de la Sección~\ref{sec:clasificador} y en las implicancias de política agraria discutidas en la Sección de Discusión.
 
 \subsection{Fuentes de datos y variables (comprensión de los datos)}
 \label{ssec:fuentes}
@@ -93,7 +93,8 @@ GWETROOT & Humedad de suelo (zona radicular) \\
 \end{tabular}
 \end{table}
 
-\subsection{Recuperación y calidad de los datos (comprensión y preparación de los datos)}
+\subsection{Recuperación y calidad de los datos (preparación de los datos)}
+\label{ssec:recuperacion}
 La hoja \texttt{c-18} reporta producción acumulada anual y no mensual directa. La producción mensual se recuperó mediante diferenciación entre meses consecutivos:
 \begin{equation}
 Prod_{m} = Acum_{m} - Acum_{m-1}
@@ -156,9 +157,9 @@ Puno & Ayaviri & Puna alta \\
 
 Se construyeron tres datasets: (i) un dataset regional agregado por región, piso ecológico y distrito (2{,}448 observaciones, 34 unidades $\times$ 72 meses); (ii) un dataset clima--producción por cultivo (2{,}376 observaciones cultivo--mes); y (iii) un dataset filtrado conservando solo las combinaciones región--cultivo más representativas de la producción regional total (33 combinaciones región--cultivo).
 
-\subsection{Fase de modelado: clustering no supervisado}
+\subsection{Clustering no supervisado (modelado)}
 \label{ssec:modelado}
-Como fase de modelado CRISP-DM se aplicaron tres algoritmos de \textit{clustering} no supervisado: KMeans (partición por minimización de inercia), aglomerativo jerárquico con enlace de Ward, y DBSCAN (densidad). La selección de $K$ se realizó mediante barrido $K=2,\dots,8$ con consenso entre el coeficiente de Silhouette (cohesión vs. separación, mayor es mejor) y el índice de Davies--Bouldin (menor es mejor). Todas las variables se estandarizaron por $z$-score; para DBSCAN se reportó Silhouette excluyendo los puntos de ruido (etiqueta $-1$).
+Como fase de modelado CRISP-DM se aplicaron, mediante scikit-learn \cite{pedregosa2011sklearn}, tres algoritmos de \textit{clustering} no supervisado: KMeans (partición por minimización de inercia), aglomerativo jerárquico con enlace de Ward, y DBSCAN (densidad). La selección de $K$ se realizó mediante barrido $K=2,\dots,8$ con consenso entre el coeficiente de Silhouette (cohesión vs. separación, mayor es mejor) y el índice de Davies--Bouldin (menor es mejor). Todas las variables se estandarizaron por $z$-score; para DBSCAN se reportó Silhouette excluyendo los puntos de ruido (etiqueta $-1$).
 
 Para auditar \emph{qué} información captura cada partición se empleó el Índice de Rand Ajustado (ARI) entre las etiquetas de cluster y la región: un ARI alto indica que el modelo reproduce la geografía, mientras que un ARI bajo indica que el modelo captura estructura distinta (p.~ej.\ patrones productivos). Esta auditoría guió el rediseño del esquema de variables, descrito en la Sección~\ref{sec:clustering}.
 
@@ -221,27 +222,13 @@ El periodo 2023--2024 registró anomalías consistentes con el Fenómeno del Ni�
     \label{fig:nino}
 \end{figure}
 
-Como verificación independiente de estos hallazgos, se aplicó un detector de anomalías no supervisado (\textit{Isolation Forest}) sobre las variables climáticas y de producción estandarizadas por unidad, sin indicarle al modelo dónde buscar (Fig.~\ref{fig:deteccion_eventos}). El método marca como anómalas el 15.0\% de las filas de la sequía de Puno 2022 y el 7.3\% de El Niño Costero 2023--2024, frente a una tasa base de 5.0\% en el resto del dataset --- confirmando ambos eventos de forma independiente. El método detecta además un tercer episodio no analizado en este artículo: lluvias intensas en Junín e Ica entre febrero y mayo de 2025 (51.6\% de detección, 10.3 veces la tasa base), consistente con alertas de SENAMHI de esas fechas \cite{senamhi2025marzo}. Su impacto en la producción aún no es observable en los datos, por la cercanía del evento al final de la serie.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.46\textwidth]{tasa_deteccion_eventos.png}
-    \caption{Tasa de detección de anomalías (Isolation Forest) por evento, frente a la tasa base del dataset. El método identifica los tres eventos sin supervisión previa.}
-    \label{fig:deteccion_eventos}
-\end{figure}
+Como verificación independiente de estos hallazgos, se aplicó un detector de anomalías no supervisado (\textit{Isolation Forest} \cite{liu2008isolationforest}) sobre las variables climáticas y de producción estandarizadas por unidad, sin indicarle al modelo dónde buscar. El método marca como anómalas el 15.0\% de las filas de la sequía de Puno 2022 y el 7.3\% de El Niño Costero 2023--2024, frente a una tasa base de 5.0\% en el resto del dataset --- confirmando ambos eventos de forma independiente. El método detecta además un tercer episodio no analizado en este artículo: lluvias intensas en Junín e Ica entre febrero y mayo de 2025 (51.6\% de detección, 10.3 veces la tasa base), consistente con alertas de SENAMHI de esas fechas \cite{senamhi2025marzo}. Su impacto en la producción aún no es observable en los datos, por la cercanía del evento al final de la serie.
 
 \subsection{Tipologías agroclimáticas mediante clustering}
 \label{sec:clustering}
 
 \subsubsection{Enfoque inicial y diagnóstico crítico (evaluación)}
-El primer modelo agrupó los 33 perfiles región--cultivo descritos por 13 variables: media y desviación estándar de cinco variables climáticas, más producción total, media de cosecha y coeficiente de variación. El barrido de $K$ seleccionó $K=7$ por consenso entre Silhouette (0.428) y Davies--Bouldin (0.698). El dendrograma Ward (Fig.~\ref{fig:dendro06}) y el mapa de calor de centroides (Fig.~\ref{fig:heatmap06}) muestran grupos aparentemente bien separados.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.48\textwidth]{dendrograma_perfiles.png}
-    \caption{Dendrograma Ward de los perfiles región--cultivo. La línea roja indica la altura de corte que produce $K=7$ clusters.}
-    \label{fig:dendro06}
-\end{figure}
+El primer modelo agrupó los 33 perfiles región--cultivo descritos por 13 variables: media y desviación estándar de cinco variables climáticas, más producción total, media de cosecha y coeficiente de variación. El barrido de $K$ seleccionó $K=7$ por consenso entre Silhouette (0.428) y Davies--Bouldin (0.698). El mapa de calor de centroides (Fig.~\ref{fig:heatmap06}) muestra grupos aparentemente bien separados.
 
 \begin{figure}[h]
     \centering
@@ -353,6 +340,58 @@ La Fig.~\ref{fig:comparativa} resume la comparación. El Silhouette no es compar
     \label{fig:comparativa}
 \end{figure}
 
+\subsection{Clasificación supervisada: evaluación y despliegue del modelo de zona}
+\label{sec:clasificador}
+Esta sección corresponde a dos fases CRISP-DM adicionales aplicadas específicamente al Modelo A: una \emph{evaluación} independiente del Silhouette/ARI ya reportados, y un esbozo ilustrativo de \emph{despliegue} --- en ningún caso un sistema operativo de predicción, consistente con el alcance exploratorio declarado en este trabajo.
+
+\subsubsection{Evaluación: ¿el modelo recupera tipologías ya conocidas?}
+Se entrenaron dos clasificadores supervisados (\textit{Random Forest} \cite{breiman2001randomforest} y $k$-NN \cite{cover1967nearestneighbor}, $k=3$) para recuperar la etiqueta de zona de cada uno de los 28 distritos a partir de sus cinco variables climáticas (media y desviación estándar). La hipótesis es directa: si los 6 clusters están realmente bien separados en el espacio climático, un clasificador que nunca vio la etiqueta real de un distrito debería recuperarla con alta precisión, tanto en validación cruzada \textit{Leave-One-Out} (cada distrito se predice habiendo entrenado con los otros 27) como en un conjunto de prueba independiente que el modelo no toca durante el entrenamiento (Tabla~\ref{tab:clasificador_eval}).
+
+\begin{table}[h]
+\centering
+\caption{Clasificación supervisada --- métricas de evaluación de la tipología de zona}
+\label{tab:clasificador_eval}
+\small
+\begin{tabular}{l c c c}
+\toprule
+\textbf{Clasificador} & \textbf{LOO} & \textbf{Train} & \textbf{Test} \\
+\midrule
+Random Forest & 96.4\% & 100.0\% & 100.0\% \\
+KNN ($k=3$) & 96.4\% & 95.2\% & 100.0\% \\
+\midrule
+Baseline & 32.1\% & --- & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Ambos clasificadores superan ampliamente el baseline y cometen el mismo único error: \emph{Jilili} (Piura), cuyo piso ecológico está etiquetado como sierra pero que el clustering agrupa en \textbf{C3 = Selva SM-Junín} por su clima medido; el clasificador, sin conocer ninguna de las dos etiquetas, también lo confunde con \textbf{C2 = Sierra papera} --- consistente con su etiqueta de piso, no con su cluster real --- con un margen de probabilidad de apenas 0.04 entre ambos. El hallazgo confirma, con un método independiente al Silhouette/ARI, que la tipología territorial está bien separada y aísla con precisión su único caso ambiguo.
+
+\subsubsection{Despliegue: clasificación de distritos no observados}
+Como esbozo ilustrativo de despliegue, los clasificadores (reentrenados con los 28 distritos completos) se aplicaron a 13 distritos reales que no participaron en la construcción de la tipología, usando clima real de NASA POWER 2020--2025 (mismas variables, coordenadas oficiales INEI/RENIEC): 5 en Junín (región ya estudiada, pero distritos no muestreados), 4 en Ucayali (región nueva, selva baja) y 4 en Tacna (región nueva, desierto hiperárido sin análogo entre las 6 regiones de entrenamiento). La Tabla~\ref{tab:clasificador_despliegue} resume el resultado.
+
+\begin{table}[h]
+\centering
+\caption{Despliegue --- clasificación de distritos no observados (clima real NASA POWER)}
+\label{tab:clasificador_despliegue}
+\small
+\begin{tabular}{l c c c c}
+\toprule
+\textbf{Región} & \textbf{n} & \textbf{Cluster} & \textbf{Acuerdo} & \textbf{Margen RF} \\
+\midrule
+Junín\textsuperscript{a} & 4 & C2 & 4/4 & 0.92 \\
+Junín\textsuperscript{a} & 1 & C2/C3 & 0/1 & 0.18 \\
+Ucayali\textsuperscript{b} & 4 & C3 & 4/4 & 0.57--0.89 \\
+Tacna\textsuperscript{c} & 2 & C1 & 2/2 & 0.00--0.14 \\
+Tacna\textsuperscript{c} & 2 & C5/C6 & 0/2 & 0.16 \\
+\bottomrule
+\end{tabular}
+
+\vspace{2pt}
+{\footnotesize \textsuperscript{a}Región conocida, distritos no muestreados. \textsuperscript{b}Región nueva, con análogo climático (selva baja). \textsuperscript{c}Región nueva, sin análogo climático.}
+\end{table}
+
+El patrón es consistente con la hipótesis de evaluación: en Junín y Ucayali, donde el clima del distrito nuevo se asemeja a un tipo climático ya presente en el entrenamiento (sierra papera del Mantaro, selva baja amazónica), ambos clasificadores coinciden con margen alto. En Tacna --- un desierto más árido que cualquier región de entrenamiento, sin análogo climático entre los 6 clusters --- los márgenes caen (incluido un empate exacto en un distrito) y los clasificadores discrepan en la mitad de los casos. Esto no es una falla del modelo sino el límite esperable de extrapolar fuera de su dominio de entrenamiento, y refuerza --- ahora con evidencia aplicada --- la postura declarada de este trabajo: una tipología exploratoria útil dentro de su dominio, no un sistema de predicción operativa generalizable a cualquier territorio.
+
 \section{Discusión y conclusiones}
 Los resultados muestran que el agro peruano responde a dinámicas climáticas diferenciadas según el piso ecológico más que según la unidad administrativa regional. La humedad relativa domina la estacionalidad costera, mientras que la humedad de suelo condiciona la productividad en sierra y altiplano; en selva, la temperatura adquiere mayor relevancia. Estas relaciones cambian de signo entre pisos para variables equivalentes, comportamiento que permanecería oculto bajo promedios regionales.
 
@@ -389,6 +428,14 @@ Como trabajo futuro, los datasets construidos permiten desarrollar modelos predi
 \bibitem{una2023} Universidad Nacional del Altiplano, ``Propuesta de zonificación agroecológica para el desarrollo sostenible,'' Tesis, 2023.
 
 \bibitem{chapman2000} P. Chapman \textit{et al.}, ``CRISP-DM 1.0: Step-by-step data mining guide,'' SPSS Inc., 2000.
+
+\bibitem{pedregosa2011sklearn} F. Pedregosa \textit{et al.}, ``Scikit-learn: Machine learning in Python,'' \textit{Journal of Machine Learning Research}, vol. 12, pp. 2825--2830, 2011.
+
+\bibitem{breiman2001randomforest} L. Breiman, ``Random forests,'' \textit{Machine Learning}, vol. 45, no. 1, pp. 5--32, 2001, doi: 10.1023/A:1010933404324.
+
+\bibitem{cover1967nearestneighbor} T. Cover and P. Hart, ``Nearest neighbor pattern classification,'' \textit{IEEE Transactions on Information Theory}, vol. 13, no. 1, pp. 21--27, 1967, doi: 10.1109/TIT.1967.1053964.
+
+\bibitem{liu2008isolationforest} F. T. Liu, K. M. Ting, and Z.-H. Zhou, ``Isolation forest,'' in \textit{Proc. 2008 Eighth IEEE Int. Conf. on Data Mining (ICDM)}, Pisa, Italy, 2008, pp. 413--422, doi: 10.1109/ICDM.2008.17.
 
 \bibitem{midagrihist} Ministerio de Desarrollo Agrario y Riego, ``Series históricas de producción agrícola --- hoja c-18,'' 2025. [Online]. Available: \url{https://www.midagri.gob.pe/}
 

@@ -1,211 +1,211 @@
 ﻿region,cultivo,piso_asignado,distrito,produccion_total_ton,nivel_confianza,regla_asignacion,categoria_agronomica,justificacion
-Ica,aceituna,costa,Chincha Alta,30373.23,alta,taxonomia_piso_prioridad,frutales,Primer piso compatible en Ica: costa (prioridad agronómica 1/2).
-Ica,aji,costa,Chincha Alta,46707.77,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Ica: costa (prioridad agronómica 1/6).
-Ica,ajo,costa,Chincha Alta,184.83,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Ica: costa (prioridad agronómica 1/5).
-Ica,alcachofa,costa,Chincha Alta,210549.2,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Ica: costa (prioridad agronómica 1/3).
-Ica,alfalfa,costa,Chincha Alta,757682.18,alta,taxonomia_piso_prioridad,forrajeros,Primer piso compatible en Ica: costa (prioridad agronómica 1/6).
-Ica,algodon_rama,costa,Chincha Alta,74580.11,alta,taxonomia_piso_prioridad,industrial,Primer piso compatible en Ica: costa (prioridad agronómica 1/3).
-Ica,arandano,costa,Chincha Alta,174125.98,alta,taxonomia_piso_prioridad,frutales_bosque,Primer piso compatible en Ica: costa (prioridad agronómica 1/2).
-Ica,arveja_grano_seco,costa,Chincha Alta,13.5,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Ica: costa (prioridad agronómica 4/4).
-Ica,arveja_verde,costa,Chincha Alta,1831.13,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Ica: costa (prioridad agronómica 4/4).
-Ica,camote,costa,Chincha Alta,150384.36,alta,taxonomia_piso_prioridad,raices,Primer piso compatible en Ica: costa (prioridad agronómica 1/8).
-Ica,cebolla,costa,Chincha Alta,563439.22,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Ica: costa (prioridad agronómica 1/5).
-Ica,esparrago,costa,Chincha Alta,959796.24,alta,taxonomia_piso_prioridad,agroexportacion_costa,Primer piso compatible en Ica: costa (prioridad agronómica 1/1).
-Ica,frijol_grano_seco,costa,Chincha Alta,8845.49,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Ica: costa (prioridad agronómica 1/6).
-Ica,haba_grano_seco,costa,Chincha Alta,7.5,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Ica: costa (prioridad agronómica 1/3).
-Ica,limon_sutil,costa,Chincha Alta,9091.86,alta,taxonomia_piso_prioridad,citricos,Primer piso compatible en Ica: costa (prioridad agronómica 1/5).
-Ica,maiz_amarillo_duro,costa,Chincha Alta,924060.72,alta,taxonomia_piso_prioridad,granos,Primer piso compatible en Ica: costa (prioridad agronómica 1/6).
-Ica,maiz_chala,costa,Chincha Alta,89.0,alta,taxonomia_piso_prioridad,granos,Primer piso compatible en Ica: costa (prioridad agronómica 1/5).
-Ica,maiz_choclo,costa,Chincha Alta,123733.03,media,override_regional,granos,Maíz choclo en valle de Ica costa; parte puede provenir de zonas altas.
-Ica,mandarina,costa,Chincha Alta,1106304.0,alta,taxonomia_piso_prioridad,citricos,Primer piso compatible en Ica: costa (prioridad agronómica 1/7).
-Ica,mango,costa,Chincha Alta,45088.75,alta,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en Ica: costa (prioridad agronómica 1/6).
-Ica,naranja,costa,Chincha Alta,181318.47,alta,taxonomia_piso_prioridad,citricos,Primer piso compatible en Ica: costa (prioridad agronómica 1/9).
-Ica,pallar_grano_seco,costa,Chincha Alta,21909.81,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Ica: costa (prioridad agronómica 1/1).
-Ica,palta,costa,Chincha Alta,645631.29,alta,taxonomia_piso_prioridad,frutales,Primer piso compatible en Ica: costa (prioridad agronómica 1/6).
-Ica,papa,costa,Chincha Alta,791326.75,baja,override_regional,andinos,Producción MIDAGRI regional incluye sierra alta de Ica; único distrito NASA es costa → proxy débil.
-Ica,papaya,costa,Chincha Alta,3121.33,alta,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en Ica: costa (prioridad agronómica 1/7).
-Ica,paprika,costa,Chincha Alta,25115.81,alta,taxonomia_piso_prioridad,hortalizas_exportacion,Primer piso compatible en Ica: costa (prioridad agronómica 1/2).
-Ica,pimiento,costa,Chincha Alta,3888.92,alta,taxonomia_piso_prioridad,hortalizas_exportacion,Primer piso compatible en Ica: costa (prioridad agronómica 1/3).
-Ica,tangelo,costa,Chincha Alta,150249.39,alta,taxonomia_piso_prioridad,citricos,Primer piso compatible en Ica: costa (prioridad agronómica 1/3).
-Ica,tomate,costa,Chincha Alta,702007.14,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Ica: costa (prioridad agronómica 1/6).
-Ica,tuna,costa,Chincha Alta,4492.43,alta,taxonomia_piso_prioridad,frutales,Primer piso compatible en Ica: costa (prioridad agronómica 1/4).
-Ica,uva,costa,Chincha Alta,2632079.83,media,taxonomia_piso_prioridad,frutales,Primer piso compatible en Ica: costa (prioridad agronómica 2/2).
-Ica,yuca,costa,Chincha Alta,51171.08,alta,taxonomia_piso_prioridad,raices,Primer piso compatible en Ica: costa (prioridad agronómica 1/7).
-Ica,zanahoria,costa,Chincha Alta,470.69,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Ica: costa (prioridad agronómica 1/5).
-Ica,zapallo,costa,Chincha Alta,159280.27,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Ica: costa (prioridad agronómica 1/6).
-Junin,aji,selva_alta,Perene,6515.1,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Junin: selva_alta (prioridad agronómica 4/6).
-Junin,ajo,sierra,El Tambo,28339.1,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Junin: sierra (prioridad agronómica 2/5).
-Junin,alcachofa,sierra,El Tambo,21358.28,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Junin: sierra (prioridad agronómica 2/3).
-Junin,alfalfa,sierra,El Tambo,829310.31,media,taxonomia_piso_prioridad,forrajeros,Primer piso compatible en Junin: sierra (prioridad agronómica 2/6).
-Junin,arroz_cascara,selva_alta,Perene,5238.65,media,taxonomia_piso_prioridad,granos,Primer piso compatible en Junin: selva_alta (prioridad agronómica 3/5).
-Junin,arveja_grano_seco,sierra,El Tambo,7390.88,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Junin: sierra (prioridad agronómica 1/4).
-Junin,arveja_verde,sierra,El Tambo,190864.54,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Junin: sierra (prioridad agronómica 1/4).
-Junin,avena_forrajera,sierra,El Tambo,614215.5,alta,taxonomia_piso_prioridad,forrajeros,Primer piso compatible en Junin: sierra (prioridad agronómica 1/3).
-Junin,cacao,selva_baja,Rio Tambo,179316.78,alta,override_regional,permanentes_selva,Cacao en selva baja de la región (Corrección documentada del grupo).
-Junin,cafe_pergamino,selva_alta,Perene,370046.39,alta,taxonomia_piso_prioridad,permanentes_selva,Primer piso compatible en Junin: selva_alta (prioridad agronómica 1/4).
-Junin,cebada_forrajera,sierra,El Tambo,87951.26,alta,taxonomia_piso_prioridad,forrajeros,Primer piso compatible en Junin: sierra (prioridad agronómica 1/3).
-Junin,cebada_grano,sierra,El Tambo,106598.13,alta,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en Junin: sierra (prioridad agronómica 1/3).
-Junin,cebolla,sierra,El Tambo,12378.7,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Junin: sierra (prioridad agronómica 2/5).
-Junin,frijol_grano_seco,sierra,El Tambo,25762.57,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Junin: sierra (prioridad agronómica 3/6).
-Junin,granadilla,selva_alta,Perene,54855.77,media,taxonomia_piso_prioridad,frutales,Primer piso compatible en Junin: selva_alta (prioridad agronómica 2/4).
-Junin,haba_grano_seco,sierra,El Tambo,17306.04,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Junin: sierra (prioridad agronómica 2/3).
-Junin,limon_sutil,selva_alta,Perene,19955.9,media,taxonomia_piso_prioridad,citricos,Primer piso compatible en Junin: selva_alta (prioridad agronómica 4/5).
-Junin,maiz_amarillo_duro,selva_alta,Perene,131260.88,media,taxonomia_piso_prioridad,granos,Primer piso compatible en Junin: selva_alta (prioridad agronómica 4/6).
-Junin,maiz_amilaceo,sierra,El Tambo,82942.15,alta,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en Junin: sierra (prioridad agronómica 1/4).
-Junin,maiz_choclo,sierra,El Tambo,540869.09,media,taxonomia_piso_prioridad,granos,Primer piso compatible en Junin: sierra (prioridad agronómica 2/5).
-Junin,mandarina,selva_alta,Perene,341567.04,media,taxonomia_piso_prioridad,citricos,Primer piso compatible en Junin: selva_alta (prioridad agronómica 3/7).
-Junin,mango,selva_alta,Perene,12489.2,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en Junin: selva_alta (prioridad agronómica 4/6).
-Junin,manzana,sierra,El Tambo,670.1,media,taxonomia_piso_prioridad,frutales_templados,Primer piso compatible en Junin: sierra (prioridad agronómica 2/2).
-Junin,melocoton,sierra,El Tambo,1693.6,media,taxonomia_piso_prioridad,frutales_templados,Primer piso compatible en Junin: sierra (prioridad agronómica 2/2).
-Junin,naranja,selva_alta,Perene,1734258.28,media,taxonomia_piso_prioridad,citricos,Primer piso compatible en Junin: selva_alta (prioridad agronómica 3/9).
-Junin,oca,sierra,El Tambo,23626.12,media,taxonomia_piso_prioridad,andinos,Primer piso compatible en Junin: sierra (prioridad agronómica 3/3).
-Junin,olluco,sierra,El Tambo,101233.87,media,taxonomia_piso_prioridad,andinos,Primer piso compatible en Junin: sierra (prioridad agronómica 3/3).
-Junin,oregano,sierra,El Tambo,471.5,alta,taxonomia_piso_prioridad,aromaticas,Primer piso compatible en Junin: sierra (prioridad agronómica 1/2).
-Junin,palta,selva_alta,Perene,354306.57,media,taxonomia_piso_prioridad,frutales,Primer piso compatible en Junin: selva_alta (prioridad agronómica 3/6).
-Junin,papa,sierra,El Tambo,2440844.36,alta,taxonomia_piso_prioridad,andinos,Primer piso compatible en Junin: sierra (prioridad agronómica 1/4).
-Junin,papaya,selva_alta,Perene,73121.76,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en Junin: selva_alta (prioridad agronómica 4/7).
-Junin,pina,selva_alta,Perene,2527247.64,alta,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en Junin: selva_alta (prioridad agronómica 1/4).
-Junin,platano,selva_alta,Perene,1244001.27,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en Junin: selva_alta (prioridad agronómica 4/8).
-Junin,quinua,sierra,El Tambo,31264.72,media,taxonomia_piso_prioridad,andinos,Primer piso compatible en Junin: sierra (prioridad agronómica 3/3).
-Junin,tangelo,selva_alta,Perene,232818.97,alta,override_regional,citricos,Cítricos en ceja de selva (Perené).
-Junin,tomate,sierra,El Tambo,555.4,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Junin: sierra (prioridad agronómica 3/6).
-Junin,trigo,sierra,El Tambo,35518.63,alta,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en Junin: sierra (prioridad agronómica 1/3).
-Junin,tuna,sierra,El Tambo,908.9,media,taxonomia_piso_prioridad,frutales,Primer piso compatible en Junin: sierra (prioridad agronómica 2/4).
-Junin,yuca,selva_baja,Rio Tambo,696951.53,alta,override_regional,raices,Yuca y cacao comparten selva baja amazónica.
-Junin,zanahoria,sierra,El Tambo,174204.93,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Junin: sierra (prioridad agronómica 2/5).
-Junin,zapallo,sierra,El Tambo,18056.3,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Junin: sierra (prioridad agronómica 2/6).
-La Libertad,aceituna,costa,Viru,3760.28,alta,taxonomia_piso_prioridad,frutales,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/2).
-La Libertad,aji,costa,Viru,32089.82,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/6).
-La Libertad,ajo,costa,Viru,7267.51,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/5).
-La Libertad,alcachofa,costa,Viru,139506.37,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/3).
-La Libertad,alfalfa,costa,Viru,1262594.66,alta,taxonomia_piso_prioridad,forrajeros,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/6).
-La Libertad,arandano,costa,Viru,880840.95,alta,taxonomia_piso_prioridad,frutales_bosque,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/2).
-La Libertad,arroz_cascara,costa,Viru,1613590.2,alta,taxonomia_piso_prioridad,granos,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/5).
-La Libertad,arveja_grano_seco,sierra,Huamachuco,63057.23,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en La Libertad: sierra (prioridad agronómica 1/4).
-La Libertad,arveja_verde,sierra,Huamachuco,30815.8,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en La Libertad: sierra (prioridad agronómica 1/4).
-La Libertad,avena_forrajera,sierra,Huamachuco,96287.55,alta,taxonomia_piso_prioridad,forrajeros,Primer piso compatible en La Libertad: sierra (prioridad agronómica 1/3).
-La Libertad,cafe_pergamino,sierra,Huamachuco,1058.71,media,taxonomia_piso_prioridad,permanentes_selva,Primer piso compatible en La Libertad: sierra (prioridad agronómica 3/4).
-La Libertad,camote,costa,Viru,40010.73,alta,taxonomia_piso_prioridad,raices,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/8).
-La Libertad,cana_para_azucar,costa,Viru,28614989.25,alta,override_regional,industrial,Agroindustria azucarera concentrada en costa norte (Virú).
-La Libertad,cebada_forrajera,sierra,Huamachuco,3195.0,alta,taxonomia_piso_prioridad,forrajeros,Primer piso compatible en La Libertad: sierra (prioridad agronómica 1/3).
-La Libertad,cebada_grano,sierra,Huamachuco,383232.31,alta,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en La Libertad: sierra (prioridad agronómica 1/3).
-La Libertad,cebolla,costa,Viru,211938.25,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/5).
-La Libertad,esparrago,costa,Viru,854391.75,alta,taxonomia_piso_prioridad,agroexportacion_costa,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/1).
+Ica,aceituna,costa,Chincha Alta,30373.23,alta,taxonomia_piso_prioridad,frutales,Primer piso compatible en Ica: costa (prioridad 1/2).
+Ica,aji,costa,Chincha Alta,46707.77,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Ica: costa (prioridad 1/6).
+Ica,ajo,costa,Chincha Alta,184.83,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Ica: costa (prioridad 1/5).
+Ica,alcachofa,costa,Chincha Alta,210549.2,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Ica: costa (prioridad 1/3).
+Ica,alfalfa,costa,Independencia,757682.18,alta,override_regional,forrajeros,"SISAGRI: Independencia concentra 235,663 t, mayor produccion medida que Chincha Alta."
+Ica,algodon_rama,costa,Chincha Alta,74580.11,alta,taxonomia_piso_prioridad,industrial,Primer piso compatible en Ica: costa (prioridad 1/3).
+Ica,arandano,costa,Chincha Alta,174125.98,alta,taxonomia_piso_prioridad,frutales_bosque,Primer piso compatible en Ica: costa (prioridad 1/2).
+Ica,arveja_grano_seco,costa,Chincha Alta,13.5,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Ica: costa (prioridad 4/4).
+Ica,arveja_verde,costa,Chincha Alta,1831.13,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Ica: costa (prioridad 4/4).
+Ica,camote,costa,Chincha Alta,150384.36,alta,taxonomia_piso_prioridad,raices,Primer piso compatible en Ica: costa (prioridad 1/8).
+Ica,cebolla,costa,Chincha Alta,563439.22,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Ica: costa (prioridad 1/5).
+Ica,esparrago,costa,Santiago,959796.24,alta,override_regional,agroexportacion_costa,"SISAGRI: Santiago concentra 328,506 t, mayor produccion medida que Chincha Alta."
+Ica,frijol_grano_seco,costa,Chincha Alta,8845.49,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Ica: costa (prioridad 1/6).
+Ica,haba_grano_seco,costa,Chincha Alta,7.5,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Ica: costa (prioridad 1/3).
+Ica,limon_sutil,costa,Chincha Alta,9091.86,alta,taxonomia_piso_prioridad,citricos,Primer piso compatible en Ica: costa (prioridad 1/5).
+Ica,maiz_amarillo_duro,costa,Independencia,924060.72,alta,override_regional,granos,"SISAGRI: Independencia concentra 350,990 t, mayor produccion medida que Chincha Alta."
+Ica,maiz_chala,costa,Chincha Alta,89.0,alta,taxonomia_piso_prioridad,granos,Primer piso compatible en Ica: costa (prioridad 1/5).
+Ica,maiz_choclo,costa,Chincha Alta,123733.03,alta,taxonomia_piso_prioridad,granos,Primer piso compatible en Ica: costa (prioridad 1/5).
+Ica,mandarina,costa,El Carmen,1106304.0,alta,override_regional,citricos,"SISAGRI: El Carmen concentra 422,236 t, mayor produccion medida que Chincha Alta."
+Ica,mango,costa,Chincha Alta,45088.75,alta,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en Ica: costa (prioridad 1/6).
+Ica,naranja,costa,Chincha Alta,181318.47,alta,taxonomia_piso_prioridad,citricos,Primer piso compatible en Ica: costa (prioridad 1/9).
+Ica,pallar_grano_seco,costa,Chincha Alta,21909.81,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Ica: costa (prioridad 1/1).
+Ica,palta,costa,El Carmen,645631.29,alta,override_regional,frutales,"SISAGRI: El Carmen concentra 125,142 t, mayor produccion medida que Chincha Alta."
+Ica,papa,costa,Nazca,791326.75,alta,override_regional,andinos,"SISAGRI: Nazca concentra 242,236 t, reemplaza override anterior de confianza baja."
+Ica,papaya,costa,Chincha Alta,3121.33,alta,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en Ica: costa (prioridad 1/7).
+Ica,paprika,costa,Chincha Alta,25115.81,alta,taxonomia_piso_prioridad,hortalizas_exportacion,Primer piso compatible en Ica: costa (prioridad 1/2).
+Ica,pimiento,costa,Chincha Alta,3888.92,alta,taxonomia_piso_prioridad,hortalizas_exportacion,Primer piso compatible en Ica: costa (prioridad 1/3).
+Ica,tangelo,costa,Chincha Alta,150249.39,alta,taxonomia_piso_prioridad,citricos,Primer piso compatible en Ica: costa (prioridad 1/3).
+Ica,tomate,costa,Salas,702007.14,alta,override_regional,hortalizas,"SISAGRI: Salas concentra 201,266 t, mayor produccion medida que Chincha Alta."
+Ica,tuna,costa,Chincha Alta,4492.43,alta,taxonomia_piso_prioridad,frutales,Primer piso compatible en Ica: costa (prioridad 1/4).
+Ica,uva,costa,Salas,2632079.83,alta,override_regional,frutales,"SISAGRI: Salas concentra 799,011 t (cultivo 'VID'), mayor produccion medida que Chincha Alta."
+Ica,yuca,costa,Chincha Alta,51171.08,alta,taxonomia_piso_prioridad,raices,Primer piso compatible en Ica: costa (prioridad 1/7).
+Ica,zanahoria,costa,Chincha Alta,470.69,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Ica: costa (prioridad 1/5).
+Ica,zapallo,costa,Chincha Alta,159280.27,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Ica: costa (prioridad 1/6).
+Junin,aji,selva_alta,Perene,6515.1,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Junin: selva_alta (prioridad 4/6).
+Junin,ajo,sierra,El Tambo,28339.1,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Junin: sierra (prioridad 2/5).
+Junin,alcachofa,sierra,El Tambo,21358.28,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Junin: sierra (prioridad 2/3).
+Junin,alfalfa,sierra,Matahuasi,829310.31,alta,override_regional,forrajeros,"SISAGRI: Matahuasi concentra 65,140 t, mayor produccion medida que El Tambo."
+Junin,arroz_cascara,selva_alta,Perene,5238.65,media,taxonomia_piso_prioridad,granos,Primer piso compatible en Junin: selva_alta (prioridad 3/5).
+Junin,arveja_grano_seco,sierra,El Tambo,7390.88,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Junin: sierra (prioridad 1/4).
+Junin,arveja_verde,sierra,El Tambo,190864.54,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Junin: sierra (prioridad 1/4).
+Junin,avena_forrajera,sierra,San Jose de Quero,614215.5,alta,override_regional,forrajeros,"SISAGRI: San Jose de Quero concentra 49,383 t, mayor produccion medida que El Tambo."
+Junin,cacao,selva_baja,Rio Tambo,179316.78,alta,override_regional,permanentes_selva,Cacao en selva baja de la region.
+Junin,cafe_pergamino,selva_alta,Pichanaqui,370046.39,alta,override_regional,permanentes_selva,"SISAGRI: Pichanaqui concentra 89,394 t, mayor produccion medida que Perene."
+Junin,cebada_forrajera,sierra,El Tambo,87951.26,alta,taxonomia_piso_prioridad,forrajeros,Primer piso compatible en Junin: sierra (prioridad 1/3).
+Junin,cebada_grano,sierra,El Tambo,106598.13,alta,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en Junin: sierra (prioridad 1/3).
+Junin,cebolla,sierra,El Tambo,12378.7,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Junin: sierra (prioridad 2/5).
+Junin,frijol_grano_seco,sierra,El Tambo,25762.57,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Junin: sierra (prioridad 3/6).
+Junin,granadilla,selva_alta,Perene,54855.77,media,taxonomia_piso_prioridad,frutales,Primer piso compatible en Junin: selva_alta (prioridad 2/4).
+Junin,haba_grano_seco,sierra,El Tambo,17306.04,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Junin: sierra (prioridad 2/3).
+Junin,limon_sutil,selva_alta,Perene,19955.9,media,taxonomia_piso_prioridad,citricos,Primer piso compatible en Junin: selva_alta (prioridad 4/5).
+Junin,maiz_amarillo_duro,selva_alta,Perene,131260.88,media,taxonomia_piso_prioridad,granos,Primer piso compatible en Junin: selva_alta (prioridad 4/6).
+Junin,maiz_amilaceo,sierra,El Tambo,82942.15,alta,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en Junin: sierra (prioridad 1/4).
+Junin,maiz_choclo,sierra,San Agustin,540869.09,alta,override_regional,granos,"SISAGRI: San Agustin concentra 40,617 t, mayor produccion medida que El Tambo."
+Junin,mandarina,selva_alta,Perene,341567.04,media,taxonomia_piso_prioridad,citricos,Primer piso compatible en Junin: selva_alta (prioridad 3/7).
+Junin,mango,selva_alta,Perene,12489.2,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en Junin: selva_alta (prioridad 4/6).
+Junin,manzana,sierra,El Tambo,670.1,media,taxonomia_piso_prioridad,frutales_templados,Primer piso compatible en Junin: sierra (prioridad 2/2).
+Junin,melocoton,sierra,El Tambo,1693.6,media,taxonomia_piso_prioridad,frutales_templados,Primer piso compatible en Junin: sierra (prioridad 2/2).
+Junin,naranja,selva_alta,Perene,1734258.28,media,taxonomia_piso_prioridad,citricos,Primer piso compatible en Junin: selva_alta (prioridad 3/9).
+Junin,oca,sierra,El Tambo,23626.12,media,taxonomia_piso_prioridad,andinos,Primer piso compatible en Junin: sierra (prioridad 3/3).
+Junin,olluco,sierra,El Tambo,101233.87,media,taxonomia_piso_prioridad,andinos,Primer piso compatible en Junin: sierra (prioridad 3/3).
+Junin,oregano,sierra,El Tambo,471.5,alta,taxonomia_piso_prioridad,aromaticas,Primer piso compatible en Junin: sierra (prioridad 1/2).
+Junin,palta,selva_alta,Perene,354306.57,media,taxonomia_piso_prioridad,frutales,Primer piso compatible en Junin: selva_alta (prioridad 3/6).
+Junin,papa,sierra,Huasahuasi,2440844.36,alta,override_regional,andinos,"SISAGRI: Huasahuasi concentra 647,138 t, mayor produccion medida que El Tambo."
+Junin,papaya,selva_alta,Perene,73121.76,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en Junin: selva_alta (prioridad 4/7).
+Junin,pina,selva_alta,Rio Negro,2527247.64,alta,override_regional,frutales_tropicales,"SISAGRI: Rio Negro concentra 690,445 t, mayor produccion medida que Perene."
+Junin,platano,selva_alta,Pangoa,1244001.27,alta,override_regional,frutales_tropicales,"SISAGRI: Pangoa concentra 266,670 t, mayor produccion medida que Perene."
+Junin,quinua,sierra,El Tambo,31264.72,media,taxonomia_piso_prioridad,andinos,Primer piso compatible en Junin: sierra (prioridad 3/3).
+Junin,tangelo,selva_alta,Perene,232818.97,alta,override_regional,citricos,Citricos en ceja de selva (Perene).
+Junin,tomate,sierra,El Tambo,555.4,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Junin: sierra (prioridad 3/6).
+Junin,trigo,sierra,El Tambo,35518.63,alta,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en Junin: sierra (prioridad 1/3).
+Junin,tuna,sierra,El Tambo,908.9,media,taxonomia_piso_prioridad,frutales,Primer piso compatible en Junin: sierra (prioridad 2/4).
+Junin,yuca,selva_baja,Rio Tambo,696951.53,alta,override_regional,raices,Yuca y cacao comparten selva baja amazonica.
+Junin,zanahoria,sierra,El Tambo,174204.93,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Junin: sierra (prioridad 2/5).
+Junin,zapallo,sierra,El Tambo,18056.3,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Junin: sierra (prioridad 2/6).
+La Libertad,aceituna,costa,Viru,3760.28,alta,taxonomia_piso_prioridad,frutales,Primer piso compatible en La Libertad: costa (prioridad 1/2).
+La Libertad,aji,costa,Viru,32089.82,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en La Libertad: costa (prioridad 1/6).
+La Libertad,ajo,costa,Viru,7267.51,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en La Libertad: costa (prioridad 1/5).
+La Libertad,alcachofa,costa,Viru,139506.37,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en La Libertad: costa (prioridad 1/3).
+La Libertad,alfalfa,costa,Viru,1262594.66,alta,taxonomia_piso_prioridad,forrajeros,Primer piso compatible en La Libertad: costa (prioridad 1/6).
+La Libertad,arandano,costa,Viru,880840.95,alta,taxonomia_piso_prioridad,frutales_bosque,Primer piso compatible en La Libertad: costa (prioridad 1/2).
+La Libertad,arroz_cascara,costa,Guadalupe,1613590.2,alta,override_regional,granos,"SISAGRI: Guadalupe concentra 380,492 t, mayor produccion medida que Viru."
+La Libertad,arveja_grano_seco,sierra,Huamachuco,63057.23,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en La Libertad: sierra (prioridad 1/4).
+La Libertad,arveja_verde,sierra,Huamachuco,30815.8,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en La Libertad: sierra (prioridad 1/4).
+La Libertad,avena_forrajera,sierra,Huamachuco,96287.55,alta,taxonomia_piso_prioridad,forrajeros,Primer piso compatible en La Libertad: sierra (prioridad 1/3).
+La Libertad,cafe_pergamino,sierra,Huamachuco,1058.71,media,taxonomia_piso_prioridad,permanentes_selva,Primer piso compatible en La Libertad: sierra (prioridad 3/4).
+La Libertad,camote,costa,Viru,40010.73,alta,taxonomia_piso_prioridad,raices,Primer piso compatible en La Libertad: costa (prioridad 1/8).
+La Libertad,cana_para_azucar,costa,Viru,28614989.25,alta,override_regional,industrial,"Agroindustria azucarera concentrada en costa norte (Viru). SISAGRI no registra cana de azucar en La Libertad; sin evidencia medida para refinar, se mantiene este proxy."
+La Libertad,cebada_forrajera,sierra,Huamachuco,3195.0,alta,taxonomia_piso_prioridad,forrajeros,Primer piso compatible en La Libertad: sierra (prioridad 1/3).
+La Libertad,cebada_grano,sierra,Huamachuco,383232.31,alta,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en La Libertad: sierra (prioridad 1/3).
+La Libertad,cebolla,costa,Viru,211938.25,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en La Libertad: costa (prioridad 1/5).
+La Libertad,esparrago,costa,Viru,854391.75,alta,taxonomia_piso_prioridad,agroexportacion_costa,Primer piso compatible en La Libertad: costa (prioridad 1/1).
 La Libertad,frijol_grano_seco,yunga,Cascas,21891.26,alta,override_regional,leguminosas,"Frijol en ceja de selva/yunga (Cascas), coherente con v1 revisado."
-La Libertad,granadilla,yunga,Cascas,10208.41,alta,taxonomia_piso_prioridad,frutales,Primer piso compatible en La Libertad: yunga (prioridad agronómica 1/4).
+La Libertad,granadilla,yunga,Cascas,10208.41,alta,taxonomia_piso_prioridad,frutales,Primer piso compatible en La Libertad: yunga (prioridad 1/4).
 La Libertad,haba_grano_seco,sierra,Huamachuco,37634.17,alta,override_regional,leguminosas,Haba en sierra libertense (Huamachuco).
-La Libertad,limon_sutil,costa,Viru,3474.86,alta,taxonomia_piso_prioridad,citricos,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/5).
-La Libertad,maiz_amarillo_duro,costa,Viru,649728.64,alta,taxonomia_piso_prioridad,granos,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/6).
-La Libertad,maiz_amilaceo,sierra,Huamachuco,140094.65,alta,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en La Libertad: sierra (prioridad agronómica 1/4).
-La Libertad,maiz_chala,costa,Viru,1129629.9,alta,taxonomia_piso_prioridad,granos,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/5).
-La Libertad,maiz_choclo,costa,Viru,71121.8,alta,taxonomia_piso_prioridad,granos,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/5).
-La Libertad,mandarina,costa,Viru,54233.05,alta,taxonomia_piso_prioridad,citricos,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/7).
-La Libertad,mango,costa,Viru,28252.55,alta,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/6).
-La Libertad,manzana,yunga,Cascas,4247.35,alta,taxonomia_piso_prioridad,frutales_templados,Primer piso compatible en La Libertad: yunga (prioridad agronómica 1/2).
-La Libertad,melocoton,yunga,Cascas,448.67,alta,taxonomia_piso_prioridad,frutales_templados,Primer piso compatible en La Libertad: yunga (prioridad agronómica 1/2).
-La Libertad,naranja,costa,Viru,9025.75,alta,taxonomia_piso_prioridad,citricos,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/9).
-La Libertad,oca,sierra,Huamachuco,35581.7,media,taxonomia_piso_prioridad,andinos,Primer piso compatible en La Libertad: sierra (prioridad agronómica 3/3).
-La Libertad,olluco,sierra,Huamachuco,58150.2,media,taxonomia_piso_prioridad,andinos,Primer piso compatible en La Libertad: sierra (prioridad agronómica 3/3).
-La Libertad,oregano,sierra,Huamachuco,1.0,alta,taxonomia_piso_prioridad,aromaticas,Primer piso compatible en La Libertad: sierra (prioridad agronómica 1/2).
-La Libertad,pallar_grano_seco,costa,Viru,1968.3,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/1).
-La Libertad,palta,costa,Viru,1366744.99,alta,taxonomia_piso_prioridad,frutales,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/6).
-La Libertad,papa,sierra,Huamachuco,3127628.58,alta,taxonomia_piso_prioridad,andinos,Primer piso compatible en La Libertad: sierra (prioridad agronómica 1/4).
-La Libertad,papaya,costa,Viru,17108.08,alta,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/7).
-La Libertad,paprika,costa,Viru,4393.0,alta,taxonomia_piso_prioridad,hortalizas_exportacion,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/2).
-La Libertad,pimiento,costa,Viru,106435.6,alta,taxonomia_piso_prioridad,hortalizas_exportacion,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/3).
-La Libertad,pina,yunga,Cascas,119678.07,media,override_regional,frutales_tropicales,Piña en yunga; costa virú menos representativa.
-La Libertad,piquillo,costa,Viru,71624.68,alta,taxonomia_piso_prioridad,hortalizas_exportacion,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/2).
-La Libertad,platano,yunga,Cascas,75396.47,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en La Libertad: yunga (prioridad agronómica 3/8).
-La Libertad,quinua,sierra,Huamachuco,16245.57,media,taxonomia_piso_prioridad,andinos,Primer piso compatible en La Libertad: sierra (prioridad agronómica 3/3).
-La Libertad,tomate,costa,Viru,59250.25,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/6).
-La Libertad,trigo,sierra,Huamachuco,400034.57,alta,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en La Libertad: sierra (prioridad agronómica 1/3).
-La Libertad,tuna,costa,Viru,3447.61,alta,taxonomia_piso_prioridad,frutales,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/4).
-La Libertad,uva,yunga,Cascas,328347.83,alta,override_regional,frutales,"Uva de mesa en ceja de selva/yunga (Cascas), no en costa virú."
-La Libertad,yuca,costa,Viru,111307.26,alta,taxonomia_piso_prioridad,raices,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/7).
-La Libertad,zanahoria,costa,Viru,34316.0,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/5).
-La Libertad,zapallo,costa,Viru,89407.43,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en La Libertad: costa (prioridad agronómica 1/6).
-Piura,ajo,sierra,Canchaque,2528.0,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Piura: sierra (prioridad agronómica 2/5).
-Piura,alfalfa,sierra,Canchaque,32416.4,media,taxonomia_piso_prioridad,forrajeros,Primer piso compatible en Piura: sierra (prioridad agronómica 2/6).
-Piura,algodon_rama,valle_chira,Sullana,47440.0,media,taxonomia_piso_prioridad,industrial,Primer piso compatible en Piura: valle_chira (prioridad agronómica 2/3).
-Piura,arandano,sierra,Canchaque,45534.37,media,taxonomia_piso_prioridad,frutales_bosque,Primer piso compatible en Piura: sierra (prioridad agronómica 2/2).
-Piura,arroz_cascara,valle_chira,Sullana,2860924.0,media,taxonomia_piso_prioridad,granos,Primer piso compatible en Piura: valle_chira (prioridad agronómica 2/5).
-Piura,arveja_grano_seco,sierra,Canchaque,23168.0,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Piura: sierra (prioridad agronómica 1/4).
-Piura,arveja_verde,sierra,Canchaque,6351.0,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Piura: sierra (prioridad agronómica 1/4).
-Piura,cafe_pergamino,sierra,Canchaque,41018.0,media,taxonomia_piso_prioridad,permanentes_selva,Primer piso compatible en Piura: sierra (prioridad agronómica 3/4).
-Piura,camote,sierra,Canchaque,56242.5,media,taxonomia_piso_prioridad,raices,Primer piso compatible en Piura: sierra (prioridad agronómica 3/8).
-Piura,cana_para_azucar,valle_chira,Sullana,3614281.06,media,taxonomia_piso_prioridad,industrial,Primer piso compatible en Piura: valle_chira (prioridad agronómica 2/2).
-Piura,cebada_grano,sierra,Canchaque,2835.0,alta,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en Piura: sierra (prioridad agronómica 1/3).
-Piura,cebolla,sierra,Canchaque,22149.0,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Piura: sierra (prioridad agronómica 2/5).
-Piura,frijol_grano_seco,sierra,Canchaque,26805.0,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Piura: sierra (prioridad agronómica 3/6).
-Piura,haba_grano_seco,sierra,Canchaque,3213.0,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Piura: sierra (prioridad agronómica 2/3).
-Piura,limon_sutil,bosque_seco,Tambogrande,1107399.5,alta,override_regional,citricos,Limón en bosque seco piurano.
-Piura,maiz_amarillo_duro,valle_chira,Sullana,415294.0,media,taxonomia_piso_prioridad,granos,Primer piso compatible en Piura: valle_chira (prioridad agronómica 2/6).
-Piura,maiz_amilaceo,sierra,Canchaque,90765.0,alta,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en Piura: sierra (prioridad agronómica 1/4).
-Piura,maiz_choclo,sierra,Canchaque,8022.0,media,taxonomia_piso_prioridad,granos,Primer piso compatible en Piura: sierra (prioridad agronómica 2/5).
+La Libertad,limon_sutil,costa,Viru,3474.86,alta,taxonomia_piso_prioridad,citricos,Primer piso compatible en La Libertad: costa (prioridad 1/5).
+La Libertad,maiz_amarillo_duro,costa,Viru,649728.64,alta,taxonomia_piso_prioridad,granos,Primer piso compatible en La Libertad: costa (prioridad 1/6).
+La Libertad,maiz_amilaceo,sierra,Huamachuco,140094.65,alta,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en La Libertad: sierra (prioridad 1/4).
+La Libertad,maiz_chala,costa,Viru,1129629.9,alta,taxonomia_piso_prioridad,granos,Primer piso compatible en La Libertad: costa (prioridad 1/5).
+La Libertad,maiz_choclo,costa,Viru,71121.8,alta,taxonomia_piso_prioridad,granos,Primer piso compatible en La Libertad: costa (prioridad 1/5).
+La Libertad,mandarina,costa,Viru,54233.05,alta,taxonomia_piso_prioridad,citricos,Primer piso compatible en La Libertad: costa (prioridad 1/7).
+La Libertad,mango,costa,Viru,28252.55,alta,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en La Libertad: costa (prioridad 1/6).
+La Libertad,manzana,yunga,Cascas,4247.35,alta,taxonomia_piso_prioridad,frutales_templados,Primer piso compatible en La Libertad: yunga (prioridad 1/2).
+La Libertad,melocoton,yunga,Cascas,448.67,alta,taxonomia_piso_prioridad,frutales_templados,Primer piso compatible en La Libertad: yunga (prioridad 1/2).
+La Libertad,naranja,costa,Viru,9025.75,alta,taxonomia_piso_prioridad,citricos,Primer piso compatible en La Libertad: costa (prioridad 1/9).
+La Libertad,oca,sierra,Huamachuco,35581.7,media,taxonomia_piso_prioridad,andinos,Primer piso compatible en La Libertad: sierra (prioridad 3/3).
+La Libertad,olluco,sierra,Huamachuco,58150.2,media,taxonomia_piso_prioridad,andinos,Primer piso compatible en La Libertad: sierra (prioridad 3/3).
+La Libertad,oregano,sierra,Huamachuco,1.0,alta,taxonomia_piso_prioridad,aromaticas,Primer piso compatible en La Libertad: sierra (prioridad 1/2).
+La Libertad,pallar_grano_seco,costa,Viru,1968.3,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en La Libertad: costa (prioridad 1/1).
+La Libertad,palta,costa,Viru,1366744.99,alta,taxonomia_piso_prioridad,frutales,Primer piso compatible en La Libertad: costa (prioridad 1/6).
+La Libertad,papa,sierra,Huamachuco,3127628.58,alta,taxonomia_piso_prioridad,andinos,Primer piso compatible en La Libertad: sierra (prioridad 1/4).
+La Libertad,papaya,costa,Viru,17108.08,alta,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en La Libertad: costa (prioridad 1/7).
+La Libertad,paprika,costa,Viru,4393.0,alta,taxonomia_piso_prioridad,hortalizas_exportacion,Primer piso compatible en La Libertad: costa (prioridad 1/2).
+La Libertad,pimiento,costa,Viru,106435.6,alta,taxonomia_piso_prioridad,hortalizas_exportacion,Primer piso compatible en La Libertad: costa (prioridad 1/3).
+La Libertad,pina,yunga,Cascas,119678.07,media,override_regional,frutales_tropicales,Pina en yunga; costa viru menos representativa.
+La Libertad,piquillo,costa,Viru,71624.68,alta,taxonomia_piso_prioridad,hortalizas_exportacion,Primer piso compatible en La Libertad: costa (prioridad 1/2).
+La Libertad,platano,yunga,Cascas,75396.47,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en La Libertad: yunga (prioridad 3/8).
+La Libertad,quinua,sierra,Huamachuco,16245.57,media,taxonomia_piso_prioridad,andinos,Primer piso compatible en La Libertad: sierra (prioridad 3/3).
+La Libertad,tomate,costa,Viru,59250.25,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en La Libertad: costa (prioridad 1/6).
+La Libertad,trigo,sierra,Huamachuco,400034.57,alta,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en La Libertad: sierra (prioridad 1/3).
+La Libertad,tuna,costa,Viru,3447.61,alta,taxonomia_piso_prioridad,frutales,Primer piso compatible en La Libertad: costa (prioridad 1/4).
+La Libertad,uva,yunga,Cascas,328347.83,alta,override_regional,frutales,"Uva de mesa en ceja de selva/yunga (Cascas), no en costa viru."
+La Libertad,yuca,costa,Viru,111307.26,alta,taxonomia_piso_prioridad,raices,Primer piso compatible en La Libertad: costa (prioridad 1/7).
+La Libertad,zanahoria,costa,Viru,34316.0,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en La Libertad: costa (prioridad 1/5).
+La Libertad,zapallo,costa,Viru,89407.43,alta,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en La Libertad: costa (prioridad 1/6).
+Piura,ajo,sierra,Canchaque,2528.0,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Piura: sierra (prioridad 2/5).
+Piura,alfalfa,sierra,Canchaque,32416.4,media,taxonomia_piso_prioridad,forrajeros,Primer piso compatible en Piura: sierra (prioridad 2/6).
+Piura,algodon_rama,valle_chira,Sullana,47440.0,media,taxonomia_piso_prioridad,industrial,Primer piso compatible en Piura: valle_chira (prioridad 2/3).
+Piura,arandano,sierra,Canchaque,45534.37,media,taxonomia_piso_prioridad,frutales_bosque,Primer piso compatible en Piura: sierra (prioridad 2/2).
+Piura,arroz_cascara,valle_chira,Ignacio Escudero,2860924.0,alta,override_regional,granos,"SISAGRI: Ignacio Escudero concentra 505,128 t, mayor produccion medida que Sullana."
+Piura,arveja_grano_seco,sierra,Canchaque,23168.0,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Piura: sierra (prioridad 1/4).
+Piura,arveja_verde,sierra,Canchaque,6351.0,alta,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Piura: sierra (prioridad 1/4).
+Piura,cafe_pergamino,sierra,Canchaque,41018.0,media,taxonomia_piso_prioridad,permanentes_selva,Primer piso compatible en Piura: sierra (prioridad 3/4).
+Piura,camote,sierra,Canchaque,56242.5,media,taxonomia_piso_prioridad,raices,Primer piso compatible en Piura: sierra (prioridad 3/8).
+Piura,cana_para_azucar,sierra,Jilili,3614281.06,media,override_regional,industrial,"SISAGRI solo registra la variante 'CANA DE AZUCAR (ALCOHOL)' (104,422 t en Jilili), producto secundario distinto de la industria azucarera de exportacion dominante en Piura."
+Piura,cebada_grano,sierra,Canchaque,2835.0,alta,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en Piura: sierra (prioridad 1/3).
+Piura,cebolla,sierra,Canchaque,22149.0,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Piura: sierra (prioridad 2/5).
+Piura,frijol_grano_seco,sierra,Canchaque,26805.0,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Piura: sierra (prioridad 3/6).
+Piura,haba_grano_seco,sierra,Canchaque,3213.0,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Piura: sierra (prioridad 2/3).
+Piura,limon_sutil,bosque_seco,Tambogrande,1107399.5,alta,override_regional,citricos,Limon en bosque seco piurano.
+Piura,maiz_amarillo_duro,valle_chira,Sullana,415294.0,media,taxonomia_piso_prioridad,granos,Primer piso compatible en Piura: valle_chira (prioridad 2/6).
+Piura,maiz_amilaceo,sierra,Canchaque,90765.0,alta,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en Piura: sierra (prioridad 1/4).
+Piura,maiz_choclo,sierra,Canchaque,8022.0,media,taxonomia_piso_prioridad,granos,Primer piso compatible en Piura: sierra (prioridad 2/5).
 Piura,mango,bosque_seco,Tambogrande,1882343.0,alta,override_regional,frutales_tropicales,Mango en bosque seco.
-Piura,naranja,bosque_seco,Tambogrande,11539.0,media,taxonomia_piso_prioridad,citricos,Primer piso compatible en Piura: bosque_seco (prioridad agronómica 6/9).
-Piura,oca,sierra,Canchaque,8876.0,media,taxonomia_piso_prioridad,andinos,Primer piso compatible en Piura: sierra (prioridad agronómica 3/3).
-Piura,olluco,sierra,Canchaque,7730.0,media,taxonomia_piso_prioridad,andinos,Primer piso compatible en Piura: sierra (prioridad agronómica 3/3).
-Piura,palta,valle_chira,Sullana,34463.0,media,taxonomia_piso_prioridad,frutales,Primer piso compatible en Piura: valle_chira (prioridad agronómica 6/6).
-Piura,papa,sierra,Canchaque,140555.0,alta,taxonomia_piso_prioridad,andinos,Primer piso compatible en Piura: sierra (prioridad agronómica 1/4).
-Piura,papaya,bosque_seco,Tambogrande,12441.0,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en Piura: bosque_seco (prioridad agronómica 2/7).
-Piura,paprika,valle_chira,Sullana,19847.0,media,taxonomia_piso_prioridad,hortalizas_exportacion,Primer piso compatible en Piura: valle_chira (prioridad agronómica 2/2).
-Piura,pimiento,valle_chira,Sullana,59349.0,media,taxonomia_piso_prioridad,hortalizas_exportacion,Primer piso compatible en Piura: valle_chira (prioridad agronómica 2/3).
-Piura,piquillo,valle_chira,Sullana,107432.0,media,taxonomia_piso_prioridad,hortalizas_exportacion,Primer piso compatible en Piura: valle_chira (prioridad agronómica 2/2).
-Piura,platano,valle_chira,Sullana,2091358.3,alta,override_regional,frutales_tropicales,Plátano dominante en valle de Chira.
-Piura,tomate,sierra,Canchaque,9356.0,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Piura: sierra (prioridad agronómica 3/6).
-Piura,trigo,sierra,Canchaque,72116.0,alta,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en Piura: sierra (prioridad agronómica 1/3).
-Piura,tuna,sierra,Canchaque,2704.0,media,taxonomia_piso_prioridad,frutales,Primer piso compatible en Piura: sierra (prioridad agronómica 2/4).
-Piura,uva,valle_chira,Sullana,1465184.28,media,override_regional,frutales,Uva de mesa en valle de Chira/Sullana; producción regional significativa.
-Piura,yuca,valle_chira,Sullana,52584.0,media,taxonomia_piso_prioridad,raices,Primer piso compatible en Piura: valle_chira (prioridad agronómica 2/7).
-Piura,zanahoria,sierra,Canchaque,4171.5,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Piura: sierra (prioridad agronómica 2/5).
-Piura,zapallo,sierra,Canchaque,939.0,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Piura: sierra (prioridad agronómica 2/6).
-Puno,ajo,altiplano_lacustre,Ilave,914.0,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 4/5).
-Puno,alfalfa,altiplano_lacustre,Ilave,10029663.9,alta,override_regional,forrajeros,Alfalfa forrajera en altiplano lacustre (Ilave).
-Puno,arroz_cascara,altiplano_lacustre,Ilave,334.0,media,taxonomia_piso_prioridad,granos,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 5/5).
-Puno,arveja_grano_seco,altiplano_lacustre,Ilave,4335.84,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 3/4).
-Puno,avena_forrajera,puna_alta,Ayaviri,13294902.33,alta,override_regional,forrajeros,Avena forrajera en puna alta.
-Puno,cafe_pergamino,altiplano_lacustre,Ilave,43051.63,media,taxonomia_piso_prioridad,permanentes_selva,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 4/4).
-Puno,camote,altiplano_lacustre,Ilave,12053.58,media,taxonomia_piso_prioridad,raices,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 8/8).
-Puno,cebada_forrajera,puna_alta,Ayaviri,1653085.61,media,taxonomia_piso_prioridad,forrajeros,Primer piso compatible en Puno: puna_alta (prioridad agronómica 2/3).
-Puno,cebada_grano,puna_alta,Ayaviri,144856.43,media,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en Puno: puna_alta (prioridad agronómica 2/3).
-Puno,cebolla,altiplano_lacustre,Ilave,30820.14,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 4/5).
-Puno,frijol_grano_seco,altiplano_lacustre,Ilave,4095.6,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 5/6).
-Puno,granadilla,altiplano_lacustre,Ilave,5819.63,media,taxonomia_piso_prioridad,frutales,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 4/4).
-Puno,haba_grano_seco,altiplano_lacustre,Ilave,71441.18,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 3/3).
-Puno,maiz_amarillo_duro,altiplano_lacustre,Ilave,21112.69,media,taxonomia_piso_prioridad,granos,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 6/6).
-Puno,maiz_amilaceo,altiplano_lacustre,Ilave,29874.9,media,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 3/4).
-Puno,maiz_choclo,altiplano_lacustre,Ilave,420.4,media,taxonomia_piso_prioridad,granos,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 5/5).
-Puno,mandarina,altiplano_lacustre,Ilave,43418.75,media,taxonomia_piso_prioridad,citricos,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 7/7).
-Puno,naranja,altiplano_lacustre,Ilave,148757.1,media,taxonomia_piso_prioridad,citricos,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 9/9).
-Puno,oca,puna_alta,Ayaviri,173001.92,alta,taxonomia_piso_prioridad,andinos,Primer piso compatible en Puno: puna_alta (prioridad agronómica 1/3).
-Puno,olluco,puna_alta,Ayaviri,91993.38,alta,taxonomia_piso_prioridad,andinos,Primer piso compatible en Puno: puna_alta (prioridad agronómica 1/3).
-Puno,oregano,altiplano_lacustre,Ilave,139.5,media,taxonomia_piso_prioridad,aromaticas,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 2/2).
-Puno,papa,puna_alta,Ayaviri,4821685.93,alta,override_regional,andinos,Papa en puna; mayor volumen en Ayaviri vs altiplano lacustre.
-Puno,papaya,altiplano_lacustre,Ilave,28282.98,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 7/7).
-Puno,pina,altiplano_lacustre,Ilave,136755.7,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 4/4).
-Puno,platano,altiplano_lacustre,Ilave,70300.55,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 8/8).
+Piura,naranja,bosque_seco,Tambogrande,11539.0,media,taxonomia_piso_prioridad,citricos,Primer piso compatible en Piura: bosque_seco (prioridad 6/9).
+Piura,oca,sierra,Canchaque,8876.0,media,taxonomia_piso_prioridad,andinos,Primer piso compatible en Piura: sierra (prioridad 3/3).
+Piura,olluco,sierra,Canchaque,7730.0,media,taxonomia_piso_prioridad,andinos,Primer piso compatible en Piura: sierra (prioridad 3/3).
+Piura,palta,valle_chira,Sullana,34463.0,media,taxonomia_piso_prioridad,frutales,Primer piso compatible en Piura: valle_chira (prioridad 6/6).
+Piura,papa,sierra,Canchaque,140555.0,alta,taxonomia_piso_prioridad,andinos,Primer piso compatible en Piura: sierra (prioridad 1/4).
+Piura,papaya,bosque_seco,Tambogrande,12441.0,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en Piura: bosque_seco (prioridad 2/7).
+Piura,paprika,valle_chira,Sullana,19847.0,media,taxonomia_piso_prioridad,hortalizas_exportacion,Primer piso compatible en Piura: valle_chira (prioridad 2/2).
+Piura,pimiento,valle_chira,Sullana,59349.0,media,taxonomia_piso_prioridad,hortalizas_exportacion,Primer piso compatible en Piura: valle_chira (prioridad 2/3).
+Piura,piquillo,valle_chira,Sullana,107432.0,media,taxonomia_piso_prioridad,hortalizas_exportacion,Primer piso compatible en Piura: valle_chira (prioridad 2/2).
+Piura,platano,valle_chira,Querecotillo,2091358.3,alta,override_regional,frutales_tropicales,"SISAGRI: Querecotillo concentra 380,603 t, reemplaza override anterior."
+Piura,tomate,sierra,Canchaque,9356.0,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Piura: sierra (prioridad 3/6).
+Piura,trigo,sierra,Canchaque,72116.0,alta,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en Piura: sierra (prioridad 1/3).
+Piura,tuna,sierra,Canchaque,2704.0,media,taxonomia_piso_prioridad,frutales,Primer piso compatible en Piura: sierra (prioridad 2/4).
+Piura,uva,valle_piura,Castilla,1465184.28,alta,override_regional,frutales,"SISAGRI: Castilla concentra 556,876 t (cultivo 'VID'), reemplaza override anterior de confianza media."
+Piura,yuca,valle_chira,Sullana,52584.0,media,taxonomia_piso_prioridad,raices,Primer piso compatible en Piura: valle_chira (prioridad 2/7).
+Piura,zanahoria,sierra,Canchaque,4171.5,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Piura: sierra (prioridad 2/5).
+Piura,zapallo,sierra,Canchaque,939.0,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Piura: sierra (prioridad 2/6).
+Puno,ajo,altiplano_lacustre,Ilave,914.0,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Puno: altiplano_lacustre (prioridad 4/5).
+Puno,alfalfa,altiplano_lacustre,Taraco,10029663.9,alta,override_regional,forrajeros,"SISAGRI: Taraco concentra 888,627 t, reemplaza override anterior."
+Puno,arroz_cascara,altiplano_lacustre,Ilave,334.0,media,taxonomia_piso_prioridad,granos,Primer piso compatible en Puno: altiplano_lacustre (prioridad 5/5).
+Puno,arveja_grano_seco,altiplano_lacustre,Ilave,4335.84,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Puno: altiplano_lacustre (prioridad 3/4).
+Puno,avena_forrajera,puna_alta,Pucara,13294902.33,alta,override_regional,forrajeros,"SISAGRI: Pucara concentra 1,143,212 t, reemplaza override anterior."
+Puno,cafe_pergamino,altiplano_lacustre,Ilave,43051.63,media,taxonomia_piso_prioridad,permanentes_selva,Primer piso compatible en Puno: altiplano_lacustre (prioridad 4/4).
+Puno,camote,altiplano_lacustre,Ilave,12053.58,media,taxonomia_piso_prioridad,raices,Primer piso compatible en Puno: altiplano_lacustre (prioridad 8/8).
+Puno,cebada_forrajera,puna_alta,Ayaviri,1653085.61,media,taxonomia_piso_prioridad,forrajeros,Primer piso compatible en Puno: puna_alta (prioridad 2/3).
+Puno,cebada_grano,puna_alta,Ayaviri,144856.43,media,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en Puno: puna_alta (prioridad 2/3).
+Puno,cebolla,altiplano_lacustre,Ilave,30820.14,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Puno: altiplano_lacustre (prioridad 4/5).
+Puno,frijol_grano_seco,altiplano_lacustre,Ilave,4095.6,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Puno: altiplano_lacustre (prioridad 5/6).
+Puno,granadilla,altiplano_lacustre,Ilave,5819.63,media,taxonomia_piso_prioridad,frutales,Primer piso compatible en Puno: altiplano_lacustre (prioridad 4/4).
+Puno,haba_grano_seco,altiplano_lacustre,Ilave,71441.18,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en Puno: altiplano_lacustre (prioridad 3/3).
+Puno,maiz_amarillo_duro,altiplano_lacustre,Ilave,21112.69,media,taxonomia_piso_prioridad,granos,Primer piso compatible en Puno: altiplano_lacustre (prioridad 6/6).
+Puno,maiz_amilaceo,altiplano_lacustre,Ilave,29874.9,media,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en Puno: altiplano_lacustre (prioridad 3/4).
+Puno,maiz_choclo,altiplano_lacustre,Ilave,420.4,media,taxonomia_piso_prioridad,granos,Primer piso compatible en Puno: altiplano_lacustre (prioridad 5/5).
+Puno,mandarina,altiplano_lacustre,Ilave,43418.75,media,taxonomia_piso_prioridad,citricos,Primer piso compatible en Puno: altiplano_lacustre (prioridad 7/7).
+Puno,naranja,altiplano_lacustre,Ilave,148757.1,media,taxonomia_piso_prioridad,citricos,Primer piso compatible en Puno: altiplano_lacustre (prioridad 9/9).
+Puno,oca,puna_alta,Ayaviri,173001.92,alta,taxonomia_piso_prioridad,andinos,Primer piso compatible en Puno: puna_alta (prioridad 1/3).
+Puno,olluco,puna_alta,Ayaviri,91993.38,alta,taxonomia_piso_prioridad,andinos,Primer piso compatible en Puno: puna_alta (prioridad 1/3).
+Puno,oregano,altiplano_lacustre,Ilave,139.5,media,taxonomia_piso_prioridad,aromaticas,Primer piso compatible en Puno: altiplano_lacustre (prioridad 2/2).
+Puno,papa,altiplano_lacustre,Ilave,4821685.93,alta,override_regional,andinos,"SISAGRI: Ilave concentra 306,830 t, reemplaza override anterior."
+Puno,papaya,altiplano_lacustre,Ilave,28282.98,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en Puno: altiplano_lacustre (prioridad 7/7).
+Puno,pina,altiplano_lacustre,Ilave,136755.7,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en Puno: altiplano_lacustre (prioridad 4/4).
+Puno,platano,altiplano_lacustre,Ilave,70300.55,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en Puno: altiplano_lacustre (prioridad 8/8).
 Puno,quinua,puna_alta,Ayaviri,213670.97,alta,override_regional,andinos,Quinua en puna alta (Ayaviri).
-Puno,trigo,puna_alta,Ayaviri,8254.86,media,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en Puno: puna_alta (prioridad agronómica 2/3).
-Puno,yuca,altiplano_lacustre,Ilave,217851.16,media,taxonomia_piso_prioridad,raices,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 7/7).
-Puno,zanahoria,altiplano_lacustre,Ilave,644.6,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 4/5).
-Puno,zapallo,altiplano_lacustre,Ilave,4720.99,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Puno: altiplano_lacustre (prioridad agronómica 5/6).
-San Martin,aji,selva_alto_mayo,Moyobamba,4350.5,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en San Martin: selva_alto_mayo (prioridad agronómica 5/6).
-San Martin,algodon_rama,selva_alto_mayo,Moyobamba,2630.1,media,taxonomia_piso_prioridad,industrial,Primer piso compatible en San Martin: selva_alto_mayo (prioridad agronómica 3/3).
-San Martin,arroz_cascara,selva_alto_mayo,Moyobamba,4913000.98,media,taxonomia_piso_prioridad,granos,Primer piso compatible en San Martin: selva_alto_mayo (prioridad agronómica 4/5).
-San Martin,cacao,selva_huallaga,Tocache,362981.41,alta,override_regional,permanentes_selva,Corredor cacao coca histórico en Tocache (selva huallaga).
-San Martin,cafe_pergamino,selva_alto_mayo,Moyobamba,455852.75,media,taxonomia_piso_prioridad,permanentes_selva,Primer piso compatible en San Martin: selva_alto_mayo (prioridad agronómica 2/4).
-San Martin,frijol_grano_seco,selva_alto_mayo,Moyobamba,17562.28,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en San Martin: selva_alto_mayo (prioridad agronómica 6/6).
-San Martin,limon_sutil,selva_alto_mayo,Moyobamba,28534.16,media,taxonomia_piso_prioridad,citricos,Primer piso compatible en San Martin: selva_alto_mayo (prioridad agronómica 5/5).
-San Martin,maiz_amarillo_duro,selva_alto_mayo,Moyobamba,1118594.85,media,taxonomia_piso_prioridad,granos,Primer piso compatible en San Martin: selva_alto_mayo (prioridad agronómica 5/6).
-San Martin,mandarina,selva_alto_mayo,Moyobamba,2452.8,media,taxonomia_piso_prioridad,citricos,Primer piso compatible en San Martin: selva_alto_mayo (prioridad agronómica 4/7).
-San Martin,mango,selva_alto_mayo,Moyobamba,8292.05,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en San Martin: selva_alto_mayo (prioridad agronómica 5/6).
-San Martin,naranja,selva_alto_mayo,Moyobamba,449016.75,media,taxonomia_piso_prioridad,citricos,Primer piso compatible en San Martin: selva_alto_mayo (prioridad agronómica 4/9).
-San Martin,palma_aceitera,selva_huallaga,Tocache,3021208.29,media,taxonomia_piso_prioridad,palma,Primer piso compatible en San Martin: selva_huallaga (prioridad agronómica 2/2).
-San Martin,palta,selva_alto_mayo,Moyobamba,3739.8,media,taxonomia_piso_prioridad,frutales,Primer piso compatible en San Martin: selva_alto_mayo (prioridad agronómica 4/6).
-San Martin,papaya,selva_alto_mayo,Moyobamba,157846.2,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en San Martin: selva_alto_mayo (prioridad agronómica 5/7).
-San Martin,pina,selva_alto_mayo,Moyobamba,100629.3,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en San Martin: selva_alto_mayo (prioridad agronómica 2/4).
-San Martin,platano,selva_huallaga,Tocache,2547538.15,alta,override_regional,frutales_tropicales,Plátano en selva baja/huallaga.
-San Martin,tomate,selva_alto_mayo,Moyobamba,15921.4,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en San Martin: selva_alto_mayo (prioridad agronómica 5/6).
-San Martin,yuca,selva_huallaga,Tocache,625033.14,media,taxonomia_piso_prioridad,raices,Primer piso compatible en San Martin: selva_huallaga (prioridad agronómica 5/7).
-San Martin,zapallo,selva_alto_mayo,Moyobamba,251.1,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en San Martin: selva_alto_mayo (prioridad agronómica 6/6).
+Puno,trigo,puna_alta,Ayaviri,8254.86,media,taxonomia_piso_prioridad,granos_andinos,Primer piso compatible en Puno: puna_alta (prioridad 2/3).
+Puno,yuca,altiplano_lacustre,Ilave,217851.16,media,taxonomia_piso_prioridad,raices,Primer piso compatible en Puno: altiplano_lacustre (prioridad 7/7).
+Puno,zanahoria,altiplano_lacustre,Ilave,644.6,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Puno: altiplano_lacustre (prioridad 4/5).
+Puno,zapallo,altiplano_lacustre,Ilave,4720.99,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en Puno: altiplano_lacustre (prioridad 5/6).
+San Martin,aji,selva_alto_mayo,Moyobamba,4350.5,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en San Martin: selva_alto_mayo (prioridad 5/6).
+San Martin,algodon_rama,selva_alto_mayo,Moyobamba,2630.1,media,taxonomia_piso_prioridad,industrial,Primer piso compatible en San Martin: selva_alto_mayo (prioridad 3/3).
+San Martin,arroz_cascara,selva_huallaga,Bajo Biavo,4913000.98,alta,override_regional,granos,"SISAGRI: Bajo Biavo concentra 662,068 t, mayor produccion medida que Moyobamba."
+San Martin,cacao,selva_huallaga,Tocache,362981.41,alta,override_regional,permanentes_selva,Corredor cacao historico en Tocache.
+San Martin,cafe_pergamino,selva_alto_mayo,Moyobamba,455852.75,media,taxonomia_piso_prioridad,permanentes_selva,Primer piso compatible en San Martin: selva_alto_mayo (prioridad 2/4).
+San Martin,frijol_grano_seco,selva_alto_mayo,Moyobamba,17562.28,media,taxonomia_piso_prioridad,leguminosas,Primer piso compatible en San Martin: selva_alto_mayo (prioridad 6/6).
+San Martin,limon_sutil,selva_alto_mayo,Moyobamba,28534.16,media,taxonomia_piso_prioridad,citricos,Primer piso compatible en San Martin: selva_alto_mayo (prioridad 5/5).
+San Martin,maiz_amarillo_duro,selva_huallaga,Bajo Biavo,1118594.85,alta,override_regional,granos,"SISAGRI: Bajo Biavo concentra 188,958 t, mayor produccion medida que Moyobamba."
+San Martin,mandarina,selva_alto_mayo,Moyobamba,2452.8,media,taxonomia_piso_prioridad,citricos,Primer piso compatible en San Martin: selva_alto_mayo (prioridad 4/7).
+San Martin,mango,selva_alto_mayo,Moyobamba,8292.05,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en San Martin: selva_alto_mayo (prioridad 5/6).
+San Martin,naranja,selva_alto_mayo,Moyobamba,449016.75,media,taxonomia_piso_prioridad,citricos,Primer piso compatible en San Martin: selva_alto_mayo (prioridad 4/9).
+San Martin,palma_aceitera,selva_huallaga,Tocache,3021208.29,media,taxonomia_piso_prioridad,palma,Primer piso compatible en San Martin: selva_huallaga (prioridad 2/2).
+San Martin,palta,selva_alto_mayo,Moyobamba,3739.8,media,taxonomia_piso_prioridad,frutales,Primer piso compatible en San Martin: selva_alto_mayo (prioridad 4/6).
+San Martin,papaya,selva_alto_mayo,Moyobamba,157846.2,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en San Martin: selva_alto_mayo (prioridad 5/7).
+San Martin,pina,selva_alto_mayo,Moyobamba,100629.3,media,taxonomia_piso_prioridad,frutales_tropicales,Primer piso compatible en San Martin: selva_alto_mayo (prioridad 2/4).
+San Martin,platano,selva_alto_mayo,Moyobamba,2547538.15,alta,override_regional,frutales_tropicales,"SISAGRI: Moyobamba concentra 178,762 t, reemplaza override anterior."
+San Martin,tomate,selva_alto_mayo,Moyobamba,15921.4,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en San Martin: selva_alto_mayo (prioridad 5/6).
+San Martin,yuca,selva_huallaga,Tocache,625033.14,media,taxonomia_piso_prioridad,raices,Primer piso compatible en San Martin: selva_huallaga (prioridad 5/7).
+San Martin,zapallo,selva_alto_mayo,Moyobamba,251.1,media,taxonomia_piso_prioridad,hortalizas,Primer piso compatible en San Martin: selva_alto_mayo (prioridad 6/6).

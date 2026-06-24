@@ -3,46 +3,46 @@ Ica,aceituna,costa,Chincha Alta
 Ica,aji,costa,Chincha Alta
 Ica,ajo,costa,Chincha Alta
 Ica,alcachofa,costa,Chincha Alta
-Ica,alfalfa,costa,Chincha Alta
+Ica,alfalfa,costa,Independencia
 Ica,algodon_rama,costa,Chincha Alta
 Ica,arandano,costa,Chincha Alta
 Ica,arveja_grano_seco,costa,Chincha Alta
 Ica,arveja_verde,costa,Chincha Alta
 Ica,camote,costa,Chincha Alta
 Ica,cebolla,costa,Chincha Alta
-Ica,esparrago,costa,Chincha Alta
+Ica,esparrago,costa,Santiago
 Ica,frijol_grano_seco,costa,Chincha Alta
 Ica,haba_grano_seco,costa,Chincha Alta
 Ica,limon_sutil,costa,Chincha Alta
-Ica,maiz_amarillo_duro,costa,Chincha Alta
+Ica,maiz_amarillo_duro,costa,Independencia
 Ica,maiz_chala,costa,Chincha Alta
 Ica,maiz_choclo,costa,Chincha Alta
-Ica,mandarina,costa,Chincha Alta
+Ica,mandarina,costa,El Carmen
 Ica,mango,costa,Chincha Alta
 Ica,naranja,costa,Chincha Alta
 Ica,pallar_grano_seco,costa,Chincha Alta
-Ica,palta,costa,Chincha Alta
-Ica,papa,costa,Chincha Alta
+Ica,palta,costa,El Carmen
+Ica,papa,costa,Nazca
 Ica,papaya,costa,Chincha Alta
 Ica,paprika,costa,Chincha Alta
 Ica,pimiento,costa,Chincha Alta
 Ica,tangelo,costa,Chincha Alta
-Ica,tomate,costa,Chincha Alta
+Ica,tomate,costa,Salas
 Ica,tuna,costa,Chincha Alta
-Ica,uva,costa,Chincha Alta
+Ica,uva,costa,Salas
 Ica,yuca,costa,Chincha Alta
 Ica,zanahoria,costa,Chincha Alta
 Ica,zapallo,costa,Chincha Alta
 Junin,aji,selva_alta,Perene
 Junin,ajo,sierra,El Tambo
 Junin,alcachofa,sierra,El Tambo
-Junin,alfalfa,sierra,El Tambo
+Junin,alfalfa,sierra,Matahuasi
 Junin,arroz_cascara,selva_alta,Perene
 Junin,arveja_grano_seco,sierra,El Tambo
 Junin,arveja_verde,sierra,El Tambo
-Junin,avena_forrajera,sierra,El Tambo
+Junin,avena_forrajera,sierra,San Jose de Quero
 Junin,cacao,selva_baja,Rio Tambo
-Junin,cafe_pergamino,selva_alta,Perene
+Junin,cafe_pergamino,selva_alta,Pichanaqui
 Junin,cebada_forrajera,sierra,El Tambo
 Junin,cebada_grano,sierra,El Tambo
 Junin,cebolla,sierra,El Tambo
@@ -52,7 +52,7 @@ Junin,haba_grano_seco,sierra,El Tambo
 Junin,limon_sutil,selva_alta,Perene
 Junin,maiz_amarillo_duro,selva_alta,Perene
 Junin,maiz_amilaceo,sierra,El Tambo
-Junin,maiz_choclo,sierra,El Tambo
+Junin,maiz_choclo,sierra,San Agustin
 Junin,mandarina,selva_alta,Perene
 Junin,mango,selva_alta,Perene
 Junin,manzana,sierra,El Tambo
@@ -62,10 +62,10 @@ Junin,oca,sierra,El Tambo
 Junin,olluco,sierra,El Tambo
 Junin,oregano,sierra,El Tambo
 Junin,palta,selva_alta,Perene
-Junin,papa,sierra,El Tambo
+Junin,papa,sierra,Huasahuasi
 Junin,papaya,selva_alta,Perene
-Junin,pina,selva_alta,Perene
-Junin,platano,selva_alta,Perene
+Junin,pina,selva_alta,Rio Negro
+Junin,platano,selva_alta,Pangoa
 Junin,quinua,sierra,El Tambo
 Junin,tangelo,selva_alta,Perene
 Junin,tomate,sierra,El Tambo
@@ -80,7 +80,7 @@ La Libertad,ajo,costa,Viru
 La Libertad,alcachofa,costa,Viru
 La Libertad,alfalfa,costa,Viru
 La Libertad,arandano,costa,Viru
-La Libertad,arroz_cascara,costa,Viru
+La Libertad,arroz_cascara,costa,Guadalupe
 La Libertad,arveja_grano_seco,sierra,Huamachuco
 La Libertad,arveja_verde,sierra,Huamachuco
 La Libertad,avena_forrajera,sierra,Huamachuco
@@ -128,12 +128,12 @@ Piura,ajo,sierra,Canchaque
 Piura,alfalfa,sierra,Canchaque
 Piura,algodon_rama,valle_chira,Sullana
 Piura,arandano,sierra,Canchaque
-Piura,arroz_cascara,valle_chira,Sullana
+Piura,arroz_cascara,valle_chira,Ignacio Escudero
 Piura,arveja_grano_seco,sierra,Canchaque
 Piura,arveja_verde,sierra,Canchaque
 Piura,cafe_pergamino,sierra,Canchaque
 Piura,camote,sierra,Canchaque
-Piura,cana_para_azucar,valle_chira,Sullana
+Piura,cana_para_azucar,sierra,Jilili
 Piura,cebada_grano,sierra,Canchaque
 Piura,cebolla,sierra,Canchaque
 Piura,frijol_grano_seco,sierra,Canchaque
@@ -152,19 +152,19 @@ Piura,papaya,bosque_seco,Tambogrande
 Piura,paprika,valle_chira,Sullana
 Piura,pimiento,valle_chira,Sullana
 Piura,piquillo,valle_chira,Sullana
-Piura,platano,valle_chira,Sullana
+Piura,platano,valle_chira,Querecotillo
 Piura,tomate,sierra,Canchaque
 Piura,trigo,sierra,Canchaque
 Piura,tuna,sierra,Canchaque
-Piura,uva,valle_chira,Sullana
+Piura,uva,valle_piura,Castilla
 Piura,yuca,valle_chira,Sullana
 Piura,zanahoria,sierra,Canchaque
 Piura,zapallo,sierra,Canchaque
 Puno,ajo,altiplano_lacustre,Ilave
-Puno,alfalfa,altiplano_lacustre,Ilave
+Puno,alfalfa,altiplano_lacustre,Taraco
 Puno,arroz_cascara,altiplano_lacustre,Ilave
 Puno,arveja_grano_seco,altiplano_lacustre,Ilave
-Puno,avena_forrajera,puna_alta,Ayaviri
+Puno,avena_forrajera,puna_alta,Pucara
 Puno,cafe_pergamino,altiplano_lacustre,Ilave
 Puno,camote,altiplano_lacustre,Ilave
 Puno,cebada_forrajera,puna_alta,Ayaviri
@@ -181,7 +181,7 @@ Puno,naranja,altiplano_lacustre,Ilave
 Puno,oca,puna_alta,Ayaviri
 Puno,olluco,puna_alta,Ayaviri
 Puno,oregano,altiplano_lacustre,Ilave
-Puno,papa,puna_alta,Ayaviri
+Puno,papa,altiplano_lacustre,Ilave
 Puno,papaya,altiplano_lacustre,Ilave
 Puno,pina,altiplano_lacustre,Ilave
 Puno,platano,altiplano_lacustre,Ilave
@@ -192,12 +192,12 @@ Puno,zanahoria,altiplano_lacustre,Ilave
 Puno,zapallo,altiplano_lacustre,Ilave
 San Martin,aji,selva_alto_mayo,Moyobamba
 San Martin,algodon_rama,selva_alto_mayo,Moyobamba
-San Martin,arroz_cascara,selva_alto_mayo,Moyobamba
+San Martin,arroz_cascara,selva_huallaga,Bajo Biavo
 San Martin,cacao,selva_huallaga,Tocache
 San Martin,cafe_pergamino,selva_alto_mayo,Moyobamba
 San Martin,frijol_grano_seco,selva_alto_mayo,Moyobamba
 San Martin,limon_sutil,selva_alto_mayo,Moyobamba
-San Martin,maiz_amarillo_duro,selva_alto_mayo,Moyobamba
+San Martin,maiz_amarillo_duro,selva_huallaga,Bajo Biavo
 San Martin,mandarina,selva_alto_mayo,Moyobamba
 San Martin,mango,selva_alto_mayo,Moyobamba
 San Martin,naranja,selva_alto_mayo,Moyobamba
@@ -205,7 +205,7 @@ San Martin,palma_aceitera,selva_huallaga,Tocache
 San Martin,palta,selva_alto_mayo,Moyobamba
 San Martin,papaya,selva_alto_mayo,Moyobamba
 San Martin,pina,selva_alto_mayo,Moyobamba
-San Martin,platano,selva_huallaga,Tocache
+San Martin,platano,selva_alto_mayo,Moyobamba
 San Martin,tomate,selva_alto_mayo,Moyobamba
 San Martin,yuca,selva_huallaga,Tocache
 San Martin,zapallo,selva_alto_mayo,Moyobamba

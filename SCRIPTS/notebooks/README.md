@@ -45,6 +45,15 @@ está documentada en la primera celda de `06_clustering_cultivos.ipynb`.
 evolución anual 2020–2025, cultivos representativos), separado por sección A (zona) /
 B (perfil), más allá de la visualización geográfica de puntos.
 
+## Fase 5 — Modelo clasificador (validación de la tipología de zona)
+
+`08_modelo_clasificador.ipynb` (autocontenido, solo lee `OUTPUTS/06a_zonas_clusters.csv`):
+entrena Random Forest y KNN para recuperar el cluster de zona de cada distrito a partir
+de su clima (validación cruzada Leave-One-Out + split train/test), y deja una función
+(`clasificar_distrito_nuevo`) para clasificar un distrito que no esté entre los 28
+originales, devolviendo el cluster más probable, el margen de confianza y el riesgo
+cualitativo asociado.
+
 ## Salidas clave en OUTPUTS/
 
 - `06a_zonas_clusters.csv`, `06a_produccion_por_zona.csv` (notebook 06, sección A)

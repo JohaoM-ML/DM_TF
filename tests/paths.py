@@ -3,6 +3,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 NOTEBOOKS = ROOT / "SCRIPTS" / "notebooks"
+PIPELINE_NOTEBOOK = NOTEBOOKS / "00_pipeline_integrado.ipynb"
 OUTPUTS = ROOT / "OUTPUTS"
 FIGURES = OUTPUTS / "figures"
 MAPPING = ROOT / "BDS" / "mapping" / "mapping_cultivo_distrito_v2_pipeline.csv"
@@ -34,13 +35,8 @@ META_COLS = {
 }
 
 EXPECTED_NOTEBOOKS = [
-    "00_build_mapping_cultivo_distrito.ipynb",
-    "01_midagri_pipeline.ipynb",
-    "02_nasa_pipeline.ipynb",
-    "03_build_dataset_integrado.ipynb",
-    "04_eda_regional.ipynb",
-    "05_eda_por_cultivo.ipynb",
-    "06_clustering_cultivos.ipynb",
-    "06a_zonas_agroclimaticas.ipynb",
-    "06b_perfiles_productivos.ipynb",
+    "00_pipeline_integrado.ipynb",
+    "04_eda.ipynb",
+    "06_clustering_final.ipynb",
+    "07_analisis_clusters.ipynb",
 ]
